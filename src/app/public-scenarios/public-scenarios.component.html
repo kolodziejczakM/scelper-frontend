@@ -1,0 +1,47 @@
+<table class="uk-table uk-table-middle">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tytuł</th>
+            <th>Opis</th>
+            <th>Autor</th>
+            <th>Strony</th>
+            <th>Stan</th>
+            <th>Opcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let scenario of scenarios; let i = index;">
+            <td>{{i}}</td>
+            <td>{{scenario.title}}</td>
+            <td>{{scenario.description}}</td>
+            <td>{{scenario.author}}</td>
+            <td>{{scenario.pages}}</td>
+            <td>{{scenario.state}}</td>
+            <td><button class="uk-button uk-button-default" type="button" (click)="deleteScenario();">Usuń</button></td>
+        </tr>
+    </tbody>
+</table>
+<form>
+    <fieldset class="uk-fieldset">
+        <legend class="uk-legend">Dodaj własny scenariusz</legend>
+        <div class="uk-margin">
+            <input class="uk-input" type="text" placeholder="Tytuł">
+        </div>
+        <div class="uk-margin">
+            <input class="uk-input" type="text" placeholder="E-mail (autora)">
+        </div>
+        <div class="uk-margin">
+            <select class="uk-select">
+                <option>Ukończony</option>
+                <option>Niekompletny</option>
+            </select>
+        </div>
+
+        <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" placeholder="Krótki opis"></textarea>
+        </div>
+    </fieldset>
+    <button class="uk-button uk-button-default" type="button" tabindex="-1">Upload</button>
+    <button class="uk-button uk-button-primary" (click)="showAlert()">Dodaj</button>
+</form>
