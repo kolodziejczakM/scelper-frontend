@@ -2,3 +2,16 @@
 .margin-centered{
     margin: 0 auto;
 }
+
+.has-error{
+    border: 1px solid darkred !important;
+}
+
+.disabled{
+    background:gray;
+}
+
+.validation-info{
+    font-weight: 700;
+    color: darkred;
+}

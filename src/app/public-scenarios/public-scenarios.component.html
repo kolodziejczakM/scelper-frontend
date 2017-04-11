@@ -22,26 +22,40 @@
         </tr>
     </tbody>
 </table>
-<form>
+<form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)">
     <fieldset class="uk-fieldset">
-        <legend class="uk-legend">Dodaj własny scenariusz</legend>
+        <legend class="uk-legend">{{formHeader}}</legend>
         <div class="uk-margin">
-            <input class="uk-input" type="text" placeholder="Tytuł">
-        </div>
-        <div class="uk-margin">
-            <input class="uk-input" type="text" placeholder="E-mail (autora)">
-        </div>
-        <div class="uk-margin">
-            <select class="uk-select">
-                <option>Ukończony</option>
-                <option>Niekompletny</option>
-            </select>
-        </div>
+            <input formControlName="title" class="uk-input" type="text" placeholder="Tytuł"
+            [ngClass]="{'has-error': hasError('title')}">
 
+            <span *ngIf="hasError('title')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('title')}}</span>
+        </div>
         <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" placeholder="Krótki opis"></textarea>
+            <input formControlName="authorEmail" class="uk-input" type="text" placeholder="E-mail (autora)"
+             [ngClass]="{'has-error': hasError('authorEmail')}">
+
+            <span *ngIf="hasError('authorEmail')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('authorEmail')}}</span>
+        </div>
+        <div class="uk-margin">
+            <select formControlName="state" class="uk-select" 
+            [ngClass]="{'has-error': hasError('state')}">
+                <option *ngFor="let option of scenarioStates">{{option}}</option>
+            </select>
+
+            <span *ngIf="hasError('state')" class="validation-info">{{formMessages.get('required')}}</span>
+        </div>
+        <div class="uk-margin">
+            <textarea formControlName="description" class="uk-textarea has-error" rows="5" placeholder="Krótki opis" 
+            [ngClass]="{'has-error': hasError('description')}"></textarea>
+
+            <span *ngIf="hasError('description')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('description')}}</span>
+        </div>
+        <div class="uk-margin">
+            <label for="file">{{fileLabel}}</label>
+            <input id="file" type="file"  (change)="fileChangeEvent($event,this)" placeholder="Upload file..." /><br>
+            <span class="validation-info">{{formMessages.get('required')}} {{formMessages.get('file')}}</span>
         </div>
     </fieldset>
-    <button class="uk-button uk-button-default" type="button" tabindex="-1">Upload</button>
-    <button class="uk-button uk-button-primary" (click)="showAlert()">Dodaj</button>
+    <button class="uk-button uk-button-primary" (click)="showAlert()">{{submitText}}</button>
 </form>
