@@ -1,3 +1,6 @@
+
+<button class="uk-button uk-button-primary" (click)="showForm()">{{addNewText}}</button>
+
 <table class="uk-table uk-table-middle">
     <thead>
         <tr>
@@ -15,16 +18,17 @@
             <td>{{i}}</td>
             <td>{{scenario.title}}</td>
             <td>{{scenario.description}}</td>
-            <td>{{scenario.author}}</td>
+            <td>{{scenario.authorEmail}}</td>
             <td>{{scenario.pages}}</td>
             <td>{{scenario.state}}</td>
             <td><button class="uk-button uk-button-default" type="button" (click)="deleteScenario();">Usuń</button></td>
         </tr>
     </tbody>
 </table>
-<form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)">
+
+
+<form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)" *ngIf="formVisible">
     <fieldset class="uk-fieldset">
-        <legend class="uk-legend">{{formHeader}}</legend>
         <div class="uk-margin">
             <input formControlName="title" class="uk-input" type="text" placeholder="Tytuł"
             [ngClass]="{'has-error': hasError('title')}">
@@ -51,7 +55,6 @@
             <span *ngIf="hasError('description')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('description')}}</span>
         </div>
         <div class="uk-margin">
-            <label for="file">{{fileLabel}}</label>
             <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">{{uploadText}}</button> {{fileName}}
             <input #fileInputNode id="file" type="file" accept="{{acceptableExtension}}" (change)="fileChangeEvent($event,this)" placeholder="Upload file..."/><br>
             <span [hidden]="fileBase64">{{formMessages.get('file')}}</span>

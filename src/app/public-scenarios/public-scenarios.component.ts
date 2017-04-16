@@ -17,9 +17,9 @@ export class PublicScenariosComponent implements OnInit {
     formMessages = PDF_FORM_MSG;
     acceptableExtension = 'application/pdf';
 
-    formHeader = 'Dodaj własny scenariusz';
-    fileLabel = 'Plik PDF:';
-    uploadText = 'Upload';
+    formVisible = false;
+    addNewText = 'Dodaj własny scenariusz';
+    uploadText = 'Upload PDF';
     submitText = 'Dodaj';
     resetText = 'Wyczyść dane';
 
@@ -65,6 +65,10 @@ export class PublicScenariosComponent implements OnInit {
                 alert(PDF_FORM_MSG.get('fileFormat'));
             }
         }
+    }
+
+    showForm(): void {
+        this.formVisible = !this.formVisible;
     }
 
     isDefaultOption(option: string): boolean {
