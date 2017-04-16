@@ -38,22 +38,19 @@
             <span *ngIf="hasError('authorEmail')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('authorEmail')}}</span>
         </div>
         <div class="uk-margin">
-            <select formControlName="state" class="uk-select" 
-            [ngClass]="{'has-error': hasError('state')}">
+            <select formControlName="state" class="uk-select" [ngClass]="{'has-error': hasError('state')}">
                 <option *ngFor="let option of scenarioStates">{{option}}</option>
             </select>
 
             <span *ngIf="hasError('state')" class="validation-info">{{formMessages.get('required')}}</span>
         </div>
         <div class="uk-margin">
-            <textarea formControlName="description" class="uk-textarea has-error" rows="5" placeholder="Krótki opis" 
-            [ngClass]="{'has-error': hasError('description')}"></textarea>
-
+            <textarea formControlName="description" class="uk-textarea has-error" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="Krótki opis"></textarea>
             <span *ngIf="hasError('description')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('description')}}</span>
         </div>
         <div class="uk-margin">
             <label for="file">{{fileLabel}}</label>
-            <input id="file" type="file"  (change)="fileChangeEvent($event,this)" placeholder="Upload file..." /><br>
+            <input id="file" type="file"  (change)="fileChangeEvent($event,this)" placeholder="Upload file..."/><br>
             <span class="validation-info">{{formMessages.get('required')}} {{formMessages.get('file')}}</span>
         </div>
     </fieldset>
