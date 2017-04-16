@@ -8,10 +8,14 @@
 }
 
 .disabled{
-    background:gray;
+    background: gray;
 }
 
 .validation-info{
     font-weight: 700;
     color: darkred;
+}
+
+input[type="file"]{
+    display: none;
 }
