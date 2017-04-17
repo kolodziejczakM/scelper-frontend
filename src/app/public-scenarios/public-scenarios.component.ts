@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Http } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { SCENARIO_STATES, DEFAULT_SCENARIO_STATE, PDF_FORM_MSG } from '../app.constants';
@@ -31,7 +32,10 @@ export class PublicScenariosComponent implements OnInit {
     scenarioStates: Array<any> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
-    constructor(formBuilder: FormBuilder) {
+    constructor(
+        private http: Http,
+        private formBuilder: FormBuilder
+    ) {
         this.pdfForm = formBuilder.group({
             title: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
             authorEmail: ['', Validators.compose([Validators.required,
@@ -44,11 +48,11 @@ export class PublicScenariosComponent implements OnInit {
     ngOnInit() {
     }
 
-    hasError(controlName: string): boolean {
+    public hasError(controlName: string): boolean {
         return !this.pdfForm.controls[controlName].valid && this.pdfForm.controls[controlName].dirty;
     }
 
-    fileChangeEvent(fileInput: any, context: any): void {
+    public fileChangeEvent(fileInput: any, context: any): void {
         if (fileInput.target.files && fileInput.target.files[0]) {
             const reader = new FileReader(),
                   fileFormat = fileInput.target.files[0].type;
@@ -67,35 +71,51 @@ export class PublicScenariosComponent implements OnInit {
         }
     }
 
-    showForm(): void {
+    public showForm(): void {
         this.formVisible = !this.formVisible;
     }
 
-    isDefaultOption(option: string): boolean {
+    public isDefaultOption(option: string): boolean {
         return option === DEFAULT_SCENARIO_STATE;
     }
 
-    resetForm() {
+    public resetForm() {
         this.pdfForm.reset();
     }
 
-    isFormValid(): boolean {
+    public isFormValid(): boolean {
         return this.pdfForm.valid && Boolean(this.fileBase64);
     }
 
-    triggerUpload(): void {
+    public triggerUpload(): void {
         this.fileInputNode.nativeElement.click();
     }
 
-    submitPDF(submitted): void  {
-        console.log(submitted);
+    public submitPDF(submitted): void  {
+        // submitted.file = this.fileBase64;
+
+        const formData = new FormData();
+        const that = this;
+
+        formData.append('title', submitted.title);
+        formData.append('authorEmail', submitted.authorEmail);
+        formData.append('state', submitted.state);
+        formData.append('description', submitted.description);
+        formData.append('file',that.fileBase64);
+
+        const url = 'http://localhost:3000/new-scenario';
+        this.http.post(url, formData).subscribe(response =>{
+            console.log('Success response: ', response);
+        },err => {
+            console.warn(err);
+        });
     }
 
-    showAlert(): void {
+    public showAlert(): void {
         alert('Na podany adres email wysłaliśmy ważne informacje. Dziękujemy za pomoc w rozwoju serwisu.');
     }
 
-    deleteScenario(): void {
+    public deleteScenario(): void {
         confirm('Czy jesteś pewien?');
     }
 
