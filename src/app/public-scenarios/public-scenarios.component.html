@@ -26,7 +26,6 @@
     </tbody>
 </table>
 
-
 <form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)" *ngIf="formVisible">
     <fieldset class="uk-fieldset">
         <div class="uk-margin">
@@ -57,7 +56,7 @@
         <div class="uk-margin">
             <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">{{uploadText}}</button> {{fileName}}
             <input #fileInputNode id="file" type="file" accept="{{acceptableExtension}}" (change)="fileChangeEvent($event,this)" placeholder="Upload file..."/><br>
-            <span [hidden]="fileBase64">{{formMessages.get('file')}}</span>
+            <span [hidden]="fileBlob">{{formMessages.get('file')}}</span>
         </div>
     </fieldset>
     <button class="uk-button uk-button-primary" [disabled]="!isFormValid()" (click)="showAlert()">{{submitText}}</button>

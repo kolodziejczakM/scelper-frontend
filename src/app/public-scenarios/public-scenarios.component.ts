@@ -26,7 +26,7 @@ export class PublicScenariosComponent implements OnInit {
 
     emailPattern = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/;
 
-    fileBase64 = '';
+    fileBlob: Blob;
     fileName = '';
 
     scenarioStates: Array<any> = SCENARIO_STATES;
@@ -57,14 +57,14 @@ export class PublicScenariosComponent implements OnInit {
             const reader = new FileReader(),
                   fileFormat = fileInput.target.files[0].type;
 
-            if (fileFormat === context.acceptableExtension) {
+            if (fileFormat === context.acceptableExtension) { // have to handle file size here also ;)
 
                 context.fileName = fileInput.target.files[0].name;
 
                 reader.onload = function (e: any) {
-                    context.fileBase64 = e.target.result;
+                    context.fileBlob = new Blob([e.target.result], { type: context.acceptableExtension });
                 };
-                reader.readAsDataURL(fileInput.target.files[0]);
+                reader.readAsArrayBuffer(fileInput.target.files[0]);
             }else {
                 alert(PDF_FORM_MSG.get('fileFormat'));
             }
@@ -84,7 +84,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     public isFormValid(): boolean {
-        return this.pdfForm.valid && Boolean(this.fileBase64);
+        return this.pdfForm.valid && Boolean(this.fileBlob);
     }
 
     public triggerUpload(): void {
@@ -92,21 +92,22 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     public submitPDF(submitted): void  {
-        // submitted.file = this.fileBase64;
 
         const formData = new FormData();
+
         const that = this;
 
         formData.append('title', submitted.title);
         formData.append('authorEmail', submitted.authorEmail);
         formData.append('state', submitted.state);
         formData.append('description', submitted.description);
-        formData.append('file',that.fileBase64);
+        formData.append('file', that.fileBlob, that.fileName);
 
         const url = 'http://localhost:3000/new-scenario';
-        this.http.post(url, formData).subscribe(response =>{
+
+        this.http.post(url, formData).subscribe(response => {
             console.log('Success response: ', response);
-        },err => {
+        }, err => {
             console.warn(err);
         });
     }
