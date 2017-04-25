@@ -1,35 +1,39 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { SCENARIO_STATES, DEFAULT_SCENARIO_STATE, PDF_FORM_MSG } from '../app.constants';
-import { PublicScenario } from '../interfaces';
+import { PublicScenario, PdfForm } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
+
+import { EMAIL_PATTERN,
+         SCENARIO_STATES,
+         DEFAULT_SCENARIO_STATE,
+         SCENARIO_ACCEPTABLE_EXTENSION,
+         SCENARIO_SIZE_LIMIT_KB,
+         PDF_FORM_TXT,
+         COMMON_MSG } from '../app.constants';
 
 @Component({
     selector: 'app-public-scenarios',
     templateUrl: './public-scenarios.component.html'
 })
-export class PublicScenariosComponent implements OnInit {
+export class PublicScenariosComponent {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
+    endpoint = 'http://localhost:3000/new-scenario';
+
     pdfForm: FormGroup;
-    formMessages = PDF_FORM_MSG;
-    acceptableExtension = 'application/pdf';
+    formText: Map<string, string> = PDF_FORM_TXT;
+    acceptableExtension: string = SCENARIO_ACCEPTABLE_EXTENSION;
+    acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
 
     formVisible = false;
-    addNewText = 'Dodaj własny scenariusz';
-    uploadText = 'Upload PDF';
-    submitText = 'Dodaj';
-    resetText = 'Wyczyść dane';
-
-    emailPattern = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/;
+    emailPattern = EMAIL_PATTERN;
 
     fileBlob: Blob;
     fileName = '';
 
-    scenarioStates: Array<any> = SCENARIO_STATES;
+    scenarioStates: Array<string> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
     constructor(
@@ -45,19 +49,18 @@ export class PublicScenariosComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
-    }
-
     public hasError(controlName: string): boolean {
         return !this.pdfForm.controls[controlName].valid && this.pdfForm.controls[controlName].dirty;
     }
 
     public fileChangeEvent(fileInput: any, context: any): void {
         if (fileInput.target.files && fileInput.target.files[0]) {
-            const reader = new FileReader(),
-                  fileFormat = fileInput.target.files[0].type;
 
-            if (fileFormat === context.acceptableExtension) { // have to handle file size here also ;)
+            const reader = new FileReader(),
+                  fileFormat = fileInput.target.files[0].type,
+                  fileSize = fileInput.target.files[0].size;
+
+            if (this.isAcceptableExtension(fileFormat) && this.isAcceptableSize(fileSize)) {
 
                 context.fileName = fileInput.target.files[0].name;
 
@@ -65,8 +68,6 @@ export class PublicScenariosComponent implements OnInit {
                     context.fileBlob = new Blob([e.target.result], { type: context.acceptableExtension });
                 };
                 reader.readAsArrayBuffer(fileInput.target.files[0]);
-            }else {
-                alert(PDF_FORM_MSG.get('fileFormat'));
             }
         }
     }
@@ -75,12 +76,34 @@ export class PublicScenariosComponent implements OnInit {
         this.formVisible = !this.formVisible;
     }
 
+    private isAcceptableSize(fileSize: number): boolean {
+        const isAcceptable = (fileSize <= this.acceptableSize);
+
+        if (!isAcceptable) {
+            alert(PDF_FORM_TXT.get('fileSize'));
+        }
+
+        return isAcceptable;
+    }
+
+    private isAcceptableExtension(fileFormat: string): boolean {
+        const isAcceptable = (fileFormat === this.acceptableExtension);
+
+         if (!isAcceptable) {
+            alert(PDF_FORM_TXT.get('fileFormat'));
+        }
+
+        return isAcceptable;
+    }
+
     public isDefaultOption(option: string): boolean {
         return option === DEFAULT_SCENARIO_STATE;
     }
 
-    public resetForm() {
+    public resetForm(): void {
         this.pdfForm.reset();
+        this.fileBlob = null;
+        this.fileName = '';
     }
 
     public isFormValid(): boolean {
@@ -91,7 +114,7 @@ export class PublicScenariosComponent implements OnInit {
         this.fileInputNode.nativeElement.click();
     }
 
-    public submitPDF(submitted): void  {
+    public submitPDF(submitted: PdfForm): void  {
 
         const formData = new FormData();
 
@@ -103,7 +126,7 @@ export class PublicScenariosComponent implements OnInit {
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 
-        const url = 'http://localhost:3000/new-scenario';
+        const url = this.endpoint;
 
         this.http.post(url, formData).subscribe(response => {
             console.log('Success response: ', response);
@@ -113,11 +136,11 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     public showAlert(): void {
-        alert('Na podany adres email wysłaliśmy ważne informacje. Dziękujemy za pomoc w rozwoju serwisu.');
+        alert(PDF_FORM_TXT.get('emailSent'));
     }
 
     public deleteScenario(): void {
-        confirm('Czy jesteś pewien?');
+        confirm(COMMON_MSG.get('confirm'));
     }
 
 }

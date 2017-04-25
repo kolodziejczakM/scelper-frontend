@@ -1,5 +1,5 @@
 
-<button class="uk-button uk-button-primary" (click)="showForm()">{{addNewText}}</button>
+<button class="uk-button uk-button-primary" (click)="showForm()">{{ formText.get('b_add') }}</button>
 
 <table class="uk-table uk-table-middle">
     <thead>
@@ -15,12 +15,12 @@
     </thead>
     <tbody>
         <tr *ngFor="let scenario of scenarios; let i = index;">
-            <td>{{i}}</td>
-            <td>{{scenario.title}}</td>
-            <td>{{scenario.description}}</td>
-            <td>{{scenario.authorEmail}}</td>
-            <td>{{scenario.pages}}</td>
-            <td>{{scenario.state}}</td>
+            <td>{{ i }}</td>
+            <td>{{ scenario.title }}</td>
+            <td>{{ scenario.description }}</td>
+            <td>{{ scenario.authorEmail }}</td>
+            <td>{{ scenario.pages }}</td>
+            <td>{{ scenario.state }}</td>
             <td><button class="uk-button uk-button-default" type="button" (click)="deleteScenario();">Usuń</button></td>
         </tr>
     </tbody>
@@ -32,13 +32,13 @@
             <input formControlName="title" class="uk-input" type="text" placeholder="Tytuł"
             [ngClass]="{'has-error': hasError('title')}">
 
-            <span *ngIf="hasError('title')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('title')}}</span>
+            <span *ngIf="hasError('title')" class="validation-info">{{ formText.get('required') }} {{ formText.get('title') }}</span>
         </div>
         <div class="uk-margin">
             <input formControlName="authorEmail" class="uk-input" type="text" placeholder="E-mail (autora)"
              [ngClass]="{'has-error': hasError('authorEmail')}">
 
-            <span *ngIf="hasError('authorEmail')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('authorEmail')}}</span>
+            <span *ngIf="hasError('authorEmail')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmail') }}</span>
         </div>
         <div class="uk-margin">
             <select formControlName="state" class="uk-select" [ngClass]="{'has-error': hasError('state')}">
@@ -47,18 +47,21 @@
                 </option>
             </select>
 
-            <span *ngIf="hasError('state')" class="validation-info">{{formMessages.get('required')}}</span>
+            <span *ngIf="hasError('state')" class="validation-info">{{formText.get('required')}}</span>
         </div>
         <div class="uk-margin">
             <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="Krótki opis"></textarea>
-            <span *ngIf="hasError('description')" class="validation-info">{{formMessages.get('required')}} {{formMessages.get('description')}}</span>
+            <span *ngIf="hasError('description')" class="validation-info">{{ formText.get('required') }} {{ formText.get('description') }}</span>
         </div>
         <div class="uk-margin">
-            <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">{{uploadText}}</button> {{fileName}}
-            <input #fileInputNode id="file" type="file" accept="{{acceptableExtension}}" (change)="fileChangeEvent($event,this)" placeholder="Upload file..."/><br>
-            <span [hidden]="fileBlob">{{formMessages.get('file')}}</span>
+            <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">{{ formText.get('b_upload') }}</button> {{ fileName }}
+            <input #fileInputNode id="file" type="file" accept="{{acceptableExtension}}" (change)="fileChangeEvent($event,this)"/><br>
+            <span [hidden]="fileBlob">{{ formText.get('file') }}</span>
+        </div>
+        <div class="uk-margin">
+            <span *ngIf="!isFormValid() && pdfForm.dirty">{{ formText.get('cannotSubmitted') }}</span>
         </div>
     </fieldset>
-    <button class="uk-button uk-button-primary" [disabled]="!isFormValid()" (click)="showAlert()">{{submitText}}</button>
-    <button class="uk-button uk-button-default" [hidden]="pdfForm.pristine" (click)="resetForm()">{{resetText}}</button>
+    <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()" (click)="showAlert()">{{ formText.get('b_submit') }}</button>
+    <button type="button" class="uk-button uk-button-default" [hidden]="pdfForm.pristine" (click)="resetForm()">{{ formText.get('b_reset') }}</button>
 </form>

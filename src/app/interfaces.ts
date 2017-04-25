@@ -1,4 +1,12 @@
 
+export interface PdfForm {
+    title: string;
+    authorEmail: string;
+    state: string;
+    description: string;
+    file: Blob;
+}
+
 export interface PublicScenario {
     title: string;
     description: string;
@@ -6,3 +14,5 @@ export interface PublicScenario {
     pages?: number;
     state: string;
 }
+
+
