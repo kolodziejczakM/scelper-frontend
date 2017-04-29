@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import { Http, Response } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PublicScenario, PdfForm } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
@@ -128,10 +130,11 @@ export class PublicScenariosComponent {
 
         const url = this.endpoint;
 
-        this.http.post(url, formData).subscribe(response => {
+        this.http.post(url, formData).map(res => res.json()).subscribe(response => {
             console.log('Success response: ', response);
-        }, err => {
-            console.warn(err);
+        },
+        (err: Response) => {
+            alert(err.text());
         });
     }
 
