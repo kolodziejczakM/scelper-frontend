@@ -131,7 +131,7 @@ export class PublicScenariosComponent {
         const url = this.endpoint;
 
         this.http.post(url, formData).map(res => res.json()).subscribe(response => {
-            console.log('Success response: ', response);
+            alert(response);
         },
         (err: Response) => {
             alert(err.text());
