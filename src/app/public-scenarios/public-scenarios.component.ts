@@ -22,7 +22,7 @@ export class PublicScenariosComponent {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
-    endpoint = 'http://localhost:3000/new-scenario';
+    endpoint = 'http://localhost:3000/api/v1/public-scenarios';
 
     pdfForm: FormGroup;
     formText: Map<string, string> = PDF_FORM_TXT;
