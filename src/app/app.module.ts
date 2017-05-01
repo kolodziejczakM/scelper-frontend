@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicScenariosComponent } from './public-scenarios/public-scenarios.component';
 import { InterviewComponent } from './interview/interview.component';
+import { ScenarioActivationComponent } from './scenario-activation/scenario-activation.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'interview', component: InterviewComponent },
-    { path: 'public-scenarios', component: PublicScenariosComponent }
+    { path: 'public-scenarios', component: PublicScenariosComponent },
+    { path: 'activation/:deleteCode', component: ScenarioActivationComponent }
 ];
 
 @NgModule({
@@ -21,7 +23,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomepageComponent,
     PublicScenariosComponent,
-    InterviewComponent
+    InterviewComponent,
+    ScenarioActivationComponent
   ],
   imports: [
     BrowserModule,
