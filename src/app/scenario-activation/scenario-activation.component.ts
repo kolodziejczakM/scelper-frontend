@@ -20,7 +20,7 @@ export class ScenarioActivationComponent implements OnInit {
 
     ngOnInit() {
         this.setDeleteCode();
-        this.patchScenario();
+       // this.patchScenario();
     }
 
     setDeleteCode() {

@@ -4,13 +4,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
+import * as helpers from '../app.helpers';
 import { PublicScenario, PdfForm } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
 
 import { EMAIL_PATTERN,
          SCENARIO_STATES,
          DEFAULT_SCENARIO_STATE,
-         SCENARIO_ACCEPTABLE_EXTENSION,
+         SCENARIO_ACCEPTABLE_MIMETYPE,
          SCENARIO_SIZE_LIMIT_KB,
          PDF_FORM_TXT,
          COMMON_MSG } from '../app.constants';
@@ -29,7 +30,7 @@ export class PublicScenariosComponent {
 
     pdfForm: FormGroup;
     formText: Map<string, string> = PDF_FORM_TXT;
-    acceptableExtension: string = SCENARIO_ACCEPTABLE_EXTENSION;
+    acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
     acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
 
     formVisible = false;
@@ -71,7 +72,7 @@ export class PublicScenariosComponent {
                   fileFormat = fileInput.target.files[0].type,
                   fileSize = fileInput.target.files[0].size;
 
-            if (this.isAcceptableExtension(fileFormat) && this.isAcceptableSize(fileSize)) {
+            if (this.isAcceptableMimetype(fileFormat) && this.isAcceptableSize(fileSize)) {
 
                 context.fileName = fileInput.target.files[0].name;
 
@@ -101,8 +102,8 @@ export class PublicScenariosComponent {
         return isAcceptable;
     }
 
-    private isAcceptableExtension(fileFormat: string): boolean {
-        const isAcceptable = (fileFormat === this.acceptableExtension);
+    private isAcceptableMimetype(fileFormat: string): boolean {
+        const isAcceptable = (fileFormat === this.acceptableMimetype);
 
          if (!isAcceptable) {
             alert(PDF_FORM_TXT.get('fileFormat'));
@@ -144,10 +145,10 @@ export class PublicScenariosComponent {
         const url = this.endpoint;
 
         this.http.post(url, formData).map(res => res.json()).subscribe(response => {
-            alert(response);
+            alert(helpers.translateServerResponse(response.code));
         },
         (err: Response) => {
-            alert(err.text());
+            console.warn(err);
         });
     }
 
