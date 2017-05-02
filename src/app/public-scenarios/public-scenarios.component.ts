@@ -77,7 +77,7 @@ export class PublicScenariosComponent {
                 context.fileName = fileInput.target.files[0].name;
 
                 reader.onload = function (e: any) {
-                    context.fileBlob = new Blob([e.target.result], { type: context.acceptableExtension });
+                    context.fileBlob = new Blob([e.target.result], { type: context.acceptableMimetype });
                 };
                 reader.readAsArrayBuffer(fileInput.target.files[0]);
             }
@@ -145,7 +145,8 @@ export class PublicScenariosComponent {
         const url = this.endpoint;
 
         this.http.post(url, formData).map(res => res.json()).subscribe(response => {
-            alert(helpers.translateServerResponse(response.code));
+           console.log(response);
+           console.log(helpers.translateServerResponse(response.code));
         },
         (err: Response) => {
             console.warn(err);

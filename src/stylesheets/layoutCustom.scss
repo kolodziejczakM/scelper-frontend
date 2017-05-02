@@ -3,6 +3,14 @@
     margin: 0 auto;
 }
 
+.margin-top-20{
+    margin-top: 20px;
+}
+
+.text-centered{
+    text-align: center;
+}
+
 .has-error{
     border: 1px solid #FF7153 !important;
 }
@@ -18,4 +26,24 @@
 
 input[type="file"]{
     display: none;
+}
+.scelper-horizontal-logo{
+    width: 160px;
+    height: 160px;
+    background: url('assets/scelper-logo.png') no-repeat;
+    background-size: contain;
+}
+
+.loader {
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #2AFF60;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
