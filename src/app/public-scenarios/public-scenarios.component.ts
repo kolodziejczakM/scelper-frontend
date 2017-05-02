@@ -4,6 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
+import { DialogService } from 'ng2-bootstrap-modal';
+import { PromptComponent } from '../prompt/prompt.component';
+import { AlertComponent } from '../alert/alert.component';
+
 import * as helpers from '../app.helpers';
 import { PublicScenario, PdfForm } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
@@ -42,9 +46,12 @@ export class PublicScenariosComponent {
     scenarioStates: Array<string> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
+    promptMessage: string;
+
     constructor(
         private http: Http,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private dialogService: DialogService
     ) {
         this.pdfForm = formBuilder.group({
             title: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -54,6 +61,18 @@ export class PublicScenariosComponent {
                               Validators.pattern(this.emailPattern)])],
             state : ['', Validators.required],
             description: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(100)])],
+        });
+    }
+
+    public showAlert(): void {
+        this.dialogService.addDialog(AlertComponent, { title: 'Uwaga', message: 'Nie powinieneś tak robić' });
+    }
+
+    public showPrompt(): void {
+        this.dialogService.addDialog(PromptComponent, { title: 'Wprowadź kod usunięcia:', question: '' })
+                          .subscribe((message) => {
+
+                this.promptMessage = message;
         });
     }
 
@@ -153,7 +172,7 @@ export class PublicScenariosComponent {
         });
     }
 
-    public showAlert(): void {
+    public showNativeAlert(): void {
         alert(PDF_FORM_TXT.get('emailSent'));
     }
 
