@@ -23,6 +23,8 @@ export const PDF_FORM_TXT = new Map([
         'Minimalna długość tytułu to 1 znak.'],
     ['authorEmail',
         'Format emaila jest niepoprawny.'],
+    ['authorEmailConfirm',
+        'Sprawdź wprowadzone maile, są między nimi różnice.'],
     ['state',
         ''],
     ['description',

@@ -41,6 +41,12 @@
             <span *ngIf="hasError('authorEmail')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmail') }}</span>
         </div>
         <div class="uk-margin">
+            <input formControlName="authorEmailConfirm" class="uk-input" type="text" placeholder="Powtórz email"
+             [ngClass]="{'has-error': hasError('authorEmailConfirm')}">
+
+            <span *ngIf="hasError('authorEmailConfirm')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmailConfirm') }}</span>
+        </div>
+        <div class="uk-margin">
             <select formControlName="state" class="uk-select" [ngClass]="{'has-error': hasError('state')}">
                 <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)">
                     {{option}}

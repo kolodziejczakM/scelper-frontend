@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
 import { Http, Response } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+
 import { PublicScenario, PdfForm } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
 
@@ -23,6 +24,8 @@ export class PublicScenariosComponent {
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
     endpoint = 'http://localhost:3000/api/v1/public-scenarios';
+    emailFieldName = 'authorEmail';
+    emailConfirmFieldName = 'authorEmailConfirm';
 
     pdfForm: FormGroup;
     formText: Map<string, string> = PDF_FORM_TXT;
@@ -46,12 +49,18 @@ export class PublicScenariosComponent {
             title: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
             authorEmail: ['', Validators.compose([Validators.required,
                               Validators.pattern(this.emailPattern)])],
+            authorEmailConfirm: ['', Validators.compose([Validators.required,
+                              Validators.pattern(this.emailPattern)])],
             state : ['', Validators.required],
-            description: ['', Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(100)])],
+            description: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(100)])],
         });
     }
 
     public hasError(controlName: string): boolean {
+
+        if (controlName === this.emailConfirmFieldName) {
+            return !this.isEmailConfirmed() || !this.pdfForm.controls[controlName].valid && this.pdfForm.controls[controlName].dirty;
+        }
         return !this.pdfForm.controls[controlName].valid && this.pdfForm.controls[controlName].dirty;
     }
 
@@ -76,6 +85,10 @@ export class PublicScenariosComponent {
 
     public showForm(): void {
         this.formVisible = !this.formVisible;
+    }
+
+    private isEmailConfirmed(): boolean {
+        return this.pdfForm.controls[this.emailConfirmFieldName].value === this.pdfForm.controls[this.emailFieldName].value;
     }
 
     private isAcceptableSize(fileSize: number): boolean {
@@ -109,7 +122,7 @@ export class PublicScenariosComponent {
     }
 
     public isFormValid(): boolean {
-        return this.pdfForm.valid && Boolean(this.fileBlob);
+        return this.pdfForm.valid && Boolean(this.fileBlob) && this.isEmailConfirmed();
     }
 
     public triggerUpload(): void {
