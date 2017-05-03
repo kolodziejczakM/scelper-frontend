@@ -30,6 +30,8 @@ export class PublicScenariosComponent {
     emailFieldName = 'authorEmail';
     emailConfirmFieldName = 'authorEmailConfirm';
 
+    filterArgs = { title: '' };
+
     pdfForm: FormGroup;
     formText: Map<string, string> = PDF_FORM_TXT;
     acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
@@ -60,6 +62,10 @@ export class PublicScenariosComponent {
             state : ['', Validators.required],
             description: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(100)])],
         });
+    }
+
+    public filterScenarios(scenarios: Array<PublicScenario> = []): any {
+        return scenarios.filter(scenario => scenario.title.indexOf(this.filterArgs['title']) !== -1);
     }
 
     public showAlert(title, message): void {
@@ -97,7 +103,7 @@ export class PublicScenariosComponent {
         }
     }
 
-    public showForm(): void {
+    public toggleForm(): void {
         this.formVisible = !this.formVisible;
     }
 

@@ -83,7 +83,7 @@ export const SERVER_RESPONSES: Object = {
 
 export const PDF_FORM_TXT = new Map([
     ['cannotSubmitted',
-        'Przycisk dodaj uaktywni się gdy wszystkie pola zostaną wypełnione poprawnie.'],
+        'Przycisk "Publikuj" uaktywni się gdy wszystkie pola zostaną wypełnione poprawnie.'],
     ['required',
         'To pole jest wymagane.'],
     ['title',
@@ -106,10 +106,12 @@ export const PDF_FORM_TXT = new Map([
         'Na podany adres email wysłaliśmy ważne informacje. Dziękujemy za pomoc w rozwoju serwisu.'],
     ['b_add',
         'Dodaj własny scenariusz'],
+    ['b_add_hide',
+        'Schowaj formularz'],
     ['b_upload',
         'Upload PDF'],
     ['b_submit',
-        'Dodaj'],
+        'Publikuj'],
     ['b_reset',
         'Wyczyść dane']
 ]);

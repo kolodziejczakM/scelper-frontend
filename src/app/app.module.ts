@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
+import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+
+import { ModalsService } from './modals/modals.service';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -13,9 +16,9 @@ import { InterviewComponent } from './interview/interview.component';
 import { ScenarioActivationComponent } from './scenario-activation/scenario-activation.component';
 import { PromptComponent } from './modals/prompt/prompt.component';
 import { AlertComponent } from './modals/alert/alert.component';
-
-import { ModalsService } from './modals/modals.service';
 import { LoaderComponent } from './loader/loader.component';
+import { HeaderComponent } from './header/header.component';
+import { GenericErrorComponent } from './generic-error/generic-error.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -33,7 +36,9 @@ const appRoutes: Routes = [
         ScenarioActivationComponent,
         PromptComponent,
         AlertComponent,
-        LoaderComponent
+        LoaderComponent,
+        HeaderComponent,
+        GenericErrorComponent
     ],
     imports: [
         BrowserModule,
@@ -41,7 +46,8 @@ const appRoutes: Routes = [
         ReactiveFormsModule,
         FormsModule,
         HttpModule,
-        BootstrapModalModule
+        BootstrapModalModule,
+        Angular2FontAwesomeModule
     ],
     entryComponents: [
         AlertComponent,

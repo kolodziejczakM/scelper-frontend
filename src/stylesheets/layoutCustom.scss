@@ -1,6 +1,14 @@
 
+body{ 
+    overflow-y: scroll
+}
+
 .margin-centered{
     margin: 0 auto;
+}
+
+.margin-30{
+    margin: 30px;
 }
 
 .margin-top-20{
@@ -38,9 +46,91 @@
     }
 } 
 
+.uk-input{
+    &.filter-field{
+        width: initial;
+    }
+}
+
+.scelper-table-wrapper{
+    padding: 40px;
+    overflow-x: auto;
+}
+
+td{
+    .fa{
+        margin: 2.5px;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}
+
+button{
+    .fa{
+        margin-right: 2.5px;
+    }
+}
+
+textarea {
+   resize: none;
+}
+
+.custom-table{
+    margin: 0 auto;
+
+    th,td{
+        padding: 20px;
+    }
+
+    th{
+        text-align: left;
+    }
+
+    td{
+        max-width: 500px;
+        min-width: 75px;
+        &.long-text{
+            min-width: 200px;
+        }
+    }
+}
+
+.new-scenario-form{
+    padding: 0 40px;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.25s ease-in-out;
+    &.visible{
+        max-height: 700px;
+    }
+}
+
+.full-interview{
+    position: relative;
+    .in-progress{
+        background: rgba(0, 0, 0 , 0.7);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: white;
+        .info{
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+    }
+}
+
 input[type="file"]{
     display: none;
 }
+
 .scelper-horizontal-logo{
     width: 160px;
     height: 160px;
