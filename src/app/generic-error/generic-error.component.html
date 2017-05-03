@@ -1,3 +1,8 @@
-<p>
-  generic-error works!
-</p>
+
+<section *ngIf="show" class="generic-error-wrapper text-centered">
+    <h4>WYSTĄPIŁ BŁĄD!</h4>
+    <div class="darkred">
+        <i class="fa fa-exclamation-circle fa-5x" aria-hidden="true"></i>
+    </div>
+    <p>{{ message }}</p>
+</section>

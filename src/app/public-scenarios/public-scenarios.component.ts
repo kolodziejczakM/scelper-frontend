@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
@@ -22,11 +22,12 @@ import { EMAIL_PATTERN,
     selector: 'app-public-scenarios',
     templateUrl: './public-scenarios.component.html'
 })
-export class PublicScenariosComponent {
+export class PublicScenariosComponent implements OnInit {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
     endpoint = 'http://localhost:3000/api/v1/public-scenarios';
+
     emailFieldName = 'authorEmail';
     emailConfirmFieldName = 'authorEmailConfirm';
 
@@ -46,8 +47,6 @@ export class PublicScenariosComponent {
     scenarioStates: Array<string> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
-    promptMessage;
-
     constructor(
         private http: Http,
         private formBuilder: FormBuilder,
@@ -64,6 +63,23 @@ export class PublicScenariosComponent {
         });
     }
 
+    ngOnInit() {
+        this.getPublicScenarios();
+    }
+
+    public getPublicScenarios(): void {
+
+        this.http.get(this.endpoint).map(res => res.json()).subscribe(response => {
+            console.log(response);
+            console.log(helpers.translateServerResponse(response.code));
+            this.scenarios = response;
+        },
+        (err: Response) => {
+            console.warn(helpers.translateServerResponse(err.json().code));
+            // TODO generic error should be visible with that message
+        });
+    }
+
     public filterScenarios(scenarios: Array<PublicScenario> = []): any {
         return scenarios.filter(scenario => scenario.title.indexOf(this.filterArgs['title']) !== -1);
     }
@@ -72,8 +88,8 @@ export class PublicScenariosComponent {
         this.modalsService.showAlert(title, message);
     }
 
-    public showPrompt(context, variableName, requestText): void {
-        this.modalsService.showPrompt(context, variableName, requestText);
+    public showPrompt(title): Observable<any> {
+        return this.modalsService.showPrompt(title);
     }
 
     public hasError(controlName: string): boolean {
@@ -177,7 +193,28 @@ export class PublicScenariosComponent {
     }
 
     public deleteScenario(): void {
-        confirm(COMMON_MSG.get('confirm'));
+        console.log('Fake deleting in progress');
+        this.showPrompt('Wprowadź kod usunięcia: ').subscribe((deleteCode) => {
+            if (deleteCode === undefined) {
+                return;
+            }
+
+            const deleteUrl = `${this.endpoint}/${deleteCode}`;
+            this.http.delete(deleteUrl).map(res => res.json()).subscribe(response => {
+                console.log(response);
+                console.log(helpers.translateServerResponse(response.code));
+            },
+            (err: Response) => {
+                console.warn(helpers.translateServerResponse(err.json().code));
+                // TODO generic error should be visible with that message
+            });
+
+        });
     }
+
+    public downloadScenario(): void {
+        console.log('Fake downloading in progress');
+    }
+
 
 }

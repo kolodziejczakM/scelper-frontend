@@ -69,7 +69,7 @@
 <section class="scelper-table-wrapper">
     <span>Filtruj: </span><input class="uk-input filter-field" type="text" [(ngModel)]="filterArgs.title" placeholder="Szukaj po tytule"/>
     <table class="custom-table">
-        <thead>
+        <thead [hidden]="!filterScenarios(scenarios).length">
             <tr>
                 <th>#</th>
                 <th>Tytuł</th>
@@ -89,8 +89,8 @@
                 <td>{{ scenario.pages }}</td>
                 <td>{{ scenario.state }}</td>
                 <td>
-                    <i class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
-                    <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    <i (click)="downloadScenario();" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
+                    <i (click)="deleteScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>
                 </td>
             </tr>
             <tr [hidden]="filterScenarios(scenarios).length">
