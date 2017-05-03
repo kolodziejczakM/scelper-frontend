@@ -11,8 +11,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { PublicScenariosComponent } from './public-scenarios/public-scenarios.component';
 import { InterviewComponent } from './interview/interview.component';
 import { ScenarioActivationComponent } from './scenario-activation/scenario-activation.component';
-import { PromptComponent } from './prompt/prompt.component';
-import { AlertComponent } from './alert/alert.component';
+import { PromptComponent } from './modals/prompt/prompt.component';
+import { AlertComponent } from './modals/alert/alert.component';
+
+import { ModalsService } from './modals/modals.service';
+import { LoaderComponent } from './loader/loader.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -29,7 +32,8 @@ const appRoutes: Routes = [
         InterviewComponent,
         ScenarioActivationComponent,
         PromptComponent,
-        AlertComponent
+        AlertComponent,
+        LoaderComponent
     ],
     imports: [
         BrowserModule,
@@ -44,7 +48,8 @@ const appRoutes: Routes = [
         PromptComponent
     ],
     providers: [
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        ModalsService
     ],
     bootstrap: [AppComponent]
 })

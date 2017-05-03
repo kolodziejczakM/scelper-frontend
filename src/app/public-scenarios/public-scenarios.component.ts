@@ -4,9 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { DialogService } from 'ng2-bootstrap-modal';
-import { PromptComponent } from '../prompt/prompt.component';
-import { AlertComponent } from '../alert/alert.component';
+import { ModalsService } from '../modals/modals.service';
 
 import * as helpers from '../app.helpers';
 import { PublicScenario, PdfForm } from '../interfaces';
@@ -46,12 +44,12 @@ export class PublicScenariosComponent {
     scenarioStates: Array<string> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
-    promptMessage: string;
+    promptMessage;
 
     constructor(
         private http: Http,
         private formBuilder: FormBuilder,
-        private dialogService: DialogService
+        private modalsService: ModalsService
     ) {
         this.pdfForm = formBuilder.group({
             title: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -64,16 +62,12 @@ export class PublicScenariosComponent {
         });
     }
 
-    public showAlert(): void {
-        this.dialogService.addDialog(AlertComponent, { title: 'Uwaga', message: 'Nie powinieneś tak robić' });
+    public showAlert(title, message): void {
+        this.modalsService.showAlert(title, message);
     }
 
-    public showPrompt(): void {
-        this.dialogService.addDialog(PromptComponent, { title: 'Wprowadź kod usunięcia:', question: '' })
-                          .subscribe((message) => {
-
-                this.promptMessage = message;
-        });
+    public showPrompt(context, variableName, requestText): void {
+        this.modalsService.showPrompt(context, variableName, requestText);
     }
 
     public hasError(controlName: string): boolean {

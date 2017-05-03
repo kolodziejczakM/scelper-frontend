@@ -24,6 +24,20 @@
     color: #FF7153;
 }
 
+.uk-button{
+    &.uk-button-primary{
+        background: #83e800;
+        color: #666;
+        &:hover{
+            background:rgba(#83e800, 0.6);
+        }
+        &:disabled{
+            background-color: #f8f8f8;
+            color: #999;
+        }
+    }
+} 
+
 input[type="file"]{
     display: none;
 }
@@ -36,7 +50,7 @@ input[type="file"]{
 
 .loader {
     border: 5px solid #f3f3f3; 
-    border-top: 5px solid #2AFF60;
+    border-top: 5px solid #83e800;
     border-radius: 50%;
     width: 30px;
     height: 30px;
