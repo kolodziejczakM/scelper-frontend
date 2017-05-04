@@ -19,10 +19,12 @@ import { AlertComponent } from './modals/alert/alert.component';
 import { LoaderComponent } from './loader/loader.component';
 import { HeaderComponent } from './header/header.component';
 import { GenericErrorComponent } from './generic-error/generic-error.component';
+import { SimpleInterviewComponent } from './simple-interview/simple-interview.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'interview', component: InterviewComponent },
+    { path: 'interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
     { path: 'activation/:deleteCode', component: ScenarioActivationComponent }
 ];
@@ -38,7 +40,8 @@ const appRoutes: Routes = [
         AlertComponent,
         LoaderComponent,
         HeaderComponent,
-        GenericErrorComponent
+        GenericErrorComponent,
+        SimpleInterviewComponent
     ],
     imports: [
         BrowserModule,
