@@ -16,11 +16,15 @@ export const COMMON_MSG = new Map([
 
 export const SERVER_RESPONSES: Object = {
     COMMON_UPLOAD: {
-        msg: 'Wystąpił błąd w trakcie uploadu pliku. Spróbuj ponownie',
+        msg: 'Wystąpił błąd w trakcie uploadu pliku. Spróbuj ponownie.',
         code: 'COMMON_UPLOAD'
     },
+    COMMON_DOWNLOAD: {
+        msg: 'Wystąpił błąd w trakcie pobierania pliku. Spróbuj ponownie.',
+        code: 'COMMON_DOWNLOAD'
+    },
     COMMON_DB: {
-        msg: 'Wystąpił błąd w trakcie połączenia z bazą danych. Spróbuj ponownie',
+        msg: 'Wystąpił błąd w trakcie połączenia z bazą danych. Spróbuj ponownie.',
         code: 'COMMON_DB'
     },
     EXTENSION: {
