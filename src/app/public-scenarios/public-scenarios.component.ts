@@ -212,8 +212,8 @@ export class PublicScenariosComponent implements OnInit {
         });
     }
 
-    public downloadScenario(): void {
-        console.log('Fake downloading in progress');
+    public downloadScenario(path: string): void {
+        location.href = 'http://www.localhost:3000/' + path;
     }
 
 
