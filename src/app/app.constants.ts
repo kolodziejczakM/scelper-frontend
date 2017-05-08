@@ -7,7 +7,10 @@ export const SCENARIO_SIZE_LIMIT_KB = (200 * KILO_BYTE);
 export const SCENARIO_ACCEPTABLE_MIMETYPE = 'application/pdf';
 
 export const DEFAULT_SCENARIO_STATE = 'Wybierz';
-export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, 'Niekompletny', 'Ukończony'];
+export const SCENARIO_STATE_INCOMPLETE = 'Niekompletny';
+export const SCENARIO_STATE_COMPLETE = 'Ukończony';
+
+export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLETE, SCENARIO_STATE_COMPLETE];
 
 export const COMMON_MSG = new Map([
     ['confirm',

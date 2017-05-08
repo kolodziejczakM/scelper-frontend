@@ -12,7 +12,8 @@ export interface PublicScenario {
     description: string;
     authorEmail: string;
     pages?: number;
-    state: string;
+    state?: string;
+    stateId?: number;
 }
 
 

@@ -1,10 +1,11 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
+// import { Http, Response } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
 import { ModalsService } from '../modals/modals.service';
+import { PublicScenariosService } from './public-scenarios.service';
 
 import * as helpers from '../app.helpers';
 import { PublicScenario, PdfForm } from '../interfaces';
@@ -26,7 +27,7 @@ export class PublicScenariosComponent implements OnInit {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
-    endpoint = 'http://localhost:3000/api/v1/public-scenarios';
+    // endpoint = 'http://localhost:3000/api/v1/public-scenarios';
 
     emailFieldName = 'authorEmail';
     emailConfirmFieldName = 'authorEmailConfirm';
@@ -39,7 +40,7 @@ export class PublicScenariosComponent implements OnInit {
     acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
 
     formVisible = false;
-    emailPattern = EMAIL_PATTERN;
+    emailPattern: RegExp = EMAIL_PATTERN;
 
     fileBlob: Blob;
     fileName = '';
@@ -48,7 +49,8 @@ export class PublicScenariosComponent implements OnInit {
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
     constructor(
-        private http: Http,
+        // private http: Http,
+        private publicScenariosService: PublicScenariosService,
         private formBuilder: FormBuilder,
         private modalsService: ModalsService
     ) {
@@ -64,20 +66,34 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getPublicScenarios();
+        // this.getPublicScenarios();
+        this.preparePublicScenarios();
     }
 
-    public getPublicScenarios(): void {
+    private getPublicScenarios(): Observable<Array<PublicScenario>> {
+        return this.publicScenariosService.getPublicScenarios();
 
-        this.http.get(this.endpoint).map(res => res.json()).subscribe(response => {
-            console.log(response);
-            console.log(helpers.translateServerResponse(response.code));
+        // this.http.get(this.endpoint).map(res => res.json()).subscribe(response => {
+        //     console.log(response);
+        //     // console.log(helpers.translateServerResponse(response.code));
+        //     this.scenarios = response;
+        // },
+        // (err: Response) => {
+        //     console.warn(helpers.translateServerResponse(err.json().code));
+        //     // TODO generic error should be visible with that message
+        // });
+    }
+
+    private preparePublicScenarios(): void {
+        this.getPublicScenarios().subscribe(response => {
             this.scenarios = response;
-        },
-        (err: Response) => {
-            console.warn(helpers.translateServerResponse(err.json().code));
-            // TODO generic error should be visible with that message
-        });
+        }, err => console.log('Error w widoku: ', err));
+       // this.getPublicScenarios
+       // map modifyScenarioStates
+    }
+
+    private getStateStringFromId(stateId: number): string {
+        return helpers.getStateStringFromId(stateId);
     }
 
     public filterScenarios(scenarios: Array<PublicScenario> = []): any {
@@ -177,37 +193,51 @@ export class PublicScenariosComponent implements OnInit {
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 
-        const url = this.endpoint;
-
-        this.http.post(url, formData).map(res => res.json()).subscribe(response => {
-           console.log(response);
-           console.log(helpers.translateServerResponse(response.code));
-        },
-        (err: Response) => {
-            console.warn(err);
+        this.postPublicScenario(formData).subscribe(response => {
+            console.log('Success in creating scenario.');
         });
+
+        // const url = this.endpoint;
+
+        // this.http.post(url, formData).map(res => res.json()).subscribe(response => {
+        //    console.log(response);
+        //    console.log(helpers.translateServerResponse(response.code));
+        // },
+        // (err: Response) => {
+        //     console.warn(err);
+        // });
+    }
+
+    private postPublicScenario(scenario): Observable<Array<PublicScenario>> {
+        return this.publicScenariosService.postPublicScenario(scenario);
+    }
+
+    private deletePublicScenario(scenario): Observable<any> {
+        return this.publicScenariosService.deletePublicScenario(scenario);
     }
 
     public showNativeAlert(): void {
         alert(PDF_FORM_TXT.get('emailSent'));
     }
 
-    public deleteScenario(): void {
-        console.log('Fake deleting in progress');
+    public removeScenario(): void {
         this.showPrompt('Wprowadź kod usunięcia: ').subscribe((deleteCode) => {
-            if (deleteCode === undefined) {
+            if (!deleteCode) {
                 return;
             }
 
-            const deleteUrl = `${this.endpoint}/${deleteCode}`;
-            this.http.delete(deleteUrl).map(res => res.json()).subscribe(response => {
-                console.log(response);
-                console.log(helpers.translateServerResponse(response.code));
-            },
-            (err: Response) => {
-                console.warn(helpers.translateServerResponse(err.json().code));
-                // TODO generic error should be visible with that message
+            this.deletePublicScenario(deleteCode).subscribe(response => {
+                console.log('Usunięto z sukcesem!');
             });
+            // const deleteUrl = `${this.endpoint}/${deleteCode}`;
+            // this.http.delete(deleteUrl).map(res => res.json()).subscribe(response => {
+            //     console.log(response);
+            //     console.log(helpers.translateServerResponse(response.code));
+            // },
+            // (err: Response) => {
+            //     console.warn(helpers.translateServerResponse(err.json().code));
+            //     // TODO generic error should be visible with that message
+            // });
 
         });
     }
@@ -215,6 +245,5 @@ export class PublicScenariosComponent implements OnInit {
     public downloadScenario(path: string): void {
         location.href = 'http://www.localhost:3000/' + path;
     }
-
 
 }
