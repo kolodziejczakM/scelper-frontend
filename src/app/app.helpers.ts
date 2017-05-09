@@ -1,11 +1,11 @@
-import { SERVER_RESPONSES,
+import { SERVER_SUCCESS_RESPONSES,
          SCENARIO_STATE_INCOMPLETE,
          SCENARIO_STATE_COMPLETE } from './app.constants';
 
 export function translateServerResponse(respCode: string): string {
-    for (const res in SERVER_RESPONSES) {
+    for (const res in SERVER_SUCCESS_RESPONSES) {
         if (res === respCode) {
-            return SERVER_RESPONSES[res]['msg'];
+            return SERVER_SUCCESS_RESPONSES[res]['msg'];
         }
     }
 }

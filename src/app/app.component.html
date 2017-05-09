@@ -1,3 +1,3 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
-<app-generic-error [show]="true" [message]="'Wystąpił problem podczas komunikacji z mockiem. Proszę spróbuj ponownie.'"></app-generic-error>
+<router-outlet *ngIf="!errorsOccured"></router-outlet>
+<app-generic-error [show]="errorsOccured" [message]="currentErrorMsg"></app-generic-error>

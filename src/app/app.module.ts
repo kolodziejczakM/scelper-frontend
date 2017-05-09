@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 
+import { AppStoreService } from './app-store.service';
 import { ApiRoutesService } from './api-routes.service';
 import { ModalsService } from './modals/modals.service';
 import { PublicScenariosService } from './public-scenarios/public-scenarios.service';
@@ -60,9 +61,10 @@ const appRoutes: Routes = [
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
+        AppStoreService,
+        ApiRoutesService,
         ModalsService,
-        PublicScenariosService,
-        ApiRoutesService
+        PublicScenariosService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,22 +1,23 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-// import { Http, Response } from '@angular/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
+import { AppStoreService } from '../app-store.service';
 import { ModalsService } from '../modals/modals.service';
 import { PublicScenariosService } from './public-scenarios.service';
 
 import * as helpers from '../app.helpers';
-import { PublicScenario, PdfForm } from '../interfaces';
+import { PublicScenario, PdfForm, ResponseObject } from '../interfaces';
 import { PUBLIC_SCENARIOS } from '../mocks';
 
-import { EMAIL_PATTERN,
+import { APP_NAME,
+         EMAIL_PATTERN,
          SCENARIO_STATES,
          DEFAULT_SCENARIO_STATE,
          SCENARIO_ACCEPTABLE_MIMETYPE,
          SCENARIO_SIZE_LIMIT_KB,
          PDF_FORM_TXT,
+         ERROR_MSG,
          COMMON_MSG } from '../app.constants';
 
 @Component({
@@ -26,8 +27,6 @@ import { EMAIL_PATTERN,
 export class PublicScenariosComponent implements OnInit {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
-
-    // endpoint = 'http://localhost:3000/api/v1/public-scenarios';
 
     emailFieldName = 'authorEmail';
     emailConfirmFieldName = 'authorEmailConfirm';
@@ -48,8 +47,12 @@ export class PublicScenariosComponent implements OnInit {
     scenarioStates: Array<string> = SCENARIO_STATES;
     scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
+    private static getStateStringFromId(stateId: number): string {
+        return helpers.getStateStringFromId(stateId);
+    }
+
     constructor(
-        // private http: Http,
+        private appStoreService: AppStoreService,
         private publicScenariosService: PublicScenariosService,
         private formBuilder: FormBuilder,
         private modalsService: ModalsService
@@ -66,34 +69,30 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.getPublicScenarios();
         this.preparePublicScenarios();
     }
 
-    private getPublicScenarios(): Observable<Array<PublicScenario>> {
-        return this.publicScenariosService.getPublicScenarios();
-
-        // this.http.get(this.endpoint).map(res => res.json()).subscribe(response => {
-        //     console.log(response);
-        //     // console.log(helpers.translateServerResponse(response.code));
-        //     this.scenarios = response;
-        // },
-        // (err: Response) => {
-        //     console.warn(helpers.translateServerResponse(err.json().code));
-        //     // TODO generic error should be visible with that message
-        // });
-    }
-
     private preparePublicScenarios(): void {
-        this.getPublicScenarios().subscribe(response => {
-            this.scenarios = response;
-        }, err => console.log('Error w widoku: ', err));
-       // this.getPublicScenarios
-       // map modifyScenarioStates
+        this.getPublicScenarios().subscribe(
+            (res: PublicScenario[]) => {
+                this.scenarios = res.map(this.stringifyScenarioStates);
+            },
+            (err: Error) => {
+                console.warn(err);
+                this.appStoreService.errorMessage = ERROR_MSG.get('scenariosDownload');
+                this.appStoreService.showError.next(true);
+                // TODO generic error needs to be refactored
+            }
+        );
     }
 
-    private getStateStringFromId(stateId: number): string {
-        return helpers.getStateStringFromId(stateId);
+    private getPublicScenarios(): Observable<PublicScenario[] | Error> {
+        return this.publicScenariosService.getPublicScenarios();
+    }
+
+    private stringifyScenarioStates(scenario: PublicScenario): PublicScenario {
+        scenario.state = PublicScenariosComponent.getStateStringFromId(scenario.stateId);
+        return scenario;
     }
 
     public filterScenarios(scenarios: Array<PublicScenario> = []): any {
@@ -147,7 +146,7 @@ export class PublicScenariosComponent implements OnInit {
         const isAcceptable = (fileSize <= this.acceptableSize);
 
         if (!isAcceptable) {
-            alert(PDF_FORM_TXT.get('fileSize'));
+            this.showAlert(APP_NAME, PDF_FORM_TXT.get('fileSize'));
         }
 
         return isAcceptable;
@@ -157,7 +156,7 @@ export class PublicScenariosComponent implements OnInit {
         const isAcceptable = (fileFormat === this.acceptableMimetype);
 
          if (!isAcceptable) {
-            alert(PDF_FORM_TXT.get('fileFormat'));
+            this.showAlert(APP_NAME, PDF_FORM_TXT.get('fileFormat'));
         }
 
         return isAcceptable;
@@ -181,7 +180,7 @@ export class PublicScenariosComponent implements OnInit {
         this.fileInputNode.nativeElement.click();
     }
 
-    public submitPDF(submitted: PdfForm): void  {
+    public submitPDF(submitted: PdfForm): void {
 
         const formData = new FormData();
 
@@ -193,53 +192,53 @@ export class PublicScenariosComponent implements OnInit {
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 
-        this.postPublicScenario(formData).subscribe(response => {
-            console.log('Success in creating scenario.');
-        });
+        this.postPublicScenario(formData).subscribe(
+            (response: ResponseObject) => {
+                const successMessage = helpers.translateServerResponse(response.code);
 
-        // const url = this.endpoint;
-
-        // this.http.post(url, formData).map(res => res.json()).subscribe(response => {
-        //    console.log(response);
-        //    console.log(helpers.translateServerResponse(response.code));
-        // },
-        // (err: Response) => {
-        //     console.warn(err);
-        // });
+                console.log(successMessage);
+                this.showAlert(APP_NAME, successMessage);
+            },
+            (err: Error) => {
+                console.warn(err);
+                this.appStoreService.errorMessage = ERROR_MSG.get('scenarioAdd');
+                this.appStoreService.showError.next(true);
+                // TODO generic error needs to be refactored
+            }
+        );
     }
 
-    private postPublicScenario(scenario): Observable<Array<PublicScenario>> {
+    private postPublicScenario(scenario): Observable<ResponseObject | Error> {
         return this.publicScenariosService.postPublicScenario(scenario);
     }
 
-    private deletePublicScenario(scenario): Observable<any> {
-        return this.publicScenariosService.deletePublicScenario(scenario);
-    }
-
-    public showNativeAlert(): void {
-        alert(PDF_FORM_TXT.get('emailSent'));
-    }
-
     public removeScenario(): void {
-        this.showPrompt('Wprowadź kod usunięcia: ').subscribe((deleteCode) => {
+
+        this.showPrompt(COMMON_MSG.get('deleteScenarioPrompt')).subscribe((deleteCode) => {
             if (!deleteCode) {
                 return;
             }
 
-            this.deletePublicScenario(deleteCode).subscribe(response => {
-                console.log('Usunięto z sukcesem!');
-            });
-            // const deleteUrl = `${this.endpoint}/${deleteCode}`;
-            // this.http.delete(deleteUrl).map(res => res.json()).subscribe(response => {
-            //     console.log(response);
-            //     console.log(helpers.translateServerResponse(response.code));
-            // },
-            // (err: Response) => {
-            //     console.warn(helpers.translateServerResponse(err.json().code));
-            //     // TODO generic error should be visible with that message
-            // });
+            this.deletePublicScenario(deleteCode).subscribe(
+                (response: ResponseObject) => {
+                    const successMessage = helpers.translateServerResponse(response.code);
+
+                    console.log(successMessage);
+                    this.showAlert(APP_NAME, successMessage);
+                },
+                (err: Error) => {
+                    console.warn(err);
+                    this.appStoreService.errorMessage = ERROR_MSG.get('scenarioDelete');
+                    this.appStoreService.showError.next(true);
+                    // TODO generic error needs to be refactored
+                }
+            );
 
         });
+    }
+
+    private deletePublicScenario(scenario): Observable<ResponseObject | Error> {
+        return this.publicScenariosService.deletePublicScenario(scenario);
     }
 
     public downloadScenario(path: string): void {

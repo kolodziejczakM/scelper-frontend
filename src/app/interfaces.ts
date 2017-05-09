@@ -1,4 +1,9 @@
 
+export interface ResponseObject {
+    code: string;
+    msg: string;
+}
+
 export interface PdfForm {
     title: string;
     authorEmail: string;
@@ -15,5 +20,4 @@ export interface PublicScenario {
     state?: string;
     stateId?: number;
 }
-
 

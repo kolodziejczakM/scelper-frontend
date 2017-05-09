@@ -1,4 +1,6 @@
 
+export const APP_NAME = 'Scelper';
+
 export const EMAIL_PATTERN = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/;
 
 export const KILO_BYTE = 1024;
@@ -14,77 +16,32 @@ export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLET
 
 export const COMMON_MSG = new Map([
     ['confirm',
-        'Czy jesteś pewien?']
+        'Czy jesteś pewien?'],
+    ['deleteScenarioPrompt',
+        'Wprowadź kod usunięcia: ']
 ]);
 
-export const SERVER_RESPONSES: Object = {
-    COMMON_UPLOAD: {
-        msg: 'Wystąpił błąd w trakcie uploadu pliku. Spróbuj ponownie.',
-        code: 'COMMON_UPLOAD'
-    },
-    COMMON_DOWNLOAD: {
-        msg: 'Wystąpił błąd w trakcie pobierania pliku. Spróbuj ponownie.',
-        code: 'COMMON_DOWNLOAD'
-    },
-    COMMON_DB: {
-        msg: 'Wystąpił błąd w trakcie połączenia z bazą danych. Spróbuj ponownie.',
-        code: 'COMMON_DB'
-    },
-    EXTENSION: {
-        msg: 'Format pliku jest nieodpowiedni.',
-        code: 'EXTENSION'
-    },
-    SCENARIO_DB_SAVE: {
-        msg: 'Wystąpił błąd w trakcie zapisu scenariusza. Spróbuj ponownie.',
-        code: 'SCENARIO_DB_SAVE'
-    },
-    SCENARIO_DB_UPDATE: {
-        msg: 'Wystąpił błąd w trakcie aktywacji scenariusza. Spróbuj ponownie.',
-        code: 'SCENARIO_DB_UPDATE'
-    },
-    SCENARIO_DB_REMOVE: {
-        msg: 'Wystąpił błąd w trakcie usuwania scenariusza. Skontaktuj się z administracją.',
-        code: 'SCENARIO_DB_REMOVE'
-    },
-    SCENARIO_FILE_UPDATE: {
-        msg: 'Wystąpił błąd w trakcie aktywacji scenariusza. Skontaktuj się z administracją.',
-        code: 'SCENARIO_FILE_UPDATE'
-    },
-    SCENARIO_FILE_REMOVE: {
-        msg: 'Wystąpił błąd podczas usuwania scenariusza. Skontaktuj się z administracją.',
-        code: 'SCENARIO_FILE_REMOVE'
-    },
-    ALREADY_EXISTS: {
-        msg: 'Twój scenariusz jest już w naszej bazie danych. W razie pytań skontaktuj się z administracją.',
-        code: 'ALREADY_EXISTS'
-    },
-    NOT_EXISTS: {
-        msg: 'Wystąpił błąd. Scenariusz został już usunięty. W razie pytań skontaktuj się z administracją.',
-        code: 'NOT_EXISTS'
-    },
-    MAIL_SENDING: {
-        msg: 'Wystąpił błąd podczas wysyłki maila aktywacyjnego. Prosimy o kontakt z administracją.',
-        code: 'MAIL_SENDING'
-    },
-    DELETE_CODE_NOT_EXISTS: {
-        msg: 'Kod usunięcia jest niepoprawny.',
-        code: 'DELETE_CODE_NOT_EXISTS'
-    },
-    SCENARIO_SAVED: {
-        msg: 'Scenariusz zapisany poprawnie.',
-        code: 'SCENARIO_SAVED'
+export const ERROR_MSG = new Map([
+    ['scenariosDownload',
+        'Wystąpił problem podczas pobierania listy scenariuszy. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
+    ['scenarioAdd',
+        'Wystąpił problem podczas dodawania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją'],
+    ['scenarioDelete',
+        'Wystąpił problem podczas usuwania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją']
+]);
+
+export const SERVER_SUCCESS_RESPONSES = {
+    MAIL_SENT: {
+        msg: 'Sprawdź skrzynkę mailową. Wysłaliśmy Ci ważne informacje nt. kolejnych kroków.',
+        code: 'MAIL_SENT'
     },
     SCENARIO_UPDATED: {
-        msg: 'Scenariusz został aktywowany.',
+        msg: 'Aktywacja scenariusza przebiegła poprawnie.',
         code: 'SCENARIO_UPDATED'
     },
     SCENARIO_REMOVED: {
-        msg: 'Scenariusz usunięty poprawnie.',
+        msg: 'Scenariusz został usunięty. W razie pytań prosimy o kontakt z administracją.',
         code: 'SCENARIO_REMOVED'
-    },
-    MAIL_SENT: {
-        msg: 'Scenariusz zapisany poprawnie. Wysłaliśmy do Ciebie maila aktywacyjnego.',
-        code: 'MAIL_SENT'
     }
 };
 

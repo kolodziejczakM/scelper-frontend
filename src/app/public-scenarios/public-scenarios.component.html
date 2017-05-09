@@ -56,7 +56,7 @@
             </div>
         </fieldset>
         <div class="text-centered margin-30">
-            <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()" (click)="showNativeAlert()">{{ formText.get('b_submit') }}</button>
+            <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()">{{ formText.get('b_submit') }}</button>
             <button type="button" class="uk-button uk-button-default" [hidden]="pdfForm.pristine" (click)="resetForm()">{{ formText.get('b_reset') }}</button>
         </div>
     </form>

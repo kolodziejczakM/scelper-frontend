@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
 import { ApiRoutesService } from '../api-routes.service';
+
+import { PublicScenario, ResponseObject } from '../interfaces';
 
 @Injectable()
 export class PublicScenariosService {
@@ -11,20 +14,21 @@ export class PublicScenariosService {
         private apiRoutesService: ApiRoutesService
     ) { }
 
-    public getPublicScenarios() {
+    public getPublicScenarios(): Observable<PublicScenario[] | Error> {
         return this.http.get(this.apiRoutesService.getPaths().publicScenarios.getAll())
-                 .map(res => res.json()); // .catch((err) => Observable.throw(err));
-                  // `ERROR <GET> catched: ${err}`);
+                        .map((res: Response) => res.json() as PublicScenario[])
+                        .catch((err) => Observable.throw(new Error(err)));
     }
 
-    public postPublicScenario(scenario) {
+    public postPublicScenario(scenario: PublicScenario): Observable<ResponseObject | Error> {
         return this.http.post(this.apiRoutesService.getPaths().publicScenarios.post(), scenario)
-                 .map(res => res.json()).catch((err) => `ERROR <POST> catched: ${err}`);
+                        .map((res: Response) => res.json() as ResponseObject)
+                        .catch((err) => Observable.throw(new Error(err)));
     }
 
-    public deletePublicScenario(deleteCode: string) {
+    public deletePublicScenario(deleteCode: string): Observable<ResponseObject | Error> {
         return this.http.delete(this.apiRoutesService.getPaths().publicScenarios.delete(deleteCode))
-                 .map(res => res.json()).catch((err) => `ERROR <DELETE> catched: ${err}`);
+                        .map((res: Response) => res.json() as ResponseObject)
+                        .catch((err) => Observable.throw(new Error(err)));
     }
-
 }
