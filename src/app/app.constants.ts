@@ -21,13 +21,15 @@ export const COMMON_MSG = new Map([
         'Wprowadź kod usunięcia: ']
 ]);
 
+export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
+
 export const ERROR_MSG = new Map([
     ['scenariosDownload',
         'Wystąpił problem podczas pobierania listy scenariuszy. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
     ['scenarioAdd',
         'Wystąpił problem podczas dodawania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją'],
     ['scenarioDelete',
-        'Wystąpił problem podczas usuwania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją']
+        'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.']
 ]);
 
 export const SERVER_SUCCESS_RESPONSES = {

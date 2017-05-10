@@ -16,18 +16,21 @@ export class PublicScenariosService {
 
     public getPublicScenarios(): Observable<PublicScenario[] | Error> {
         return this.http.get(this.apiRoutesService.getPaths().publicScenarios.getAll())
+
                         .map((res: Response) => res.json() as PublicScenario[])
                         .catch((err) => Observable.throw(new Error(err)));
     }
 
     public postPublicScenario(scenario: PublicScenario): Observable<ResponseObject | Error> {
         return this.http.post(this.apiRoutesService.getPaths().publicScenarios.post(), scenario)
+
                         .map((res: Response) => res.json() as ResponseObject)
                         .catch((err) => Observable.throw(new Error(err)));
     }
 
     public deletePublicScenario(deleteCode: string): Observable<ResponseObject | Error> {
         return this.http.delete(this.apiRoutesService.getPaths().publicScenarios.delete(deleteCode))
+
                         .map((res: Response) => res.json() as ResponseObject)
                         .catch((err) => Observable.throw(new Error(err)));
     }

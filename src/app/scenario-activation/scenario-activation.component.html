@@ -1,8 +1,3 @@
 
-<!--<div class="scelper-horizontal-logo margin-centered"></div>
-<div *ngIf="loading" class="loader margin-centered margin-top-20"></div>
-<p class="text-centered margin-top-20">
-    {{ visibleText }}
-</p>-->
 
-<app-loader [show]="loading" [text]="visibleText" [logoVisible]="true"></app-loader>
+<app-loader *ngIf="loading" [text]="visibleText" [logoVisible]="true"></app-loader>

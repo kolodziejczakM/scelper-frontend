@@ -1,8 +1,11 @@
 
-<section *ngIf="show" class="generic-error-wrapper text-centered">
-    <h4>WYSTĄPIŁ BŁĄD!</h4>
+<section class="generic-error-wrapper text-centered">
+    <h4>{{ header }}</h4>
     <div class="darkred">
         <i class="fa fa-exclamation-circle fa-5x" aria-hidden="true"></i>
     </div>
     <p>{{ message }}</p>
+    <button class="uk-button uk-button-default" (click)="refreshApp();">
+        <i class="fa fa-refresh" aria-hidden="true"></i> {{ refreshText }}
+    </button>
 </section>

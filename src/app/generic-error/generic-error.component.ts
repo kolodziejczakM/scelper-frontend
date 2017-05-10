@@ -6,12 +6,18 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class GenericErrorComponent implements OnInit {
 
-    @Input() show: boolean;
+    public refreshText = 'Odśwież stronę';
+
+    @Input() header: string;
     @Input() message: string;
 
     constructor() { }
 
     ngOnInit() {
+    }
+
+    public refreshApp(): void {
+        location.reload();
     }
 
 }

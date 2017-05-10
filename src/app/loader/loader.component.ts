@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
 
-    @Input() show: boolean;
     @Input() text: string;
     @Input() logoVisible: boolean;
 

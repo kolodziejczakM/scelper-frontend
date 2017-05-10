@@ -2,7 +2,9 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
-import { AppStoreService } from '../app-store.service';
+import { AppStoreService } from '../app-store/app-store.service';
+import { AppStoreActions } from '../app-store/app-store.actions';
+
 import { ModalsService } from '../modals/modals.service';
 import { PublicScenariosService } from './public-scenarios.service';
 
@@ -53,6 +55,7 @@ export class PublicScenariosComponent implements OnInit {
 
     constructor(
         private appStoreService: AppStoreService,
+        private appStoreActions: AppStoreActions,
         private publicScenariosService: PublicScenariosService,
         private formBuilder: FormBuilder,
         private modalsService: ModalsService
@@ -79,9 +82,8 @@ export class PublicScenariosComponent implements OnInit {
             },
             (err: Error) => {
                 console.warn(err);
-                this.appStoreService.errorMessage = ERROR_MSG.get('scenariosDownload');
-                this.appStoreService.showError.next(true);
-                // TODO generic error needs to be refactored
+                this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenariosDownload'));
+                this.appStoreActions.setShowError(true);
             }
         );
     }
@@ -201,9 +203,8 @@ export class PublicScenariosComponent implements OnInit {
             },
             (err: Error) => {
                 console.warn(err);
-                this.appStoreService.errorMessage = ERROR_MSG.get('scenarioAdd');
-                this.appStoreService.showError.next(true);
-                // TODO generic error needs to be refactored
+                this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));
+                this.appStoreActions.setShowError(true);
             }
         );
     }
@@ -228,9 +229,8 @@ export class PublicScenariosComponent implements OnInit {
                 },
                 (err: Error) => {
                     console.warn(err);
-                    this.appStoreService.errorMessage = ERROR_MSG.get('scenarioDelete');
-                    this.appStoreService.showError.next(true);
-                    // TODO generic error needs to be refactored
+                    this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioDelete'));
+                    this.appStoreActions.setShowError(true);
                 }
             );
 
