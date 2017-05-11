@@ -30,24 +30,34 @@ export class PublicScenariosComponent implements OnInit {
 
     @ViewChild('fileInputNode') fileInputNode: ElementRef;
 
-    emailFieldName = 'authorEmail';
-    emailConfirmFieldName = 'authorEmailConfirm';
+    private emailFieldName = 'authorEmail';
+    private emailConfirmFieldName = 'authorEmailConfirm';
 
-    filterArgs = { title: '' };
+    public pdfForm: FormGroup;
+    public formText: Map<string, string> = PDF_FORM_TXT;
+    private acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
+    private acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
 
-    pdfForm: FormGroup;
-    formText: Map<string, string> = PDF_FORM_TXT;
-    acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
-    acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
+    public formVisible = false;
+    private emailPattern: RegExp = EMAIL_PATTERN;
 
-    formVisible = false;
-    emailPattern: RegExp = EMAIL_PATTERN;
+    private fileBlob: Blob;
+    private fileName = '';
 
-    fileBlob: Blob;
-    fileName = '';
+    public scenarioStates: Array<string> = SCENARIO_STATES;
+    public scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
 
-    scenarioStates: Array<string> = SCENARIO_STATES;
-    scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
+    public selectOptions = [
+        { id: 0, category: 'title' },
+        { id: 1, category: 'description' },
+        { id: 2, category: 'authorEmail' },
+        { id: 3, category: 'genre' },
+        { id: 4, category: 'pages' },
+        { id: 5, category: 'state' }
+    ]; // TO DO - move it to constants
+
+    public selectedFilter = this.selectOptions[0];
+    public filterArgs = { [this.selectedFilter.category]: '' };
 
     private static getStateStringFromId(stateId: number): string {
         return helpers.getStateStringFromId(stateId);
@@ -75,10 +85,20 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
     }
 
+    public onFilterChange(): void {
+        this.filterArgs[this.selectedFilter.category] = '';
+    }
+
+    public filterScenarios(scenarios: Array<PublicScenario> = []): any {
+
+        return scenarios.filter(scenario => scenario[this.selectedFilter.category].toLowerCase()
+                        .indexOf(this.filterArgs[this.selectedFilter.category].toLowerCase()) !== -1);
+    }
+
     private preparePublicScenarios(): void {
         this.getPublicScenarios().subscribe(
             (res: PublicScenario[]) => {
-                this.scenarios = res.map(this.stringifyScenarioStates);
+                this.scenarios = res.map(this.stringifyScenario);
             },
             (err: Error) => {
                 console.warn(err);
@@ -92,13 +112,10 @@ export class PublicScenariosComponent implements OnInit {
         return this.publicScenariosService.getPublicScenarios();
     }
 
-    private stringifyScenarioStates(scenario: PublicScenario): PublicScenario {
+    private stringifyScenario(scenario: PublicScenario): PublicScenario {
         scenario.state = PublicScenariosComponent.getStateStringFromId(scenario.stateId);
+        scenario.pages = String(scenario.pages); // for filtering purposes
         return scenario;
-    }
-
-    public filterScenarios(scenarios: Array<PublicScenario> = []): any {
-        return scenarios.filter(scenario => scenario.title.indexOf(this.filterArgs['title']) !== -1);
     }
 
     public showAlert(title, message): void {

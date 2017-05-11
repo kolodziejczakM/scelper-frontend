@@ -16,8 +16,8 @@ export interface PublicScenario {
     title: string;
     description: string;
     authorEmail: string;
-    pages?: number;
-    state?: string;
-    stateId?: number;
+    pages?: number | string; // is mapped to string for filtering purposes (indexOf method)
+    state?: string; // it must be changed to object
+    stateId?: number; //  it will in object
 }
 

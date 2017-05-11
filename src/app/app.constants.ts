@@ -12,7 +12,7 @@ export const DEFAULT_SCENARIO_STATE = 'Wybierz';
 export const SCENARIO_STATE_INCOMPLETE = 'Niekompletny';
 export const SCENARIO_STATE_COMPLETE = 'Ukończony';
 
-export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLETE, SCENARIO_STATE_COMPLETE];
+export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLETE, SCENARIO_STATE_COMPLETE]; // TO DO change it to Object[]
 
 export const COMMON_MSG = new Map([
     ['confirm',
