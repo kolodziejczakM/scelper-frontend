@@ -6,21 +6,23 @@ import { AppStoreService } from '../app-store/app-store.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 
 import { ModalsService } from '../modals/modals.service';
-import { PublicScenariosService } from './public-scenarios.service';
+import { PublicScenariosAsyncs } from './public-scenarios.asyncs';
 
 import * as helpers from '../app.helpers';
 import { PublicScenario, PdfForm, ResponseObject } from '../interfaces';
-import { PUBLIC_SCENARIOS } from '../mocks';
 
 import { APP_NAME,
+         ERROR_MSG,
+         COMMON_MSG } from '../app.constants';
+
+import { PDF_FORM_TXT,
          EMAIL_PATTERN,
          SCENARIO_STATES,
          DEFAULT_SCENARIO_STATE,
          SCENARIO_ACCEPTABLE_MIMETYPE,
-         SCENARIO_SIZE_LIMIT_KB,
-         PDF_FORM_TXT,
-         ERROR_MSG,
-         COMMON_MSG } from '../app.constants';
+         SCENARIO_SIZE_LIMIT_KB, } from '../public-scenarios/new-scenario-form/new-scenario-form.constants';
+
+import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
 
 @Component({
     selector: 'sce-public-scenarios',
@@ -45,19 +47,9 @@ export class PublicScenariosComponent implements OnInit {
     private fileName = '';
 
     public scenarioStates: Array<string> = SCENARIO_STATES;
-    public scenarios: Array<PublicScenario> = PUBLIC_SCENARIOS;
+    public scenarios: Array<PublicScenario> = [];
 
-    public selectOptions = [
-        { id: 0, category: 'title' },
-        { id: 1, category: 'description' },
-        { id: 2, category: 'authorEmail' },
-        { id: 3, category: 'genre' },
-        { id: 4, category: 'pages' },
-        { id: 5, category: 'state' }
-    ]; // TO DO - move it to constants
-
-    public selectedFilter = this.selectOptions[0];
-    public filterArgs = { [this.selectedFilter.category]: '' };
+    public selectOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
 
     private static getStateStringFromId(stateId: number): string {
         return helpers.getStateStringFromId(stateId);
@@ -66,18 +58,33 @@ export class PublicScenariosComponent implements OnInit {
     constructor(
         private appStoreService: AppStoreService,
         private appStoreActions: AppStoreActions,
-        private publicScenariosService: PublicScenariosService,
+        private publicScenariosAsyncs: PublicScenariosAsyncs,
         private formBuilder: FormBuilder,
         private modalsService: ModalsService
     ) {
+
         this.pdfForm = formBuilder.group({
-            title: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            authorEmail: ['', Validators.compose([Validators.required,
-                              Validators.pattern(this.emailPattern)])],
-            authorEmailConfirm: ['', Validators.compose([Validators.required,
-                              Validators.pattern(this.emailPattern)])],
-            state : ['', Validators.required],
-            description: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(100)])],
+            title: [
+                '',
+                Validators.compose([Validators.required, Validators.minLength(1)])
+            ],
+            authorEmail: [
+                '',
+                Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])
+            ],
+            authorEmailConfirm: [
+                '',
+                Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])
+            ],
+            state : [
+                '',
+                Validators.required
+            ],
+            description: [
+                '',
+                Validators.compose([Validators.required, Validators.minLength(10),
+                Validators.maxLength(100)])
+            ],
         });
     }
 
@@ -85,14 +92,14 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
     }
 
-    public onFilterChange(): void {
-        this.filterArgs[this.selectedFilter.category] = '';
-    }
-
     public filterScenarios(scenarios: Array<PublicScenario> = []): any {
 
-        return scenarios.filter(scenario => scenario[this.selectedFilter.category].toLowerCase()
-                        .indexOf(this.filterArgs[this.selectedFilter.category].toLowerCase()) !== -1);
+        if (!scenarios.length) {
+            return scenarios;
+        }
+
+        return scenarios.filter(scenario => scenario[this.appStoreService.getScenarioFilterChoice().category].toLowerCase()
+                        .indexOf(this.appStoreService.getScenarioFilterValue().toLowerCase()) !== -1);
     }
 
     private preparePublicScenarios(): void {
@@ -109,7 +116,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     private getPublicScenarios(): Observable<PublicScenario[] | Error> {
-        return this.publicScenariosService.getPublicScenarios();
+        return this.publicScenariosAsyncs.getPublicScenarios();
     }
 
     private stringifyScenario(scenario: PublicScenario): PublicScenario {
@@ -227,7 +234,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     private postPublicScenario(scenario): Observable<ResponseObject | Error> {
-        return this.publicScenariosService.postPublicScenario(scenario);
+        return this.publicScenariosAsyncs.postPublicScenario(scenario);
     }
 
     public removeScenario(): void {
@@ -255,7 +262,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     private deletePublicScenario(scenario): Observable<ResponseObject | Error> {
-        return this.publicScenariosService.deletePublicScenario(scenario);
+        return this.publicScenariosAsyncs.deletePublicScenario(scenario);
     }
 
     public downloadScenario(path: string): void {

@@ -21,3 +21,12 @@ export interface PublicScenario {
     stateId?: number; //  it will in object
 }
 
+export interface ScenarioSelectFilterOption {
+    id: number;
+    category: string;
+    label: string;
+}
+
+export interface ApiPathsObject {
+    publicScenarios: any;
+}

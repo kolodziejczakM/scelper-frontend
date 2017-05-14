@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
+import { ApiPathsObject } from './interfaces';
 
 @Injectable()
 export class ApiRoutesService {
 
-    serverBase = `http://localhost:3000`;
-    apiSegment = `api/v1`;
+    private serverBase = `http://localhost:3000`;
+    private apiSegment = `api/v1`;
+    private apiBaseRoute = `${this.serverBase}/${this.apiSegment}`;
 
-    apiBaseRoute = `${this.serverBase}/${this.apiSegment}`;
-
-    publicScenarios = {
+    private publicScenarios = {
         getAll: () => `${this.apiBaseRoute}/public-scenarios`,
         post: () => `${this.apiBaseRoute}/public-scenarios`,
+        patch: (deleteCode: string) => `${this.serverBase}/activation/${deleteCode}`,
         delete: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/${deleteCode}`
     };
 
-    paths = {
+    private paths = {
         publicScenarios: this.publicScenarios
     };
 
-    public getPaths() {
+    public getPaths(): ApiPathsObject {
         return this.paths;
     }
 }

@@ -1,9 +1,12 @@
 
 <section class="scelper-filter-input-select-wrapper">
-    <span>Filtruj: </span><input class="uk-input filter-field" type="text" [(ngModel)]="filterArgs[selectedFilter.category]" placeholder="Szukaj po tytule"/>
-    <select class="uk-select" [(ngModel)]="selectedFilter" (change)="onFilterChange()">
+    <span>{{ staticTexts.get('labelText') }}</span>
+    <input class="uk-input filter-field" type="text" [(ngModel)]="filterValue" (input)="onInputChange()" placeholder="{{ staticTexts.get('placeholderText') }}"/>
+
+    <select class="uk-select filter-select" [(ngModel)]="selectedFilter" (change)="onSelectChange()">
         <option *ngFor="let option of selectOptions" [ngValue]="option"> 
-            {{option.category}}
+            {{option.label}}
         </option>
     </select>    
+    <button class="uk-button uk-button-default" *ngIf="filterValue" (click)="clearInputField();">{{ staticTexts.get('clearBtnText') }}</button>
 </section>

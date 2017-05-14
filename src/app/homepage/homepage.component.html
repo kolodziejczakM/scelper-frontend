@@ -1,12 +1,12 @@
 <section class="uk-child-width-1-1 uk-child-width-1-2@s uk-grid uk-padding margin-centered">  
     <div class="uk-light uk-background-secondary uk-padding">
-        <h3>Twórz samodzielnie!</h3>
-        <p>Skorzystaj z naszego narzędzia by stworzyć lepszy scenariusz.</p>
-        <button routerLink="/interview" routerLinkActive="active" class="uk-button uk-button-default">Zacznij</button>
+        <h3>{{ staticTexts.get('interviewHeader') }}</h3>
+        <p>{{ staticTexts.get('interviewParagraph') }}</p>
+        <button routerLink="/interview" routerLinkActive="active" class="uk-button uk-button-default">{{ staticTexts.get('interviewBtnText') }}</button>
     </div>
     <div class="uk-dark uk-background-muted uk-padding">
-        <h3>Pobieraj gotowce!</h3>
-        <p>Gotowe scenariusze i chętni do pomocy scenarzyści.</p>
-        <button routerLink="/public-scenarios" routerLinkActive="active" class="uk-button uk-button-default">Przeglądaj</button>
+        <h3>{{ staticTexts.get('publicScenariosHeader') }}</h3>
+        <p>{{ staticTexts.get('publicScenariosParagraph') }}</p>
+        <button routerLink="/public-scenarios" routerLinkActive="active" class="uk-button uk-button-default">{{ staticTexts.get('publicScenariosBtnText') }}</button>
     </div>
 </section>

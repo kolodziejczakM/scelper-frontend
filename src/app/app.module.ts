@@ -13,7 +13,7 @@ import { AppStoreWatchers } from './app-store/app-store.watchers';
 
 import { ApiRoutesService } from './api-routes.service';
 import { ModalsService } from './modals/modals.service';
-import { PublicScenariosService } from './public-scenarios/public-scenarios.service';
+import { PublicScenariosAsyncs } from './public-scenarios/public-scenarios.asyncs';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -27,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
 import { GenericErrorComponent } from './generic-error/generic-error.component';
 import { SimpleInterviewComponent } from './simple-interview/simple-interview.component';
 import { FilterInputSelectComponent } from './filter-input-select/filter-input-select.component';
+import { NewScenarioFormComponent } from './public-scenarios/new-scenario-form/new-scenario-form.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
         HeaderComponent,
         GenericErrorComponent,
         SimpleInterviewComponent,
-        FilterInputSelectComponent
+        FilterInputSelectComponent,
+        NewScenarioFormComponent
     ],
     imports: [
         BrowserModule,
@@ -71,7 +73,7 @@ const appRoutes: Routes = [
         AppStoreWatchers,
         ApiRoutesService,
         ModalsService,
-        PublicScenariosService
+        PublicScenariosAsyncs
     ],
     bootstrap: [AppComponent]
 })

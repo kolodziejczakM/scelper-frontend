@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-import { Http, Response } from '@angular/http';
+
+import { PublicScenariosAsyncs } from '../public-scenarios/public-scenarios.asyncs';
+import { ResponseObject } from '../interfaces';
+
+import { PARAM_NAME,
+         LOADING_TEXT,
+         SUCCESS_TEXT,
+         ERROR_TEXT } from './scenario-activation.constants';
 
 @Component({
     selector: 'sce-scenario-activation',
@@ -9,20 +18,17 @@ import { Http, Response } from '@angular/http';
 })
 export class ScenarioActivationComponent implements OnInit {
 
-    paramName = 'deleteCode';
     deleteCode: string;
-    url = `http://localhost:3000/activation/`;
-
     loading = true;
 
-    loadingText = 'Twój kod jest przetwarzany. Prosimy o chwilę cierpliwości...';
-    successText = 'Przekierowuję do aplikacji...';
-    errorText = 'Wystąpił błąd w trakcie analizy kodu aktywacji. Spróbuj ponownie lub skontaktuj się z administracją.';
+    loadingText: string = LOADING_TEXT;
+    successText: string = SUCCESS_TEXT;
+    errorText: string = ERROR_TEXT;
 
     visibleText = this.loadingText;
 
     constructor(
-        private http: Http,
+        private publicScenariosAsyncs: PublicScenariosAsyncs,
         private router: Router,
         private activatedRoute: ActivatedRoute) { }
 
@@ -31,28 +37,34 @@ export class ScenarioActivationComponent implements OnInit {
         this.patchScenario();
     }
 
-    setDeleteCode() {
-        this.deleteCode = this.activatedRoute.snapshot.params[this.paramName];
+    private setDeleteCode() {
+        this.deleteCode = this.activatedRoute.snapshot.params[PARAM_NAME];
     }
 
-    patchScenario() {
-        const url = this.url + this.deleteCode;
+    private patchPublicScenario(deleteCode): Observable<ResponseObject | Error> {
+        return this.publicScenariosAsyncs.patchPublicScenario(deleteCode);
+    }
+
+    private patchScenario() {
         this.loading = true;
 
-        this.http.patch(url, this.deleteCode).map(res => res.json()).subscribe(response => {
-            const that = this;
-            this.visibleText = this.successText;
+        this.patchPublicScenario(this.deleteCode).subscribe(
+            res => {
+                const that = this;
+                this.visibleText = this.successText;
 
-            setTimeout(function(){
-                that.loading = false;
-                that.router.navigate(['public-scenarios']);
-            }, 1000);
-        },
-        (err: Response) => {
-            console.warn('Failure:', err);
-            this.loading = false;
-            this.visibleText = this.errorText;
-        });
+                setTimeout(function(){
+                    that.loading = false;
+                    that.router.navigate(['public-scenarios']);
+                }, 1000);
+
+            },
+            (err: Response) => {
+                console.warn(err);
+                this.loading = false;
+                this.visibleText = this.errorText;
+            }
+        );
     }
 
 }

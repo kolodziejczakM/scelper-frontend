@@ -64,16 +64,7 @@
 
 
 <section class="scelper-table-wrapper">
-    <!--<section class="scelper-filter-input-select-wrapper">
-        <span>Filtruj: </span><input class="uk-input filter-field" type="text" [(ngModel)]="filterArgs[selectedFilter.category]" placeholder="Szukaj po tytule"/>
-        <select class="uk-select" [(ngModel)]="selectedFilter" (change)="onFilterChange()">
-            <option *ngFor="let option of selectOptions" [ngValue]="option"> 
-                {{option.category}}
-            </option>
-        </select>    
-    </section>-->
-    
-
+    <sce-filter-input-select [selectOptions]="selectOptions"></sce-filter-input-select>
     <table class="custom-table">
         <thead [hidden]="!filterScenarios(scenarios).length">
             <tr>

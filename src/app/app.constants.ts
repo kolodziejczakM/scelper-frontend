@@ -1,18 +1,17 @@
 
 export const APP_NAME = 'Scelper';
-
-export const EMAIL_PATTERN = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/;
-
 export const KILO_BYTE = 1024;
-export const SCENARIO_SIZE_LIMIT_KB = (200 * KILO_BYTE);
 
-export const SCENARIO_ACCEPTABLE_MIMETYPE = 'application/pdf';
+export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
 
-export const DEFAULT_SCENARIO_STATE = 'Wybierz';
-export const SCENARIO_STATE_INCOMPLETE = 'Niekompletny';
-export const SCENARIO_STATE_COMPLETE = 'Ukończony';
-
-export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLETE, SCENARIO_STATE_COMPLETE]; // TO DO change it to Object[]
+export const SCENARIO_FILTER_DROPDOWN_OPTIONS = [
+    { id: 0, category: 'title', label: 'Tytuł' },
+    { id: 1, category: 'description', label: 'Opis' },
+    { id: 2, category: 'authorEmail', label: 'Autor' },
+    { id: 3, category: 'genre', label: 'Gatunek' },
+    { id: 4, category: 'pages', label: 'Strony' },
+    { id: 5, category: 'state', label: 'Stan' }
+];
 
 export const COMMON_MSG = new Map([
     ['confirm',
@@ -21,7 +20,6 @@ export const COMMON_MSG = new Map([
         'Wprowadź kod usunięcia: ']
 ]);
 
-export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
 export const BACK_BUTTON_TEXT = 'Wróć';
 
 export const ERROR_MSG = new Map([
@@ -48,37 +46,3 @@ export const SERVER_SUCCESS_RESPONSES = {
     }
 };
 
-export const PDF_FORM_TXT = new Map([
-    ['cannotSubmitted',
-        'Przycisk "Publikuj" uaktywni się gdy wszystkie pola zostaną wypełnione poprawnie.'],
-    ['required',
-        'To pole jest wymagane.'],
-    ['title',
-        'Minimalna długość tytułu to 1 znak.'],
-    ['authorEmail',
-        'Format emaila jest niepoprawny.'],
-    ['authorEmailConfirm',
-        'Sprawdź wprowadzone maile, są między nimi różnice.'],
-    ['state',
-        ''],
-    ['description',
-        'Opis powinien mieć od 10 do 100 znaków.'],
-    ['file',
-        'Nie wybrano pliku'],
-    ['fileFormat',
-        'Format pliku jest nieodpowiedni.'],
-    ['fileSize',
-        'Plik jest zbyt duży.'],
-    ['emailSent',
-        'Na podany adres email wysłaliśmy ważne informacje. Dziękujemy za pomoc w rozwoju serwisu.'],
-    ['b_add',
-        'Dodaj własny scenariusz'],
-    ['b_add_hide',
-        'Schowaj formularz'],
-    ['b_upload',
-        'Upload PDF'],
-    ['b_submit',
-        'Publikuj'],
-    ['b_reset',
-        'Wyczyść dane']
-]);

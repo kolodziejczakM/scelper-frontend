@@ -7,7 +7,7 @@ import { ApiRoutesService } from '../api-routes.service';
 import { PublicScenario, ResponseObject } from '../interfaces';
 
 @Injectable()
-export class PublicScenariosService {
+export class PublicScenariosAsyncs {
 
     constructor(
         private http: Http,
@@ -23,6 +23,13 @@ export class PublicScenariosService {
 
     public postPublicScenario(scenario: PublicScenario): Observable<ResponseObject | Error> {
         return this.http.post(this.apiRoutesService.getPaths().publicScenarios.post(), scenario)
+
+                        .map((res: Response) => res.json() as ResponseObject)
+                        .catch((err) => Observable.throw(new Error(err)));
+    }
+
+    public patchPublicScenario(deleteCode: string): Observable<ResponseObject | Error> {
+        return this.http.patch(this.apiRoutesService.getPaths().publicScenarios.patch(deleteCode), deleteCode)
 
                         .map((res: Response) => res.json() as ResponseObject)
                         .catch((err) => Observable.throw(new Error(err)));
