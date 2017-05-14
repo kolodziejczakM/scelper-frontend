@@ -6,6 +6,6 @@ export class ScelperFrontendPage {
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('sce-root h1')).getText();
   }
 }

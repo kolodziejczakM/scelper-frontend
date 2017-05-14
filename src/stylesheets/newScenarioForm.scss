@@ -1,0 +1,19 @@
+
+.new-scenario-form {
+    padding: 0 40px;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.25s ease-in-out;
+    &.visible{
+        max-height: 700px;
+    }
+}
+
+.has-error {
+    border: 1px solid #FF7153 !important;
+}
+
+.validation-info {
+    font-weight: 700;
+    color: #FF7153;
+}

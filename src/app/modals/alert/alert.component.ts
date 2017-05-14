@@ -7,7 +7,7 @@ export interface AlertModel {
 }
 
 @Component({
-    selector: 'app-alert',
+    selector: 'sce-alert',
     template: `<div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

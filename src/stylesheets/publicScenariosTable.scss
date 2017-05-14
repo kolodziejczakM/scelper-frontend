@@ -1,0 +1,36 @@
+
+.scelper-table-wrapper {
+    padding: 40px;
+    overflow-x: auto;
+}
+
+td {
+    .fa {
+        margin: 2.5px;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+.custom-table {
+    margin: 0 auto;
+
+    th,
+    td {
+        padding: 20px;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    td {
+        max-width: 500px;
+        min-width: 75px;
+        &.long-text {
+            min-width: 200px;
+        }
+    }
+}

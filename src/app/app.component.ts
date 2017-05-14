@@ -6,7 +6,7 @@ import { AppStoreService } from './app-store/app-store.service';
 import { AppStoreWatchers } from './app-store/app-store.watchers';
 
 @Component({
-    selector: 'app-root',
+    selector: 'sce-root',
     templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {

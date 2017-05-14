@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-interview',
+    selector: 'sce-interview',
     templateUrl: './interview.component.html'
 })
 export class InterviewComponent implements OnInit {

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-loader',
+    selector: 'sce-loader',
     templateUrl: './loader.component.html'
 })
 export class LoaderComponent implements OnInit {

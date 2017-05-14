@@ -26,6 +26,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { HeaderComponent } from './header/header.component';
 import { GenericErrorComponent } from './generic-error/generic-error.component';
 import { SimpleInterviewComponent } from './simple-interview/simple-interview.component';
+import { FilterInputSelectComponent } from './filter-input-select/filter-input-select.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
         LoaderComponent,
         HeaderComponent,
         GenericErrorComponent,
-        SimpleInterviewComponent
+        SimpleInterviewComponent,
+        FilterInputSelectComponent
     ],
     imports: [
         BrowserModule,

@@ -7,7 +7,7 @@ export interface PromptModel {
 }
 
 @Component({
-  selector: 'app-prompt',
+  selector: 'sce-prompt',
   template: `<div class="modal-dialog">
                 <div class="modal-content">
                    <div class="modal-header">

@@ -23,7 +23,7 @@ import { APP_NAME,
          COMMON_MSG } from '../app.constants';
 
 @Component({
-    selector: 'app-public-scenarios',
+    selector: 'sce-public-scenarios',
     templateUrl: './public-scenarios.component.html'
 })
 export class PublicScenariosComponent implements OnInit {

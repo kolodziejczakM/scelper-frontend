@@ -3,7 +3,7 @@ import { BACK_BUTTON_TEXT } from '../app.constants';
 import { AppStoreActions } from '../app-store/app-store.actions';
 
 @Component({
-    selector: 'app-generic-error',
+    selector: 'sce-generic-error',
     templateUrl: './generic-error.component.html'
 })
 export class GenericErrorComponent implements OnDestroy {

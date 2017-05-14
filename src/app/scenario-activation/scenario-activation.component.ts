@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { Http, Response } from '@angular/http';
 
 @Component({
-    selector: 'app-scenario-activation',
+    selector: 'sce-scenario-activation',
     templateUrl: './scenario-activation.component.html'
 })
 export class ScenarioActivationComponent implements OnInit {
