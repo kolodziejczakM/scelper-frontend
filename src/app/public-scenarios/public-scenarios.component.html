@@ -14,34 +14,34 @@
     <form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)">
         <fieldset class="uk-fieldset">
             <div class="uk-margin">
-                <input formControlName="title" class="uk-input" type="text" placeholder="Tytuł"
+                <input formControlName="title" class="uk-input" type="text" placeholder="{{ formText.get('titlePlaceholder') }}"
                 [ngClass]="{'has-error': hasError('title')}">
 
                 <span *ngIf="hasError('title')" class="validation-info">{{ formText.get('required') }} {{ formText.get('title') }}</span>
             </div>
             <div class="uk-margin">
-                <input formControlName="authorEmail" class="uk-input" type="text" placeholder="E-mail (autora)"
+                <input formControlName="authorEmail" class="uk-input" type="text" placeholder="{{ formText.get('authorEmailPlaceholder') }}"
                 [ngClass]="{'has-error': hasError('authorEmail')}">
 
                 <span *ngIf="hasError('authorEmail')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmail') }}</span>
             </div>
             <div class="uk-margin">
-                <input formControlName="authorEmailConfirm" class="uk-input" type="text" placeholder="Powtórz email"
+                <input formControlName="authorEmailConfirm" class="uk-input" type="text" placeholder="{{ formText.get('authorEmailConfirmPlaceholder') }}"
                 [ngClass]="{'has-error': hasError('authorEmailConfirm')}">
 
                 <span *ngIf="hasError('authorEmailConfirm')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmailConfirm') }}</span>
             </div>
             <div class="uk-margin">
                 <select formControlName="state" class="uk-select" [ngClass]="{'has-error': hasError('state')}">
-                    <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)">
-                        {{option}}
+                    <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)" [ngValue]="option">
+                        {{option.label}}
                     </option>
                 </select>
 
                 <span *ngIf="hasError('state')" class="validation-info">{{formText.get('required')}}</span>
             </div>
             <div class="uk-margin">
-                <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="Krótki opis"></textarea>
+                <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="{{ formText.get('descriptionPlaceholder') }}"></textarea>
                 <span *ngIf="hasError('description')" class="validation-info">{{ formText.get('required') }} {{ formText.get('description') }}</span>
             </div>
             <div class="uk-margin">
@@ -84,7 +84,7 @@
                 <td class="long-text">{{ scenario.description }}</td>
                 <td>{{ scenario.authorEmail }}</td>
                 <td>{{ scenario.pages }}</td>
-                <td>{{ scenario.state }}</td>
+                <td>{{ scenario.state.label }}</td>
                 <td>
                     <i (click)="downloadScenario(scenario.path);" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
                     <i (click)="removeScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>

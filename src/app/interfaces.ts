@@ -16,9 +16,14 @@ export interface PublicScenario {
     title: string;
     description: string;
     authorEmail: string;
-    pages?: number | string; // is mapped to string for filtering purposes (indexOf method)
-    state?: string; // it must be changed to object
-    stateId?: number; //  it will in object
+    pages: number | string;
+    state: ScenarioState;
+}
+
+export interface ScenarioState {
+    id: number;
+    value: number;
+    label: string;
 }
 
 export interface ScenarioSelectFilterOption {

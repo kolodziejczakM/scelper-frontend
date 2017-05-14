@@ -9,7 +9,10 @@ import { ModalsService } from '../modals/modals.service';
 import { PublicScenariosAsyncs } from './public-scenarios.asyncs';
 
 import * as helpers from '../app.helpers';
-import { PublicScenario, PdfForm, ResponseObject } from '../interfaces';
+import { PublicScenario,
+         PdfForm,
+         ResponseObject,
+         ScenarioState } from '../interfaces';
 
 import { APP_NAME,
          ERROR_MSG,
@@ -46,14 +49,10 @@ export class PublicScenariosComponent implements OnInit {
     private fileBlob: Blob;
     private fileName = '';
 
-    public scenarioStates: Array<string> = SCENARIO_STATES;
-    public scenarios: Array<PublicScenario> = [];
+    public scenarioStates: ScenarioState[] = SCENARIO_STATES;
+    public scenarios: PublicScenario[] = [];
 
     public selectOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
-
-    private static getStateStringFromId(stateId: number): string {
-        return helpers.getStateStringFromId(stateId);
-    }
 
     constructor(
         private appStoreService: AppStoreService,
@@ -92,7 +91,7 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
     }
 
-    public filterScenarios(scenarios: Array<PublicScenario> = []): any {
+    public filterScenarios(scenarios: PublicScenario[] = []): any {
 
         if (!scenarios.length) {
             return scenarios;
@@ -105,7 +104,7 @@ export class PublicScenariosComponent implements OnInit {
     private preparePublicScenarios(): void {
         this.getPublicScenarios().subscribe(
             (res: PublicScenario[]) => {
-                this.scenarios = res.map(this.stringifyScenario);
+                this.scenarios = res.map(this.stringifyScenarioPages);
             },
             (err: Error) => {
                 console.warn(err);
@@ -119,9 +118,8 @@ export class PublicScenariosComponent implements OnInit {
         return this.publicScenariosAsyncs.getPublicScenarios();
     }
 
-    private stringifyScenario(scenario: PublicScenario): PublicScenario {
-        scenario.state = PublicScenariosComponent.getStateStringFromId(scenario.stateId);
-        scenario.pages = String(scenario.pages); // for filtering purposes
+    private stringifyScenarioPages(scenario: PublicScenario): PublicScenario {
+        scenario.pages = String(scenario.pages);
         return scenario;
     }
 
@@ -188,8 +186,8 @@ export class PublicScenariosComponent implements OnInit {
         return isAcceptable;
     }
 
-    public isDefaultOption(option: string): boolean {
-        return option === DEFAULT_SCENARIO_STATE;
+    public isDefaultOption(option: ScenarioState): boolean {
+        return option.label === DEFAULT_SCENARIO_STATE;
     }
 
     public resetForm(): void {
@@ -209,12 +207,11 @@ export class PublicScenariosComponent implements OnInit {
     public submitPDF(submitted: PdfForm): void {
 
         const formData = new FormData();
-
         const that = this;
 
         formData.append('title', submitted.title);
         formData.append('authorEmail', submitted.authorEmail);
-        formData.append('state', submitted.state);
+        formData.append('state', JSON.stringify(submitted.state));
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 

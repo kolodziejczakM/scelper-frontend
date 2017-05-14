@@ -5,10 +5,12 @@ export const SCENARIO_SIZE_LIMIT_KB = (200 * KILO_BYTE);
 export const SCENARIO_ACCEPTABLE_MIMETYPE = 'application/pdf';
 
 export const DEFAULT_SCENARIO_STATE = 'Wybierz';
-export const SCENARIO_STATE_INCOMPLETE = 'Niekompletny';
-export const SCENARIO_STATE_COMPLETE = 'Ukończony';
 
-export const SCENARIO_STATES = [DEFAULT_SCENARIO_STATE, SCENARIO_STATE_INCOMPLETE, SCENARIO_STATE_COMPLETE]; // TO DO change it to Object[]
+export const SCENARIO_STATES = [
+    { id: 0, value: 0, label: 'Wybierz' },
+    { id: 1, value: 0, label: 'Niekompletny' },
+    { id: 2, value: 1, label: 'Ukończony' }
+];
 
 export const PDF_FORM_TXT = new Map([
     ['cannotSubmitted',
@@ -17,14 +19,22 @@ export const PDF_FORM_TXT = new Map([
         'To pole jest wymagane.'],
     ['title',
         'Minimalna długość tytułu to 1 znak.'],
+    ['titlePlaceholder',
+        'Tytuł'],
     ['authorEmail',
         'Format emaila jest niepoprawny.'],
+    ['authorEmailPlaceholder',
+        'E-mail (autora)'],
     ['authorEmailConfirm',
         'Sprawdź wprowadzone maile, są między nimi różnice.'],
+    ['authorEmailConfirmPlaceholder',
+        'Powtórz email'],
     ['state',
         ''],
     ['description',
         'Opis powinien mieć od 10 do 100 znaków.'],
+    ['descriptionPlaceholder',
+        'Krótki opis.'],
     ['file',
         'Nie wybrano pliku'],
     ['fileFormat',
