@@ -53,6 +53,7 @@ export class PublicScenariosComponent implements OnInit {
     public scenarios: PublicScenario[] = [];
 
     public selectOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
+    public selectedState;
 
     constructor(
         private appStoreService: AppStoreService,
@@ -89,6 +90,7 @@ export class PublicScenariosComponent implements OnInit {
 
     ngOnInit() {
         this.preparePublicScenarios();
+        this.setDefaultStateInForm();
     }
 
     public filterScenarios(scenarios: PublicScenario[] = []): any {
@@ -162,6 +164,10 @@ export class PublicScenariosComponent implements OnInit {
         this.formVisible = !this.formVisible;
     }
 
+    private setDefaultStateInForm(): void {
+        this.selectedState = SCENARIO_STATES[0];
+    }
+
     private isEmailConfirmed(): boolean {
         return this.pdfForm.controls[this.emailConfirmFieldName].value === this.pdfForm.controls[this.emailFieldName].value;
     }
@@ -194,6 +200,7 @@ export class PublicScenariosComponent implements OnInit {
         this.pdfForm.reset();
         this.fileBlob = null;
         this.fileName = '';
+        this.setDefaultStateInForm();
     }
 
     public isFormValid(): boolean {

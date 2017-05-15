@@ -32,7 +32,7 @@
                 <span *ngIf="hasError('authorEmailConfirm')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmailConfirm') }}</span>
             </div>
             <div class="uk-margin">
-                <select formControlName="state" class="uk-select" [ngClass]="{'has-error': hasError('state')}">
+                <select formControlName="state" class="uk-select" [(ngModel)]="selectedState" [ngClass]="{'has-error': hasError('state')}">
                     <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)" [ngValue]="option">
                         {{option.label}}
                     </option>
