@@ -19,10 +19,10 @@ textarea {
 
 .uk-button {
     &.uk-button-primary {
-        background: #83e800;
+        background: $scelper-green;
         color: #666;
         &:hover {
-            background:rgba(#83e800, 0.6);
+            background:rgba($scelper-green, 0.6);
         }
         &:disabled {
             background-color: #f8f8f8;

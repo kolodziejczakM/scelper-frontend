@@ -7,7 +7,8 @@ export interface ResponseObject {
 export interface PdfForm {
     title: string;
     authorEmail: string;
-    state: string;
+    genre: ScenarioGenre;
+    state: ScenarioState;
     description: string;
     file: Blob;
 }
@@ -23,6 +24,11 @@ export interface PublicScenario {
 export interface ScenarioState {
     id: number;
     value: number;
+    label: string;
+}
+
+export interface ScenarioGenre {
+    id: number;
     label: string;
 }
 

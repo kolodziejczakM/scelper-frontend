@@ -1,5 +1,8 @@
 
 export const APP_NAME = 'Scelper';
+
+export const DEFAULT_SELECT_STATE = 'Wybierz';
+export const BACK_BUTTON_TEXT = 'Wróć';
 export const KILO_BYTE = 1024;
 
 export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
@@ -19,8 +22,6 @@ export const COMMON_MSG = new Map([
     ['deleteScenarioPrompt',
         'Wprowadź kod usunięcia: ']
 ]);
-
-export const BACK_BUTTON_TEXT = 'Wróć';
 
 export const ERROR_MSG = new Map([
     ['scenariosDownload',

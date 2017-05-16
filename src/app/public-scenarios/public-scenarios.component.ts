@@ -12,18 +12,23 @@ import * as helpers from '../app.helpers';
 import { PublicScenario,
          PdfForm,
          ResponseObject,
-         ScenarioState } from '../interfaces';
+         ScenarioState,
+         ScenarioGenre } from '../interfaces';
 
 import { APP_NAME,
+         DEFAULT_SELECT_STATE,
          ERROR_MSG,
          COMMON_MSG } from '../app.constants';
 
 import { PDF_FORM_TXT,
          EMAIL_PATTERN,
          SCENARIO_STATES,
-         DEFAULT_SCENARIO_STATE,
+         SCENARIO_GENRES,
          SCENARIO_ACCEPTABLE_MIMETYPE,
-         SCENARIO_SIZE_LIMIT_KB, } from '../public-scenarios/new-scenario-form/new-scenario-form.constants';
+         SCENARIO_SIZE_LIMIT_KB,
+         SCENARIO_TITLE_MIN_LENGTH,
+         SCENARIO_DESCRIPTION_MIN_LENGTH,
+         SCENARIO_DESCRIPTION_MAX_LENGTH } from '../public-scenarios/new-scenario-form/new-scenario-form.constants';
 
 import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
 
@@ -49,11 +54,15 @@ export class PublicScenariosComponent implements OnInit {
     private fileBlob: Blob;
     private fileName = '';
 
-    public scenarioStates: ScenarioState[] = SCENARIO_STATES;
     public scenarios: PublicScenario[] = [];
 
-    public selectOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
+    public scenarioStates: ScenarioState[] = SCENARIO_STATES;
+    public scenarioGenres: ScenarioGenre[] = SCENARIO_GENRES;
+
+    public selectFilterOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
+
     public selectedState;
+    public selectedGenre;
 
     constructor(
         private appStoreService: AppStoreService,
@@ -66,7 +75,7 @@ export class PublicScenariosComponent implements OnInit {
         this.pdfForm = formBuilder.group({
             title: [
                 '',
-                Validators.compose([Validators.required, Validators.minLength(1)])
+                Validators.compose([Validators.required, Validators.minLength(SCENARIO_TITLE_MIN_LENGTH)])
             ],
             authorEmail: [
                 '',
@@ -76,21 +85,30 @@ export class PublicScenariosComponent implements OnInit {
                 '',
                 Validators.compose([Validators.required, Validators.pattern(this.emailPattern)])
             ],
-            state : [
+            genre: [
+                '',
+                Validators.required
+            ],
+            state: [
                 '',
                 Validators.required
             ],
             description: [
                 '',
-                Validators.compose([Validators.required, Validators.minLength(10),
-                Validators.maxLength(100)])
+                Validators.compose([
+                    Validators.required,
+                    Validators.minLength(SCENARIO_DESCRIPTION_MIN_LENGTH),
+                    Validators.maxLength(SCENARIO_DESCRIPTION_MAX_LENGTH)
+                ])
             ],
         });
+
     }
 
     ngOnInit() {
         this.preparePublicScenarios();
         this.setDefaultStateInForm();
+        this.setDefaultGenreInForm();
     }
 
     public filterScenarios(scenarios: PublicScenario[] = []): any {
@@ -104,7 +122,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     private preparePublicScenarios(): void {
-        this.getPublicScenarios().subscribe(
+        this.publicScenariosAsyncs.getPublicScenarios().subscribe(
             (res: PublicScenario[]) => {
                 this.scenarios = res.map(this.stringifyScenarioPages);
             },
@@ -114,10 +132,6 @@ export class PublicScenariosComponent implements OnInit {
                 this.appStoreActions.setShowError(true);
             }
         );
-    }
-
-    private getPublicScenarios(): Observable<PublicScenario[] | Error> {
-        return this.publicScenariosAsyncs.getPublicScenarios();
     }
 
     private stringifyScenarioPages(scenario: PublicScenario): PublicScenario {
@@ -164,8 +178,28 @@ export class PublicScenariosComponent implements OnInit {
         this.formVisible = !this.formVisible;
     }
 
+    private isDefaultStateInForm(): boolean {
+        if (!this.selectedState) {
+            return true;
+        }
+        return this.selectedState.label === this.scenarioStates[0].label;
+    }
+
+    private isDefaultGenreInForm(): boolean {
+        if (!this.selectedGenre) {
+            return true;
+        }
+        return this.selectedGenre.label === this.scenarioStates[0].label;
+    }
+
     private setDefaultStateInForm(): void {
-        this.selectedState = SCENARIO_STATES[0];
+        this.selectedState = this.scenarioStates[0];
+        this.pdfForm.controls['state'].setValue(this.scenarioStates[0]);
+    }
+
+    private setDefaultGenreInForm(): void {
+        this.selectedGenre = this.scenarioGenres[0];
+        this.pdfForm.controls['genre'].setValue(this.scenarioGenres[0]);
     }
 
     private isEmailConfirmed(): boolean {
@@ -192,8 +226,8 @@ export class PublicScenariosComponent implements OnInit {
         return isAcceptable;
     }
 
-    public isDefaultOption(option: ScenarioState): boolean {
-        return option.label === DEFAULT_SCENARIO_STATE;
+    public isDefaultOption(option: ScenarioState | ScenarioGenre): boolean {
+        return option.label === DEFAULT_SELECT_STATE;
     }
 
     public resetForm(): void {
@@ -201,10 +235,20 @@ export class PublicScenariosComponent implements OnInit {
         this.fileBlob = null;
         this.fileName = '';
         this.setDefaultStateInForm();
+        this.setDefaultGenreInForm();
     }
 
     public isFormValid(): boolean {
-        return this.pdfForm.valid && Boolean(this.fileBlob) && this.isEmailConfirmed();
+
+        const requirements = [
+            this.pdfForm.valid,
+            Boolean(this.fileBlob),
+            this.isEmailConfirmed(),
+            !this.isDefaultGenreInForm(),
+            !this.isDefaultStateInForm()
+        ];
+
+        return requirements.every(value => value);
     }
 
     public triggerUpload(): void {
@@ -218,11 +262,12 @@ export class PublicScenariosComponent implements OnInit {
 
         formData.append('title', submitted.title);
         formData.append('authorEmail', submitted.authorEmail);
+        formData.append('genre', JSON.stringify(submitted.genre));
         formData.append('state', JSON.stringify(submitted.state));
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 
-        this.postPublicScenario(formData).subscribe(
+        this.publicScenariosAsyncs.postPublicScenario(formData).subscribe(
             (response: ResponseObject) => {
                 const successMessage = helpers.translateServerResponse(response.code);
 
@@ -237,10 +282,6 @@ export class PublicScenariosComponent implements OnInit {
         );
     }
 
-    private postPublicScenario(scenario): Observable<ResponseObject | Error> {
-        return this.publicScenariosAsyncs.postPublicScenario(scenario);
-    }
-
     public removeScenario(): void {
 
         this.showPrompt(COMMON_MSG.get('deleteScenarioPrompt')).subscribe((deleteCode) => {
@@ -248,7 +289,7 @@ export class PublicScenariosComponent implements OnInit {
                 return;
             }
 
-            this.deletePublicScenario(deleteCode).subscribe(
+            this.publicScenariosAsyncs.deletePublicScenario(deleteCode).subscribe(
                 (response: ResponseObject) => {
                     const successMessage = helpers.translateServerResponse(response.code);
 
@@ -263,10 +304,6 @@ export class PublicScenariosComponent implements OnInit {
             );
 
         });
-    }
-
-    private deletePublicScenario(scenario): Observable<ResponseObject | Error> {
-        return this.publicScenariosAsyncs.deletePublicScenario(scenario);
     }
 
     public downloadScenario(path: string): void {

@@ -1,16 +1,24 @@
 
+input.uk-input,
+select.uk-select, 
+textarea.uk-textarea {
+    &:focus {
+        outline: 1px solid $scelper-green;
+    }
+}
+
 .new-scenario-form {
     padding: 0 40px;
     overflow: hidden;
     max-height: 0;
     transition: all 0.25s ease-in-out;
     &.visible{
-        max-height: 700px;
+        max-height: 1000px;
     }
 }
 
 .has-error {
-    border: 1px solid #FF7153 !important;
+    border: 2px solid #FF7153 !important;
 }
 
 .validation-info {

@@ -32,13 +32,18 @@
                 <span *ngIf="hasError('authorEmailConfirm')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmailConfirm') }}</span>
             </div>
             <div class="uk-margin">
-                <select formControlName="state" class="uk-select" [(ngModel)]="selectedState" [ngClass]="{'has-error': hasError('state')}">
+                <select formControlName="genre" class="uk-select" [(ngModel)]="selectedGenre">
+                    <option *ngFor="let option of scenarioGenres" [disabled]="isDefaultOption(option)" [ngValue]="option">
+                        {{option.label}}
+                    </option>
+                </select>
+            </div>
+            <div class="uk-margin">
+                <select formControlName="state" class="uk-select" [(ngModel)]="selectedState">
                     <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)" [ngValue]="option">
                         {{option.label}}
                     </option>
                 </select>
-
-                <span *ngIf="hasError('state')" class="validation-info">{{formText.get('required')}}</span>
             </div>
             <div class="uk-margin">
                 <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="{{ formText.get('descriptionPlaceholder') }}"></textarea>
@@ -64,7 +69,7 @@
 
 
 <section class="scelper-table-wrapper">
-    <sce-filter-input-select [selectOptions]="selectOptions"></sce-filter-input-select>
+    <sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
     <table class="custom-table">
         <thead [hidden]="!filterScenarios(scenarios).length">
             <tr>
