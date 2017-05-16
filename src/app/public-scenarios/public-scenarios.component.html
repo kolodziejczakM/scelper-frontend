@@ -78,6 +78,7 @@
                 <th>Opis</th>
                 <th>Autor</th>
                 <th>Strony</th>
+                <th>Gatunek</th>
                 <th>Stan</th>
                 <th>Opcje</th>
             </tr>
@@ -89,7 +90,8 @@
                 <td class="long-text">{{ scenario.description }}</td>
                 <td>{{ scenario.authorEmail }}</td>
                 <td>{{ scenario.pages }}</td>
-                <td>{{ scenario.state.label }}</td>
+                <td>{{ scenario.genre }}</td>
+                <td>{{ scenario.state }}</td>
                 <td>
                     <i (click)="downloadScenario(scenario.path);" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
                     <i (click)="removeScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>

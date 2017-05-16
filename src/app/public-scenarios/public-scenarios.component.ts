@@ -124,7 +124,7 @@ export class PublicScenariosComponent implements OnInit {
     private preparePublicScenarios(): void {
         this.publicScenariosAsyncs.getPublicScenarios().subscribe(
             (res: PublicScenario[]) => {
-                this.scenarios = res.map(this.stringifyScenarioPages);
+                this.scenarios = res.map(this.stringifyScenario);
             },
             (err: Error) => {
                 console.warn(err);
@@ -134,7 +134,9 @@ export class PublicScenariosComponent implements OnInit {
         );
     }
 
-    private stringifyScenarioPages(scenario: PublicScenario): PublicScenario {
+    private stringifyScenario(scenario: PublicScenario): PublicScenario {
+        scenario.state = scenario.state.label;
+        scenario.genre = scenario.genre.label;
         scenario.pages = String(scenario.pages);
         return scenario;
     }

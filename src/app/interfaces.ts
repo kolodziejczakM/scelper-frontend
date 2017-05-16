@@ -18,7 +18,8 @@ export interface PublicScenario {
     description: string;
     authorEmail: string;
     pages: number | string;
-    state: ScenarioState;
+    genre: any;
+    state: any;
 }
 
 export interface ScenarioState {
