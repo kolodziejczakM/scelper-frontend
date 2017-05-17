@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
+import { WindowService } from '../shared/window.service';
 import { AppStoreService } from '../app-store/app-store.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 
@@ -69,7 +70,8 @@ export class PublicScenariosComponent implements OnInit {
         private appStoreActions: AppStoreActions,
         private publicScenariosAsyncs: PublicScenariosAsyncs,
         private formBuilder: FormBuilder,
-        private modalsService: ModalsService
+        private modalsService: ModalsService,
+        private windowService: WindowService
     ) {
 
         this.pdfForm = formBuilder.group({
@@ -109,6 +111,8 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
         this.setDefaultStateInForm();
         this.setDefaultGenreInForm();
+
+        // this.pdfTestFunctionality();
     }
 
     public filterScenarios(scenarios: PublicScenario[] = []): any {
@@ -310,6 +314,56 @@ export class PublicScenariosComponent implements OnInit {
 
     public downloadScenario(path: string): void {
         location.href = 'http://www.localhost:3000/' + path;
+    }
+
+    public pdfTestFunctionality() {
+        const doc = new this.windowService.nativeWindow.PDFDocument();
+        const blobStream = this.windowService.nativeWindow.blobStream;
+
+        const stream = doc.pipe(blobStream());
+        doc.fontSize(25)
+        .text('Here is some vector graphics...', 100, 80);
+
+        // some vector graphics
+        doc.save()
+        .moveTo(100, 150)
+        .lineTo(100, 250)
+        .lineTo(200, 250)
+        .fill('#FF3300');
+
+        doc.circle(280, 200, 50)
+        .fill('#6600FF');
+
+        // an SVG path
+        doc.scale(0.6)
+        .translate(470, 130)
+        .path('M 250,75 L 323,301 131,161 369,161 177,301 z')
+        .fill('red', 'even-odd')
+        .restore();
+
+        // and some justified text wrapped into columns
+        doc.text('And here is some wrapped text...', 100, 300)
+        .font('Times-Roman', 13)
+        .moveDown()
+        .text('lorem', {
+            width: 412,
+            align: 'justify',
+            indent: 30,
+            columns: 2,
+            height: 300,
+            ellipsis: true
+        });
+        // end and display the document in the iframe to the right
+        doc.end();
+        stream.on('finish', function() {
+          ///iframe.src = stream.toBlobURL('application/pdf');
+            const objectUrl = stream.toBlobURL('application/pdf');
+            const anchor = document.createElement('a');
+            anchor.href = objectUrl;
+            anchor.download = 'scelperGenerated';
+            anchor.click();
+
+        });
     }
 
 }
