@@ -39,6 +39,13 @@ export interface ScenarioSelectFilterOption {
     label: string;
 }
 
+export interface SimpleInterview {
+    id: number;
+    category: string;
+    questionText: string;
+}
+
 export interface ApiPathsObject {
     publicScenarios: any;
+    simpleInterview: any;
 }

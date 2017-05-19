@@ -15,6 +15,7 @@ import { WindowService } from './shared/window.service';
 import { ApiRoutesService } from './api-routes.service';
 import { ModalsService } from './modals/modals.service';
 import { PublicScenariosAsyncs } from './public-scenarios/public-scenarios.asyncs';
+import { SimpleInterviewAsyncs } from './simple-interview/simple-interview.asyncs';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
         AppStoreWatchers,
         ApiRoutesService,
         ModalsService,
-        PublicScenariosAsyncs
+        PublicScenariosAsyncs,
+        SimpleInterviewAsyncs
     ],
     bootstrap: [AppComponent]
 })

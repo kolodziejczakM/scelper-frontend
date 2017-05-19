@@ -15,8 +15,13 @@ export class ApiRoutesService {
         delete: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/${deleteCode}`
     };
 
+    private simpleInterview = {
+        getQuestions: () => `${this.apiBaseRoute}/interview-questions`,
+    };
+
     private paths = {
-        publicScenarios: this.publicScenarios
+        publicScenarios: this.publicScenarios,
+        simpleInterview: this.simpleInterview
     };
 
     public getPaths(): ApiPathsObject {
