@@ -39,7 +39,7 @@ export interface ScenarioSelectFilterOption {
     label: string;
 }
 
-export interface SimpleInterview {
+export interface SimpleInterviewQuestion {
     id: number;
     category: string;
     questionText: string;

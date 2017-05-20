@@ -29,7 +29,9 @@ export const ERROR_MSG = new Map([
     ['scenarioAdd',
         'Wystąpił problem podczas dodawania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją'],
     ['scenarioDelete',
-        'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.']
+        'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.'],
+    ['questionsDownload',
+        'Wystąpił problem podczas pobierania listy pytań. Sprawdź połączenie internetowe lub skontaktuj się z administracją']
 ]);
 
 export const SERVER_SUCCESS_RESPONSES = {

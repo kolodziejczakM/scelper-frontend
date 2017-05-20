@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
+import { AppStoreActions } from '../app-store/app-store.actions';
+
 import { SimpleInterviewAsyncs } from './simple-interview.asyncs';
-import { SimpleInterview } from '../interfaces';
+import { SimpleInterviewQuestion } from '../interfaces';
+
+import { ERROR_MSG } from '../app.constants';
 
 @Component({
     selector: 'sce-simple-interview',
@@ -8,9 +13,10 @@ import { SimpleInterview } from '../interfaces';
 })
 export class SimpleInterviewComponent implements OnInit {
 
-    public interviewQuestions = [];
+    public interviewQuestions: SimpleInterviewQuestion[] = [];
 
     constructor(
+        private appStoreActions: AppStoreActions,
         private simpleInterviewAsyncs: SimpleInterviewAsyncs
     ) { }
 
@@ -20,15 +26,15 @@ export class SimpleInterviewComponent implements OnInit {
 
     private getQuestions () {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
-            (response: SimpleInterview[]) => {
-                console.log('Success: ', response);
+            (response: SimpleInterviewQuestion[]) => {
+
                 this.interviewQuestions = response;
+                console.log(this.interviewQuestions);
             },
             (err: Error) => {
                 console.warn(err);
-                console.log(' //TODO needs error handling :)');
-                // this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenariosDownload'));
-                // this.appStoreActions.setShowError(true);
+                this.appStoreActions.setErrorMessage(ERROR_MSG.get('questionsDownload'));
+                this.appStoreActions.setShowError(true);
             }
         );
     }

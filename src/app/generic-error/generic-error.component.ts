@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { BACK_BUTTON_TEXT } from '../app.constants';
 import { AppStoreActions } from '../app-store/app-store.actions';
 
@@ -6,7 +6,7 @@ import { AppStoreActions } from '../app-store/app-store.actions';
     selector: 'sce-generic-error',
     templateUrl: './generic-error.component.html'
 })
-export class GenericErrorComponent implements OnDestroy {
+export class GenericErrorComponent {
 
     hideText = BACK_BUTTON_TEXT;
 
@@ -17,12 +17,8 @@ export class GenericErrorComponent implements OnDestroy {
         private appStoreActions: AppStoreActions
     ) { }
 
-    ngOnDestroy() {
-        console.clear();
-    }
-
     public hide(): void {
         this.appStoreActions.setShowError(false);
+        location.reload();
     }
-
 }

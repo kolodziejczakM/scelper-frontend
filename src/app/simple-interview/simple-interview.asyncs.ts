@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiRoutesService } from '../api-routes.service';
-import { SimpleInterview } from '../interfaces';
+import { SimpleInterviewQuestion } from '../interfaces';
 
 @Injectable()
 export class SimpleInterviewAsyncs {
@@ -13,10 +13,10 @@ export class SimpleInterviewAsyncs {
         private apiRoutesService: ApiRoutesService
     ) { }
 
-    public getQuestions(): Observable<SimpleInterview[] | Error> {
+    public getQuestions(): Observable<SimpleInterviewQuestion[] | Error> {
         return this.http.get(this.apiRoutesService.getPaths().simpleInterview.getQuestions())
 
-                        .map((res: Response) => res.json() as SimpleInterview[])
+                        .map((res: Response) => res.json() as SimpleInterviewQuestion[])
                         .retry(1)
                         .catch((err) => Observable.throw(new Error(err)));
     }
