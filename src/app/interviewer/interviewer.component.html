@@ -1,0 +1,15 @@
+
+<section class="interviewer-wrapper">
+
+    <section class="current-question">
+        <input class="uk-input" type="text" (ngModel)="currentQuestion"/>
+    </section>
+
+    <section class="current-answer">
+        <textarea class="uk-textarea" rows="5" placeholder="Scenariusz nie powinien być odzwierciedleniem rzeczywistości. Powinien przedstawiać pewien problem."></textarea>
+    </section>
+    <p>
+        interviewer works!
+    </p>
+    <span *ngFor="let question of interviewerQuestions">{{ question.questionText }}</span>
+</section>

@@ -30,6 +30,7 @@ import { GenericErrorComponent } from './generic-error/generic-error.component';
 import { SimpleInterviewComponent } from './simple-interview/simple-interview.component';
 import { FilterInputSelectComponent } from './filter-input-select/filter-input-select.component';
 import { NewScenarioFormComponent } from './public-scenarios/new-scenario-form/new-scenario-form.component';
+import { InterviewerComponent } from './interviewer/interviewer.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -53,7 +54,8 @@ const appRoutes: Routes = [
         GenericErrorComponent,
         SimpleInterviewComponent,
         FilterInputSelectComponent,
-        NewScenarioFormComponent
+        NewScenarioFormComponent,
+        InterviewerComponent
     ],
     imports: [
         BrowserModule,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
-import { ScenarioSelectFilterOption } from '../interfaces';
+import { ScenarioSelectFilterOption, SimpleInterviewQuestion } from '../interfaces';
 
 @Injectable()
 export class AppStoreService {
@@ -11,6 +11,9 @@ export class AppStoreService {
 
     public scenarioFilterChoice: ScenarioSelectFilterOption = SCENARIO_FILTER_DROPDOWN_OPTIONS[0];
     public scenarioFilterValue = '';
+
+    public interviewerQuestions = new BehaviorSubject([] as SimpleInterviewQuestion[]);
+    public currentInterviewerQuestion = new BehaviorSubject({} as SimpleInterviewQuestion);
 
     public getShowError(): BehaviorSubject<boolean> {
         return this.showError;
@@ -26,5 +29,13 @@ export class AppStoreService {
 
     public getScenarioFilterValue(): string {
         return this.scenarioFilterValue;
+    }
+
+    public getInterviewerQuestions() {
+        return this.interviewerQuestions;
+    }
+
+    public getCurrentInterviewerQuestion() {
+        return this.currentInterviewerQuestion;
     }
 }

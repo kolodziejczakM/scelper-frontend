@@ -4,6 +4,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AppStoreService } from './app-store.service';
 
+import { SimpleInterviewQuestion } from '../interfaces';
+
 @Injectable()
 export class AppStoreWatchers {
 
@@ -13,6 +15,14 @@ export class AppStoreWatchers {
 
     public watchShowError(): BehaviorSubject<boolean> {
         return this.appStoreService.getShowError();
+    }
+
+    public watchInterviewerQuestions(): BehaviorSubject<SimpleInterviewQuestion[]> {
+        return this.appStoreService.getInterviewerQuestions();
+    }
+
+    public watchCurrentInterviewerQuestion(): BehaviorSubject<SimpleInterviewQuestion> {
+        return this.appStoreService.getCurrentInterviewerQuestion();
     }
 
 }

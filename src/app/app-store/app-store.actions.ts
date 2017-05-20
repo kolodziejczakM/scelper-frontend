@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { AppStoreService } from './app-store.service';
-import { ScenarioSelectFilterOption } from '../interfaces';
+import { ScenarioSelectFilterOption, SimpleInterviewQuestion } from '../interfaces';
 
 @Injectable()
 export class AppStoreActions {
@@ -24,5 +24,13 @@ export class AppStoreActions {
 
     public scenarioFilterValue(value: string): void {
         this.appStoreService.scenarioFilterValue = value;
+    }
+
+    public setInterviewerQuestions(value: SimpleInterviewQuestion[]): void {
+        this.appStoreService.getInterviewerQuestions().next(value);
+    }
+
+    public setCurrentInteviewerQuestion(value: SimpleInterviewQuestion): void {
+        this.appStoreService.getCurrentInterviewerQuestion().next(value);
     }
 }

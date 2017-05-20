@@ -13,23 +13,19 @@ import { ERROR_MSG } from '../app.constants';
 })
 export class SimpleInterviewComponent implements OnInit {
 
-    public interviewQuestions: SimpleInterviewQuestion[] = [];
-
     constructor(
         private appStoreActions: AppStoreActions,
         private simpleInterviewAsyncs: SimpleInterviewAsyncs
     ) { }
 
     ngOnInit() {
-        this.getQuestions();
+        this.setQuestions();
     }
 
-    private getQuestions () {
+    private setQuestions (): void {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
             (response: SimpleInterviewQuestion[]) => {
-
-                this.interviewQuestions = response;
-                console.log(this.interviewQuestions);
+                this.appStoreActions.setInterviewerQuestions(response);
             },
             (err: Error) => {
                 console.warn(err);
