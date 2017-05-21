@@ -47,6 +47,10 @@ export class InterviewerComponent implements OnInit {
         );
     }
 
+    public updateCurrentAnswer($event): void {
+        this.interviewerQuestions[this.getCurrentQuestionIndex()].answer = $event.target.value;
+    }
+
     private getCurrentQuestionIndex(): number {
        return this.interviewerQuestions.findIndex(el => el._id === this.currentInterviewerQuestion._id);
     }

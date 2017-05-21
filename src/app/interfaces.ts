@@ -44,6 +44,7 @@ export interface SimpleInterviewQuestion {
     id: number;
     category: string;
     questionText: string;
+    answer?: string;
 }
 
 export interface ApiPathsObject {

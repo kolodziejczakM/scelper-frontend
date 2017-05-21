@@ -2,16 +2,19 @@
 <section class="interviewer-wrapper">
 
     <section class="interviewer-head">
-        <i (click)="goToPreviousQuestion()" class="control--previous fa fa-arrow-left fa-3x" aria-hidden="true"></i>
-        <div class="current-question">
-            <span>{{ currentInterviewerQuestion.questionText }}</span>
+        <div class="control-wrapper">
+              <i (click)="goToPreviousQuestion()" [hidden]="isFirstQuestionActive()" class="control--previous fa fa-arrow-left fa-3x" aria-hidden="true"></i>
         </div>
-        <i (click)="goToNextQuestion()" class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+        <div class="current-question">
+            <span onselectstart="return false;">{{ currentInterviewerQuestion.questionText }}</span>
+        </div>
+        <div class="control-wrapper">
+             <i (click)="goToNextQuestion()" [hidden]="isLastQuestionActive()" class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+        </div>
     </section>
     
     <section class="current-answer">
-        <textarea class="uk-textarea" rows="5" placeholder="{{ answerPlaceholder }}"></textarea>
+        <textarea (input)="updateCurrentAnswer($event);" class="uk-textarea" rows="5" placeholder="{{ answerPlaceholder }}" [value]="currentInterviewerQuestion.answer"></textarea>
     </section>
     
-    <!--<span *ngFor="let question of interviewerQuestions">{{ question.questionText }}</span>-->
 </section>

@@ -18,6 +18,10 @@
     justify-content: center;
 }
 
+.control-wrapper {
+    min-width: 60px;
+}
+
 .control {
     &--previous,
     &--next {

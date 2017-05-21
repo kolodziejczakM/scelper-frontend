@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 
 import { AppStoreActions } from '../app-store/app-store.actions';
 
@@ -19,14 +20,17 @@ export class SimpleInterviewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.setQuestions();
+        this.prepareQuestions();
     }
 
-    private setQuestions (): void {
+    private prepareQuestions (): void {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
             (response: SimpleInterviewQuestion[]) => {
-                this.appStoreActions.setInterviewerQuestions(response);
-                console.log(response);
+
+                this.appendSimpleInterviewQuestionsWithAnswer(response);
+                const reshuffled = _.shuffle(response);
+
+                this.appStoreActions.setInterviewerQuestions(reshuffled);
             },
             (err: Error) => {
                 console.warn(err);
@@ -34,6 +38,12 @@ export class SimpleInterviewComponent implements OnInit {
                 this.appStoreActions.setShowError(true);
             }
         );
+    }
+
+    private appendSimpleInterviewQuestionsWithAnswer(questionArr: SimpleInterviewQuestion[]): void {
+        questionArr.forEach(questionObject => {
+            questionObject.answer = '';
+        });
     }
 
 }
