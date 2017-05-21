@@ -40,6 +40,7 @@ export interface ScenarioSelectFilterOption {
 }
 
 export interface SimpleInterviewQuestion {
+    _id: string;
     id: number;
     category: string;
     questionText: string;

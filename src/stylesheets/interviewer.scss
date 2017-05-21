@@ -6,7 +6,7 @@
 .current-question {
     width: 100%;
     display: inline-block;
-    margin: 20px 0;
+    margin: 0 0 20px 0;
     padding: 10px 15px;
     background: #f8f8f8;
     font-size: 24px;
@@ -14,7 +14,7 @@
 
 .interviewer-head {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -22,7 +22,7 @@
     &--previous,
     &--next {
         cursor: pointer;
-        margin: 10px;
+        margin: 0 10px;
 
         &:hover { 
             color: lighten($scelper-gray-dark, 10%);
@@ -31,5 +31,7 @@
 }
 
 .current-answer {
-
+    textarea { 
+        padding: 10px;
+    }
 }

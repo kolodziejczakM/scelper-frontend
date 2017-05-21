@@ -5,12 +5,15 @@ import { AppStoreActions } from '../app-store/app-store.actions';
 import { AppStoreWatchers } from '../app-store/app-store.watchers';
 
 import { SimpleInterviewQuestion } from '../interfaces';
+import { ANSWER_PLACEHOLDER } from './interviewer.constants';
 
 @Component({
     selector: 'sce-interviewer',
     templateUrl: './interviewer.component.html'
 })
 export class InterviewerComponent implements OnInit {
+
+    public answerPlaceholder = ANSWER_PLACEHOLDER;
 
     public interviewerQuestions: SimpleInterviewQuestion[] = [];
     public currentInterviewerQuestion = {} as SimpleInterviewQuestion;
@@ -30,7 +33,7 @@ export class InterviewerComponent implements OnInit {
         this.appStoreWatchers.watchInterviewerQuestions().takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.interviewerQuestions = storeVal;
-                this.setCurrentQuestion(storeVal[0]);
+                this.appStoreActions.setCurrentInteviewerQuestion(storeVal[0]);
             }
         );
     }
@@ -39,12 +42,41 @@ export class InterviewerComponent implements OnInit {
         this.appStoreWatchers.watchCurrentInterviewerQuestion().takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
+                console.log('current is now: ', this.currentInterviewerQuestion);
             }
         );
     }
 
-    private setCurrentQuestion(value): void {
-        this.appStoreActions.setCurrentInteviewerQuestion(value);
+    private getCurrentQuestionIndex(): number {
+       return this.interviewerQuestions.findIndex(el => el._id === this.currentInterviewerQuestion._id);
+    }
+
+    public goToNextQuestion(): void {
+        if (!this.isLastQuestionActive()) {
+             this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() + 1]);
+        }
+    }
+
+    public goToPreviousQuestion(): void {
+        if (!this.isFirstQuestionActive()) {
+           this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() - 1]);
+        }
+    }
+
+    private isLastQuestionActive() {
+        if (this.getCurrentQuestionIndex() === (this.interviewerQuestions.length - 1)) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    private isFirstQuestionActive() {
+        if (this.getCurrentQuestionIndex() === 0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }

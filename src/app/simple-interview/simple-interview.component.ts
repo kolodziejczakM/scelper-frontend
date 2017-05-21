@@ -26,6 +26,7 @@ export class SimpleInterviewComponent implements OnInit {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
             (response: SimpleInterviewQuestion[]) => {
                 this.appStoreActions.setInterviewerQuestions(response);
+                console.log(response);
             },
             (err: Error) => {
                 console.warn(err);

@@ -2,15 +2,15 @@
 <section class="interviewer-wrapper">
 
     <section class="interviewer-head">
-        <i class="control--previous fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+        <i (click)="goToPreviousQuestion()" class="control--previous fa fa-arrow-left fa-3x" aria-hidden="true"></i>
         <div class="current-question">
             <span>{{ currentInterviewerQuestion.questionText }}</span>
         </div>
-        <i class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+        <i (click)="goToNextQuestion()" class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
     </section>
     
     <section class="current-answer">
-        <textarea class="uk-textarea" rows="5" placeholder="Scenariusz nie powinien być odzwierciedleniem rzeczywistości. Powinien przedstawiać pewien problem."></textarea>
+        <textarea class="uk-textarea" rows="5" placeholder="{{ answerPlaceholder }}"></textarea>
     </section>
     
     <!--<span *ngFor="let question of interviewerQuestions">{{ question.questionText }}</span>-->
