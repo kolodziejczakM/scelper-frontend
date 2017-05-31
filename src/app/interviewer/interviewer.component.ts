@@ -47,6 +47,34 @@ export class InterviewerComponent implements OnInit {
         );
     }
 
+    public generatePDF(): void {
+        alert('Generowanie ograć na backendzie! :)');
+    }
+
+    public listQuestionsWithoutAnswers(): String[] {
+        return this.interviewerQuestions.filter(question => !Boolean(question.answer)).map(question => question.questionText);
+    }
+
+    public isInterviewInProgress(): boolean {
+        return this.interviewerQuestions.some(question => Boolean(question.answer));
+    }
+
+    public restartInterview(): void {
+        this.cleanInterview();
+        this.goToFirstQuestion();
+    }
+
+    private cleanInterview(): void {
+        this.interviewerQuestions.forEach((element: SimpleInterviewQuestion) => {
+            element.answer = '';
+        });
+        this.appStoreActions.setInterviewerQuestions(this.interviewerQuestions);
+    }
+
+    private goToFirstQuestion(): void {
+        this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[0]);
+    }
+
     public updateCurrentAnswer($event): void {
         this.interviewerQuestions[this.getCurrentQuestionIndex()].answer = $event.target.value;
     }
@@ -67,7 +95,7 @@ export class InterviewerComponent implements OnInit {
         }
     }
 
-    private isLastQuestionActive() {
+    private isLastQuestionActive(): boolean {
         if (this.getCurrentQuestionIndex() === (this.interviewerQuestions.length - 1)) {
             return true;
         }else {
@@ -75,7 +103,7 @@ export class InterviewerComponent implements OnInit {
         }
     }
 
-    private isFirstQuestionActive() {
+    private isFirstQuestionActive(): boolean {
         if (this.getCurrentQuestionIndex() === 0) {
             return true;
         }else {

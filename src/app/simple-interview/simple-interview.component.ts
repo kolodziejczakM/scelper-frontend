@@ -20,10 +20,10 @@ export class SimpleInterviewComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.prepareQuestions();
+        this.setMixedQuestions();
     }
 
-    private prepareQuestions (): void {
+    private setMixedQuestions (): void {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
             (response: SimpleInterviewQuestion[]) => {
 
