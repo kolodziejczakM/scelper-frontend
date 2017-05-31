@@ -17,6 +17,7 @@ export class ApiRoutesService {
 
     private simpleInterview = {
         getQuestions: () => `${this.apiBaseRoute}/interview-questions`,
+        postAnswers: () => `${this.apiBaseRoute}/interview-summary`
     };
 
     private paths = {
