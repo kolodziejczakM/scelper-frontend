@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { AppStoreWatchers } from '../app-store/app-store.watchers';
 
-import { SimpleInterviewQuestion } from '../interfaces';
+import { SimpleInterviewAsyncs } from '../simple-interview/simple-interview.asyncs';
+
+import { PDFblob, SimpleInterviewQuestion } from '../interfaces';
 import { ANSWER_PLACEHOLDER } from './interviewer.constants';
 
 @Component({
@@ -21,6 +23,7 @@ export class InterviewerComponent implements OnInit {
     constructor(
         private appStoreActions: AppStoreActions,
         private appStoreWatchers: AppStoreWatchers,
+        private simpleInterviewAsyncs: SimpleInterviewAsyncs,
         private router: Router
     ) { }
 
@@ -48,7 +51,25 @@ export class InterviewerComponent implements OnInit {
     }
 
     public generatePDF(): void {
-        alert('Generowanie ograć na backendzie! :)');
+        console.log('wysylam: ', this.interviewerQuestions);
+        this.simpleInterviewAsyncs.postInterviewAnswers(this.interviewerQuestions).subscribe(
+            (response: PDFblob) => {
+
+                const pdfBlob = new Blob([response], { type: 'application/pdf' }),
+                      anchor = document.createElement('a');
+
+                console.log('pdfBlob: ', pdfBlob);
+
+                anchor.href = URL.createObjectURL(pdfBlob);
+                anchor.download = 'Scelper_short_summary';
+                anchor.click();
+            },
+            (err: Error) => {
+                console.warn(err);
+                // this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));
+                // this.appStoreActions.setShowError(true);
+            }
+        );
     }
 
     public listQuestionsWithoutAnswers(): String[] {

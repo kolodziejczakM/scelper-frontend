@@ -4,6 +4,8 @@ export interface ResponseObject {
     msg: string;
 }
 
+export type PDFblob = Blob;
+
 export interface PdfForm {
     title: string;
     authorEmail: string;

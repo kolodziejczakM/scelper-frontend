@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { ApiRoutesService } from '../api-routes.service';
-import { SimpleInterviewQuestion, ResponseObject } from '../interfaces';
+import { SimpleInterviewQuestion, PDFblob } from '../interfaces';
 
 @Injectable()
 export class SimpleInterviewAsyncs {
@@ -13,6 +13,10 @@ export class SimpleInterviewAsyncs {
         private apiRoutesService: ApiRoutesService
     ) { }
 
+    private attachBlobHeader() {
+        return { responseType: ResponseContentType.Blob };
+    }
+
     public getQuestions(): Observable<SimpleInterviewQuestion[] | Error> {
         return this.http.get(this.apiRoutesService.getPaths().simpleInterview.getQuestions())
 
@@ -21,10 +25,12 @@ export class SimpleInterviewAsyncs {
                         .catch((err) => Observable.throw(new Error(err)));
     }
 
-    public postInterviewAnswers(answeredQuestions: SimpleInterviewQuestion[]): Observable<ResponseObject | Error> {
-        return this.http.post(this.apiRoutesService.getPaths().simpleInterview.postAnswers(), answeredQuestions)
+    public postInterviewAnswers(answeredQuestions: SimpleInterviewQuestion[]): Observable<PDFblob | Error> {
 
-                        .map((res: Response) => res.json() as ResponseObject)
+        return this.http.post(
+            this.apiRoutesService.getPaths().simpleInterview.postAnswers(), answeredQuestions, this.attachBlobHeader())
+
+                        .map((res) => res.blob())
                         .retry(1)
                         .catch((err) => Observable.throw(new Error(err)));
     }

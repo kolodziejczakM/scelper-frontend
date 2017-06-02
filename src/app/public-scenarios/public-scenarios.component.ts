@@ -356,7 +356,7 @@ export class PublicScenariosComponent implements OnInit {
         // end and display the document in the iframe to the right
         doc.end();
         stream.on('finish', function() {
-          ///iframe.src = stream.toBlobURL('application/pdf');
+          // iframe.src = stream.toBlobURL('application/pdf');
             const objectUrl = stream.toBlobURL('application/pdf');
             const anchor = document.createElement('a');
             anchor.href = objectUrl;
