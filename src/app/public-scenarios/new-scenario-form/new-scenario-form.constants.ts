@@ -1,8 +1,8 @@
-import { KILO_BYTE, DEFAULT_SELECT_STATE } from '../../app.constants';
+import { PDF_MIMETYPE, KILO_BYTE, DEFAULT_SELECT_STATE } from '../../app.constants';
 
 export const EMAIL_PATTERN = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/;
 export const SCENARIO_SIZE_LIMIT_KB = (200 * KILO_BYTE);
-export const SCENARIO_ACCEPTABLE_MIMETYPE = 'application/pdf';
+export const SCENARIO_ACCEPTABLE_MIMETYPE = PDF_MIMETYPE;
 
 export const SCENARIO_TITLE_MIN_LENGTH = 1;
 export const SCENARIO_DESCRIPTION_MIN_LENGTH = 10;

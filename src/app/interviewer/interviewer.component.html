@@ -24,7 +24,9 @@
             <span>{{ question }}</span>
             <br>
         </div>
-        
+        <ng-container *ngIf="listQuestionsWithAnswers().length">
+            <button class="uk-button uk-button-primary margin-top-20" (click)="generatePDF();">Wygeneruj PDF</button>
+        </ng-container>
     </ng-container>
-    <button class="uk-button uk-button-primary margin-top-20" (click)="generatePDF();">Wygeneruj PDF</button>
+
 </section>

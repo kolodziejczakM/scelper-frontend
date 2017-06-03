@@ -1,9 +1,11 @@
 
+
 export const APP_NAME = 'Scelper';
+export const PDF_MIMETYPE = 'application/pdf';
+export const KILO_BYTE = 1024;
 
 export const DEFAULT_SELECT_STATE = 'Wybierz';
 export const BACK_BUTTON_TEXT = 'Wróć';
-export const KILO_BYTE = 1024;
 
 export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
 
@@ -31,7 +33,9 @@ export const ERROR_MSG = new Map([
     ['scenarioDelete',
         'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.'],
     ['questionsDownload',
-        'Wystąpił problem podczas pobierania listy pytań. Sprawdź połączenie internetowe lub skontaktuj się z administracją']
+        'Wystąpił problem podczas pobierania listy pytań. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
+    ['interviewSummaryGeneration',
+        'Wystąpił problem podczas generowania podsumowania. Spróbuj ponownie lub skontaktuj się z administracją']
 ]);
 
 export const SERVER_SUCCESS_RESPONSES = {

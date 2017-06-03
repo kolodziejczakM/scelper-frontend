@@ -21,10 +21,7 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": [
-        "assets/scripts/pdfkit.js",
-        "assets/scripts/blob-stream.js"
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

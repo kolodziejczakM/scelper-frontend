@@ -7,7 +7,8 @@ import { AppStoreWatchers } from '../app-store/app-store.watchers';
 import { SimpleInterviewAsyncs } from '../simple-interview/simple-interview.asyncs';
 
 import { PDFblob, SimpleInterviewQuestion } from '../interfaces';
-import { ANSWER_PLACEHOLDER } from './interviewer.constants';
+import { ERROR_MSG } from '../app.constants';
+import { GENERATED_PDF_FILENAME, GENERATED_PDF_MIMETYPE, ANSWER_PLACEHOLDER } from './interviewer.constants';
 
 @Component({
     selector: 'sce-interviewer',
@@ -45,31 +46,31 @@ export class InterviewerComponent implements OnInit {
         this.appStoreWatchers.watchCurrentInterviewerQuestion().takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
-                console.log('current is now: ', this.currentInterviewerQuestion);
             }
         );
     }
 
     public generatePDF(): void {
-        console.log('wysylam: ', this.interviewerQuestions);
         this.simpleInterviewAsyncs.postInterviewAnswers(this.interviewerQuestions).subscribe(
             (response: PDFblob) => {
 
-                const pdfBlob = new Blob([response], { type: 'application/pdf' }),
+                const pdfBlob = new Blob([response], { type: GENERATED_PDF_MIMETYPE }),
                       anchor = document.createElement('a');
 
-                console.log('pdfBlob: ', pdfBlob);
-
                 anchor.href = URL.createObjectURL(pdfBlob);
-                anchor.download = 'Scelper_short_summary';
+                anchor.download = GENERATED_PDF_FILENAME;
                 anchor.click();
             },
             (err: Error) => {
                 console.warn(err);
-                // this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));
-                // this.appStoreActions.setShowError(true);
+                this.appStoreActions.setErrorMessage(ERROR_MSG.get('interviewSummaryGeneration'));
+                this.appStoreActions.setShowError(true);
             }
         );
+    }
+
+    public listQuestionsWithAnswers(): String[] {
+        return this.interviewerQuestions.filter(question => Boolean(question.answer)).map(question => question.questionText);
     }
 
     public listQuestionsWithoutAnswers(): String[] {
