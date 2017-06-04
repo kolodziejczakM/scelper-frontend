@@ -17,6 +17,7 @@ export class ApiRoutesService {
 
     private simpleInterview = {
         getQuestions: () => `${this.apiBaseRoute}/interview-questions`,
+        getRandomSymbols: (amount = 3) => `${this.apiBaseRoute}/random-symbols?amount=${amount}`,
         postAnswers: () => `${this.apiBaseRoute}/interview-summary`
     };
 

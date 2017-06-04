@@ -12,6 +12,8 @@
              <i (click)="goToNextQuestion()" [hidden]="isLastQuestionActive()" class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
         </div>
     </section>
+
+    <sce-symbols></sce-symbols>
     
     <section class="current-answer">
         <textarea (input)="updateCurrentAnswer($event);" class="uk-textarea" rows="5" placeholder="{{ answerPlaceholder }}" [value]="currentInterviewerQuestion.answer"></textarea>

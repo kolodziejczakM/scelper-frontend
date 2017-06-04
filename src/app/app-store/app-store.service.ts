@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
-import { ScenarioSelectFilterOption, SimpleInterviewQuestion } from '../interfaces';
+import { ScenarioSelectFilterOption, SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
 
 @Injectable()
 export class AppStoreService {
@@ -14,6 +14,8 @@ export class AppStoreService {
 
     public interviewerQuestions = new BehaviorSubject([{ id: 0, category: '', questionText: '' }] as SimpleInterviewQuestion[]);
     public currentInterviewerQuestion = new BehaviorSubject({} as SimpleInterviewQuestion);
+
+    public randomSymbols = new BehaviorSubject([] as ScelperSymbol[]);
 
     public getShowError(): BehaviorSubject<boolean> {
         return this.showError;
@@ -37,5 +39,9 @@ export class AppStoreService {
 
     public getCurrentInterviewerQuestion() {
         return this.currentInterviewerQuestion;
+    }
+
+    public getRandomSymbols(): BehaviorSubject<ScelperSymbol[]> {
+        return this.randomSymbols;
     }
 }

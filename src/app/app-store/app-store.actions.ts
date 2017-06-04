@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { AppStoreService } from './app-store.service';
-import { ScenarioSelectFilterOption, SimpleInterviewQuestion } from '../interfaces';
+import { ScenarioSelectFilterOption, SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
 
 @Injectable()
 export class AppStoreActions {
@@ -32,5 +32,9 @@ export class AppStoreActions {
 
     public setCurrentInteviewerQuestion(value: SimpleInterviewQuestion): void {
         this.appStoreService.getCurrentInterviewerQuestion().next(value);
+    }
+
+    public setRandomSymbols(value: ScelperSymbol[]): void {
+        this.appStoreService.getRandomSymbols().next(value);
     }
 }

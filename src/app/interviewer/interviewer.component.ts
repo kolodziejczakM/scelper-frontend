@@ -6,7 +6,7 @@ import { AppStoreWatchers } from '../app-store/app-store.watchers';
 
 import { SimpleInterviewAsyncs } from '../simple-interview/simple-interview.asyncs';
 
-import { PDFblob, SimpleInterviewQuestion } from '../interfaces';
+import { PDFblob, SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
 import { ERROR_MSG } from '../app.constants';
 import { GENERATED_PDF_FILENAME, GENERATED_PDF_MIMETYPE, ANSWER_PLACEHOLDER } from './interviewer.constants';
 
@@ -49,6 +49,7 @@ export class InterviewerComponent implements OnInit {
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
                 this.measureCurrentQuestionAnsweringTime();
+                this.setRandomSymbols();
             }
         );
     }
@@ -63,6 +64,18 @@ export class InterviewerComponent implements OnInit {
 
     private incrementTimeOfAnswering(): void {
         this.currentInterviewerQuestion.timeOfAnswering += 1;
+    }
+
+    private setRandomSymbols(): void {
+        this.simpleInterviewAsyncs.getRandomSymbols().subscribe(
+            (response: ScelperSymbol[]) => {
+                this.appStoreActions.setRandomSymbols(response);
+            },
+            (err: Error) => {
+                console.warn(err);
+                // TO DO: BETTER ERROR HANDLING
+            }
+        );
     }
 
     public generatePDF(): void {

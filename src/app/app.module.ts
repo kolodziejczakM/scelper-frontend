@@ -31,6 +31,7 @@ import { SimpleInterviewComponent } from './simple-interview/simple-interview.co
 import { FilterInputSelectComponent } from './filter-input-select/filter-input-select.component';
 import { NewScenarioFormComponent } from './public-scenarios/new-scenario-form/new-scenario-form.component';
 import { InterviewerComponent } from './interviewer/interviewer.component';
+import { SymbolsComponent } from './symbols/symbols.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -55,7 +56,8 @@ const appRoutes: Routes = [
         SimpleInterviewComponent,
         FilterInputSelectComponent,
         NewScenarioFormComponent,
-        InterviewerComponent
+        InterviewerComponent,
+        SymbolsComponent
     ],
     imports: [
         BrowserModule,

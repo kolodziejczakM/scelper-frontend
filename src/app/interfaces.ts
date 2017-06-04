@@ -1,10 +1,10 @@
 
+export type PDFblob = Blob;
+
 export interface ResponseObject {
     code: string;
     msg: string;
 }
-
-export type PDFblob = Blob;
 
 export interface PdfForm {
     title: string;
@@ -48,6 +48,13 @@ export interface SimpleInterviewQuestion {
     questionText: string;
     answer?: string;
     timeOfAnswering?: number;
+}
+
+export interface ScelperSymbol {
+    _id: string;
+    id: number;
+    codeName: string;
+    path: string;
 }
 
 export interface ApiPathsObject {

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AppStoreService } from './app-store.service';
 
-import { SimpleInterviewQuestion } from '../interfaces';
+import { SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
 
 @Injectable()
 export class AppStoreWatchers {
@@ -23,6 +23,10 @@ export class AppStoreWatchers {
 
     public watchCurrentInterviewerQuestion(): BehaviorSubject<SimpleInterviewQuestion> {
         return this.appStoreService.getCurrentInterviewerQuestion();
+    }
+
+    public watchRandomSymbols(): BehaviorSubject<ScelperSymbol[]> {
+        return this.appStoreService.getRandomSymbols();
     }
 
 }
