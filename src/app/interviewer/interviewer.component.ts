@@ -49,7 +49,10 @@ export class InterviewerComponent implements OnInit {
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
                 this.measureCurrentQuestionAnsweringTime();
-                this.setRandomSymbols();
+
+                if (this.currentInterviewerQuestion.questionText) {
+                    this.setRandomSymbols();
+                }
             }
         );
     }

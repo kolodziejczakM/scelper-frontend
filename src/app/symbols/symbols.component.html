@@ -1,9 +1,5 @@
 
 <section class="symbols-wrapper">
-    <p>
-        symbols works!
-    </p>
     <div [style.background-image]="'url('+getSymbolPath(symbol.path)+')'" class="scelper-symbol" *ngFor="let symbol of randomSymbols">
-        {{ symbol.codeName }}
     </div>
 </section>
