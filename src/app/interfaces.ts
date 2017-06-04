@@ -47,6 +47,7 @@ export interface SimpleInterviewQuestion {
     category: string;
     questionText: string;
     answer?: string;
+    timeOfAnswering?: number;
 }
 
 export interface ApiPathsObject {

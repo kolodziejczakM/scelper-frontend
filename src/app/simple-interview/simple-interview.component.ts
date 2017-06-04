@@ -27,7 +27,7 @@ export class SimpleInterviewComponent implements OnInit {
         this.simpleInterviewAsyncs.getQuestions().subscribe(
             (response: SimpleInterviewQuestion[]) => {
 
-                this.appendSimpleInterviewQuestionsWithAnswer(response);
+                this.extendSimpleInterviewQuestions(response);
                 const reshuffled = _.shuffle(response);
 
                 this.appStoreActions.setInterviewerQuestions(reshuffled);
@@ -40,9 +40,10 @@ export class SimpleInterviewComponent implements OnInit {
         );
     }
 
-    private appendSimpleInterviewQuestionsWithAnswer(questionArr: SimpleInterviewQuestion[]): void {
+    private extendSimpleInterviewQuestions(questionArr: SimpleInterviewQuestion[]): void {
         questionArr.forEach(questionObject => {
             questionObject.answer = '';
+            questionObject.timeOfAnswering = 0;
         });
     }
 

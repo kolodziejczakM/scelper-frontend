@@ -18,6 +18,8 @@ export class InterviewerComponent implements OnInit {
 
     public answerPlaceholder = ANSWER_PLACEHOLDER;
 
+    private currentIntervalID;
+
     public interviewerQuestions: SimpleInterviewQuestion[] = [];
     public currentInterviewerQuestion = {} as SimpleInterviewQuestion;
 
@@ -46,8 +48,21 @@ export class InterviewerComponent implements OnInit {
         this.appStoreWatchers.watchCurrentInterviewerQuestion().takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
+                this.measureCurrentQuestionAnsweringTime();
             }
         );
+    }
+
+    private measureCurrentQuestionAnsweringTime(): void {
+        if (this.currentIntervalID) {
+            clearInterval(this.currentIntervalID);
+        }
+
+        this.currentIntervalID = setInterval(this.incrementTimeOfAnswering.bind(this), 1000);
+    }
+
+    private incrementTimeOfAnswering(): void {
+        this.currentInterviewerQuestion.timeOfAnswering += 1;
     }
 
     public generatePDF(): void {
