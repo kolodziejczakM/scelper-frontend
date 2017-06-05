@@ -1,15 +1,18 @@
 
+$wrapper-padding: 40px;
+$curr-question-font-size: 24px;
 
 .interviewer-wrapper { 
-    padding: 40px;
+    padding: $wrapper-padding;
 }
+
 .current-question {
     width: 100%;
     display: inline-block;
     margin: 0 0 20px 0;
     padding: 10px 15px;
     background: #f8f8f8;
-    font-size: 24px;
+    font-size: $curr-question-font-size;
 }
 
 .interviewer-head {
@@ -20,6 +23,10 @@
 
 .control-wrapper {
     min-width: 60px;
+
+    &.right {
+        text-align: right;
+    }
 }
 
 .control {
@@ -37,5 +44,14 @@
 .current-answer {
     textarea { 
         padding: 10px;
+    }
+}
+
+@media(max-width: $mobile) {
+    .interviewer-wrapper {
+        padding: $wrapper-padding * 0.5;
+    }
+    .current-question {
+        font-size: $curr-question-font-size * 0.75;
     }
 }

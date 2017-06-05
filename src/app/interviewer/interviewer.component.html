@@ -3,13 +3,13 @@
 
     <section class="interviewer-head">
         <div class="control-wrapper">
-              <i (click)="goToPreviousQuestion()" [hidden]="isFirstQuestionActive()" class="control--previous fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+              <i (click)="goToPreviousQuestion()" [hidden]="isFirstQuestionActive()" class="control--previous fa fa-angle-left fa-3x" aria-hidden="true"></i>
         </div>
         <div class="current-question">
             <span onselectstart="return false;">{{ currentInterviewerQuestion.questionText }}</span>
         </div>
-        <div class="control-wrapper">
-             <i (click)="goToNextQuestion()" [hidden]="isLastQuestionActive()" class="control--next fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+        <div class="control-wrapper right">
+             <i (click)="goToNextQuestion()" [hidden]="isLastQuestionActive()" class="control--next fa fa-angle-right fa-3x" aria-hidden="true"></i>
         </div>
     </section>
 

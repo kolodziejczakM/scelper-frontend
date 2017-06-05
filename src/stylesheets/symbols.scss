@@ -1,15 +1,31 @@
 
+$symbol-dimension: 100px;
+$symbol-opacity: 0.5;
+
+$wrapper-height: 150px;
+
 .symbols-wrapper {
     text-align: center;
+    height: $wrapper-height;
 }
 
 .scelper-symbol {
     display: inline-block;
-    opacity: 0.5;
+    opacity: $symbol-opacity;
     margin: 10px;
-    width: 100px;
-    height: 100px;
+    width: $symbol-dimension;
+    height: $symbol-dimension;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
+}
+
+@media(max-width: $mobile) {
+    .symbols-wrapper {
+        height: $wrapper-height * 0.6;
+    }
+    .scelper-symbol {
+        width: $symbol-dimension * 0.6;
+        height: $symbol-dimension * 0.6;
+    }
 }

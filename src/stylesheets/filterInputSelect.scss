@@ -3,3 +3,9 @@
     display: inline-block;
     width: initial;
 }
+
+@media(max-width: $mobile) {
+    input.uk-input.filter-field {
+        width: 120px;
+    }
+}

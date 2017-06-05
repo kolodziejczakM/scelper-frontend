@@ -36,23 +36,20 @@ export class InterviewerComponent implements OnInit {
     }
 
     private watchInterviewerQuestions(): void {
-        this.appStoreWatchers.watchInterviewerQuestions().takeUntil(this.router.events.pairwise()).subscribe(
+        this.appStoreWatchers.watchInterviewerQuestions().skip(1).takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.interviewerQuestions = storeVal;
-                this.appStoreActions.setCurrentInteviewerQuestion(storeVal[0]);
+                this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[0]);
             }
         );
     }
 
     private watchCurrentInterviewerQuestion(): void {
-        this.appStoreWatchers.watchCurrentInterviewerQuestion().takeUntil(this.router.events.pairwise()).subscribe(
+        this.appStoreWatchers.watchCurrentInterviewerQuestion().skip(1).takeUntil(this.router.events.pairwise()).subscribe(
             storeVal => {
                 this.currentInterviewerQuestion = storeVal;
                 this.measureCurrentQuestionAnsweringTime();
-
-                if (this.currentInterviewerQuestion.questionText) {
-                    this.setRandomSymbols();
-                }
+                this.setRandomSymbols();
             }
         );
     }
@@ -76,7 +73,6 @@ export class InterviewerComponent implements OnInit {
             },
             (err: Error) => {
                 console.warn(err);
-                // TO DO: BETTER ERROR HANDLING
             }
         );
     }

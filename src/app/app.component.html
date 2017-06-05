@@ -1,8 +1,10 @@
 
 <sce-header></sce-header>
 
-<section [hidden]="errorsOccured">
+<main [hidden]="errorsOccured">
     <router-outlet ></router-outlet>
-</section>
+</main>
+
+<sce-footer></sce-footer>
 
 <sce-generic-error *ngIf="errorsOccured" [header]="errorHeader" [message]="currentErrorMsg"></sce-generic-error>

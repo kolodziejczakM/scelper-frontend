@@ -32,6 +32,7 @@ import { FilterInputSelectComponent } from './filter-input-select/filter-input-s
 import { NewScenarioFormComponent } from './public-scenarios/new-scenario-form/new-scenario-form.component';
 import { InterviewerComponent } from './interviewer/interviewer.component';
 import { SymbolsComponent } from './symbols/symbols.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
         FilterInputSelectComponent,
         NewScenarioFormComponent,
         InterviewerComponent,
-        SymbolsComponent
+        SymbolsComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

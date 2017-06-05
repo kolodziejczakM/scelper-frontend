@@ -1,6 +1,14 @@
 
+* {
+    box-sizing: border-box;
+}
+
 body { 
     overflow-y: scroll
+}
+
+main {
+    padding-bottom: $footer-height;
 }
 
 button {
