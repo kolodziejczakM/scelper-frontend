@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 import { AppStoreWatchers } from '../app-store/app-store.watchers';
 import { ScelperSymbol } from '../interfaces';
@@ -26,6 +27,6 @@ export class SymbolsComponent implements OnInit {
     }
 
     public getSymbolPath(path: string): string {
-        return `http://localhost:3000/${path}`;
+        return environment.serverRoot + path;
     }
 }

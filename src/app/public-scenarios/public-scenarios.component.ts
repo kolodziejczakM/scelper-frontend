@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
 import { WindowService } from '../shared/window.service';
@@ -298,6 +299,7 @@ export class PublicScenariosComponent implements OnInit {
                 (response: ResponseObject) => {
                     const successMessage = helpers.translateServerResponse(response.code);
                     this.showAlert(APP_NAME, successMessage);
+                    location.reload();
                 },
                 (err: Error) => {
                     console.warn(err);
@@ -310,7 +312,7 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     public downloadScenario(path: string): void {
-        location.href = 'http://www.localhost:3000/' + path;
+        location.href = environment.serverRoot + path.replace('public', '');
     }
 
 }
