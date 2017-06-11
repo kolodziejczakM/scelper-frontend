@@ -19,7 +19,8 @@ import { PublicScenario,
 import { APP_NAME,
          DEFAULT_SELECT_STATE,
          ERROR_MSG,
-         COMMON_MSG } from '../app.constants';
+         COMMON_MSG,
+         SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
 
 import { PDF_FORM_TXT,
          EMAIL_PATTERN,
@@ -31,7 +32,7 @@ import { PDF_FORM_TXT,
          SCENARIO_DESCRIPTION_MIN_LENGTH,
          SCENARIO_DESCRIPTION_MAX_LENGTH } from '../public-scenarios/new-scenario-form/new-scenario-form.constants';
 
-import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
+import { NO_RESULT_TEXT } from './public-scenarios-table/public-scenarios-table.constants';
 
 @Component({
     selector: 'sce-public-scenarios',
@@ -64,6 +65,8 @@ export class PublicScenariosComponent implements OnInit {
 
     public selectedState;
     public selectedGenre;
+
+    public noResultsText = NO_RESULT_TEXT;
 
     constructor(
         private appStoreService: AppStoreService,

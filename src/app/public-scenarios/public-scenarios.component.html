@@ -99,7 +99,10 @@
             </tr>
             <tr [hidden]="filterScenarios(scenarios).length">
                 <td colspan="6">
-                    Brak wyników dla wybranych kryteriów wyszukiwania.
+                    <div class="text-centered">
+                        <i class="fa fa-ban fa-3x" aria-hidden="true"></i>
+                    </div>
+                    <p>{{ noResultsText }}</p>
                 </td>
             </tr>
         </tbody>
