@@ -34,6 +34,7 @@ import { InterviewerComponent } from './interviewer/interviewer.component';
 import { SymbolsComponent } from './symbols/symbols.component';
 import { FooterComponent } from './footer/footer.component';
 import { InterviewerTutorialComponent } from './interviewer-tutorial/interviewer-tutorial.component';
+import { PublicScenariosTableComponent } from './public-scenarios/public-scenarios-table/public-scenarios-table.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -48,20 +49,21 @@ const appRoutes: Routes = [
         AppComponent,
         HomepageComponent,
         PublicScenariosComponent,
+        PublicScenariosTableComponent,
+        NewScenarioFormComponent,
+        FilterInputSelectComponent,
         InterviewComponent,
+        SimpleInterviewComponent,
+        InterviewerComponent,
+        SymbolsComponent,
+        InterviewerTutorialComponent,
         ScenarioActivationComponent,
         PromptComponent,
         AlertComponent,
         LoaderComponent,
         HeaderComponent,
-        GenericErrorComponent,
-        SimpleInterviewComponent,
-        FilterInputSelectComponent,
-        NewScenarioFormComponent,
-        InterviewerComponent,
-        SymbolsComponent,
         FooterComponent,
-        InterviewerTutorialComponent
+        GenericErrorComponent
     ],
     imports: [
         BrowserModule,

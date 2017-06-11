@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { GENERIC_ERROR_HEADER } from './app.constants';
 
 import { AppStoreService } from './app-store/app-store.service';
@@ -17,7 +16,8 @@ export class AppComponent implements OnInit {
 
     constructor(
         private appStoreService: AppStoreService,
-        private appStoreWatchers: AppStoreWatchers) {}
+        private appStoreWatchers: AppStoreWatchers
+    ) {}
 
     ngOnInit() {
         this.watchShowError();

@@ -1,6 +1,7 @@
 
 .footer-wrapper {
-    background: #fff;
+    box-shadow: 0 5px 15px 0.5px $scelper-gray-dark;
+    background: $scelper-white;
     padding: 20px;
     z-index: 100;
     position: fixed;
@@ -12,7 +13,7 @@
 
     .footer-main-text {
         .sce-heart-icon {
-            color: #83e800;
+            color: $scelper-green;
         }
     }
 
@@ -24,7 +25,7 @@
             margin-right: 10px;
             
             a {
-                color: #83e800;
+                color: $scelper-green;
                 opacity: 0.6;
             }
         }

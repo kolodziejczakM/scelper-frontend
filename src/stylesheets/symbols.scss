@@ -1,8 +1,14 @@
 
 $symbol-dimension: 100px;
 $symbol-opacity: 0.5;
-
 $wrapper-height: 150px;
+
+$mobile-dimension-multiplier: 0.6;
+
+@keyframes SCELPER_SYMBOL_INIT {
+    0%   { height: 0; }
+    100% { height: $symbol-dimension; }
+}
 
 .symbols-wrapper {
     text-align: center;
@@ -15,6 +21,8 @@ $wrapper-height: 150px;
     margin: 10px;
     width: $symbol-dimension;
     height: $symbol-dimension;
+    animation: SCELPER_SYMBOL_INIT .5s 1;
+    will-change: height;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -22,10 +30,10 @@ $wrapper-height: 150px;
 
 @media(max-width: $mobile) {
     .symbols-wrapper {
-        height: $wrapper-height * 0.6;
+        height: $wrapper-height * $mobile-dimension-multiplier;
     }
     .scelper-symbol {
-        width: $symbol-dimension * 0.6;
-        height: $symbol-dimension * 0.6;
+        width: $symbol-dimension * $mobile-dimension-multiplier;
+        height: $symbol-dimension * $mobile-dimension-multiplier;
     }
 }

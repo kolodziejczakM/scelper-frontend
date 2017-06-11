@@ -7,8 +7,16 @@ body {
     overflow-y: scroll
 }
 
+@keyframes REFRESH_APP_ANIMATION {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 main {
     padding-bottom: $footer-height;
+    opacity: 1;
+    will-change: opacity;
+    animation: REFRESH_APP_ANIMATION 0.5s 1;
 }
 
 button {
@@ -28,7 +36,7 @@ textarea {
 .uk-button {
     &.uk-button-primary {
         background: $scelper-green;
-        color: #666;
+        color: $scelper-gray-dark;
         &:hover {
             background:rgba($scelper-green, 0.6);
         }

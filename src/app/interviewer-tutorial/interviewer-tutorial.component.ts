@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InterviewerTutorialComponent implements OnInit {
 
+    public abortBtnText = 'Pomiń';
+    public startBtnText = 'Rozpocznij';
+
+    public currentTexts = [
+        'Jeśli jesteś tu pierwszy raz - polecamy skorzystać z krótkiego wprowadzenia.',
+        'Pomoże Ci ono zrozumieć sposób w jaki prowadzony jest wywiad i objaśni interfejs.'
+    ];
+
     constructor() { }
 
     ngOnInit() {

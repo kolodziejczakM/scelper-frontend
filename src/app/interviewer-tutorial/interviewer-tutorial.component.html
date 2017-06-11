@@ -1,11 +1,12 @@
 <section class="interviewer-tutorial-wrapper">
-    <div class="current-text">
-        <h3>Tutorial</h3>
-        <p>Jeśli jesteś tu pierwszy raz - polecamy skorzystać z krótkiego wprowadzenia.</p>
-        <p>Pomoże Ci ono zrozumieć sposób w jaki prowadzony jest wywiad i objaśni interfejs.</p>
-    </div>
-    <div class="current-controls">
-        <button class="uk-button uk-button-default">Pomiń</button>
-        <button class="uk-button uk-button-primary">Rozpocznij</button>            
-    </div>  
+    <div class="interviewer-tutorial-content">
+        <div class="current-text">
+            <i class="fa fa-compass fa-3x" aria-hidden="true"></i>
+            <p *ngFor="let text of currentTexts">{{ text }}</p>
+        </div>
+        <div class="current-controls">
+            <button class="uk-button uk-button-default">{{ abortBtnText }}</button>
+            <button class="uk-button uk-button-primary">{{ startBtnText }}</button>            
+        </div>  
+    </div> 
 </section>

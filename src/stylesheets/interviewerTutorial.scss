@@ -1,17 +1,55 @@
 
+@keyframes INITIAL_POSITION_SET {
+  0%   { top: 100%; }
+  100% { top: 0; }
+}
+
+@keyframes INITIAL_BACKDROP_SET {
+  0%   { background: rgba($scelper-gray-dark, 1); }
+  100% { background: rgba($scelper-gray-dark, 0.75); }
+}
+
 .interviewer-tutorial-wrapper {
-    border: 1px solid red;
     position: fixed;
-    padding: 40px;
-    background: #fff;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    .current-text,
-    .current-controls {
-        text-align: center;
+    background: rgba($scelper-gray-dark, 0.75);
+    will-change: background;
+    animation: INITIAL_BACKDROP_SET .3s 1;
+
+    .interviewer-tutorial-content {
+        box-shadow: 0 .5px 15px 0.5px $scelper-gray-dark;
+        position: fixed;
+        padding: 20px 40px;
+        background: $scelper-white;
+        width: 100%;
+        top: 0;
+        will-change: top;
+        animation: INITIAL_POSITION_SET 1s 1;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        .current-text,
+        .current-controls {
+            text-align: center;
+        }
+
+        .current-text {
+            p {
+                margin: 5px;
+            }
+        }
+
+        .current-controls {
+            margin: 15px;
+
+            button {
+                margin: 5px;
+            }
+
+        }
+
     }
-    
 }
