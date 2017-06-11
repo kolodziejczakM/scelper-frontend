@@ -1,0 +1,17 @@
+
+.interviewer-tutorial-wrapper {
+    border: 1px solid red;
+    position: fixed;
+    padding: 40px;
+    background: #fff;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    .current-text,
+    .current-controls {
+        text-align: center;
+    }
+    
+}

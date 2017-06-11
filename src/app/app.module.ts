@@ -33,6 +33,7 @@ import { NewScenarioFormComponent } from './public-scenarios/new-scenario-form/n
 import { InterviewerComponent } from './interviewer/interviewer.component';
 import { SymbolsComponent } from './symbols/symbols.component';
 import { FooterComponent } from './footer/footer.component';
+import { InterviewerTutorialComponent } from './interviewer-tutorial/interviewer-tutorial.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
         NewScenarioFormComponent,
         InterviewerComponent,
         SymbolsComponent,
-        FooterComponent
+        FooterComponent,
+        InterviewerTutorialComponent
     ],
     imports: [
         BrowserModule,

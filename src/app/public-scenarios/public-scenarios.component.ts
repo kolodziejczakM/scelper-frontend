@@ -46,14 +46,14 @@ export class PublicScenariosComponent implements OnInit {
 
     public pdfForm: FormGroup;
     public formText: Map<string, string> = PDF_FORM_TXT;
-    private acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
+    public acceptableMimetype: string = SCENARIO_ACCEPTABLE_MIMETYPE;
     private acceptableSize: number = SCENARIO_SIZE_LIMIT_KB;
 
     public formVisible = false;
     private emailPattern: RegExp = EMAIL_PATTERN;
 
-    private fileBlob: Blob;
-    private fileName = '';
+    public fileBlob: Blob;
+    public fileName = '';
 
     public scenarios: PublicScenario[] = [];
 
