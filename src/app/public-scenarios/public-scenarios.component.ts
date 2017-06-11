@@ -33,7 +33,7 @@ import { PDF_FORM_TXT,
          SCENARIO_DESCRIPTION_MIN_LENGTH,
          SCENARIO_DESCRIPTION_MAX_LENGTH } from '../public-scenarios/new-scenario-form/new-scenario-form.constants';
 
-import { NO_RESULT_TEXT } from './public-scenarios-table/public-scenarios-table.constants';
+import { NO_RESULT_TEXT, MAYBE_YOU_TEXT } from './public-scenarios-table/public-scenarios-table.constants';
 
 @Component({
     selector: 'sce-public-scenarios',
@@ -68,6 +68,7 @@ export class PublicScenariosComponent implements OnInit {
     public selectedGenre;
 
     public noResultsText = NO_RESULT_TEXT;
+    public maybeYouText = MAYBE_YOU_TEXT;
 
     constructor(
         private appStoreService: AppStoreService,

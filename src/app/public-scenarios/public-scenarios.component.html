@@ -95,9 +95,10 @@
             <tr [hidden]="filterScenarios(scenarios).length">
                 <td colspan="6">
                     <div class="text-centered">
-                        <i class="fa fa-ban fa-3x" aria-hidden="true"></i>
+                        <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
+                        <p>{{ noResultsText }}</p>
+                        <p>{{ maybeYouText }}</p>
                     </div>
-                    <p>{{ noResultsText }}</p>
                 </td>
             </tr>
         </tbody>
