@@ -20,6 +20,7 @@ export class InterviewerComponent implements OnInit {
 
     private currentIntervalID;
 
+    public isInterviewerTutorialVisible = true;
     public interviewerQuestions: SimpleInterviewQuestion[] = [];
     public currentInterviewerQuestion = {} as SimpleInterviewQuestion;
 
@@ -33,6 +34,15 @@ export class InterviewerComponent implements OnInit {
     ngOnInit() {
         this.watchInterviewerQuestions();
         this.watchCurrentInterviewerQuestion();
+        this.watchIsInterviewerTutorialVisible();
+    }
+
+    private watchIsInterviewerTutorialVisible(): void {
+        this.appStoreWatchers.watchIsInterviewerTutorialVisible().skip(1).takeUntil(this.router.events.pairwise()).subscribe(
+            storeVal => {
+                this.isInterviewerTutorialVisible = storeVal;
+            }
+        );
     }
 
     private watchInterviewerQuestions(): void {

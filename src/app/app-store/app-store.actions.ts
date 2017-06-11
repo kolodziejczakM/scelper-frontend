@@ -37,4 +37,8 @@ export class AppStoreActions {
     public setRandomSymbols(value: ScelperSymbol[]): void {
         this.appStoreService.getRandomSymbols().next(value);
     }
+
+    public setIsInterviewerTutorialVisible(value: boolean): void {
+        this.appStoreService.getIsInterviewerTutorialVisible().next(value);
+    }
 }

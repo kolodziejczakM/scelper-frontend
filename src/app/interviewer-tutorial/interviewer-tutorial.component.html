@@ -1,12 +1,36 @@
 <section class="interviewer-tutorial-wrapper">
     <div class="interviewer-tutorial-content">
-        <div class="current-text">
-            <i class="fa fa-compass fa-3x" aria-hidden="true"></i>
-            <p *ngFor="let text of currentTexts">{{ text }}</p>
+        <div class="current-text" [ngSwitch]="currentStep">
+
+            <ng-container *ngSwitchCase="0">  
+                <i class="fa fa-compass fa-3x" aria-hidden="true"></i>
+                <p *ngFor="let text of tutorialTexts[currentStep]">{{ text }}</p>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="1">
+                <p>{{ tutorialTexts[currentStep][0] }}</p> 
+                <div class="current-question">Co tam słychać?</div>
+                <span>{{ tutorialTexts[currentStep][1] }}</span>
+                <i class="tutorial-icon fa fa-angle-left fa-3x" aria-hidden="true"></i>
+                <i class="tutorial-icon fa fa-angle-right fa-3x" aria-hidden="true"></i>
+                <span>{{ tutorialTexts[currentStep][2] }}</span>
+            </ng-container>
+
         </div>
+
+
         <div class="current-controls">
-            <button class="uk-button uk-button-default">{{ abortBtnText }}</button>
-            <button class="uk-button uk-button-primary">{{ startBtnText }}</button>            
+
+            <ng-container *ngIf="isAtFirstStep();">
+                <button class="uk-button uk-button-default" (click)="closeTutorial();">{{ abortBtnText }}</button>
+                <button class="uk-button uk-button-primary" (click)="nextStep();">{{ startBtnText }}</button> 
+            </ng-container>
+
+            <ng-container *ngIf="!isAtFirstStep();">
+                <button class="uk-button uk-button-default" (click)="previousStep();">{{ backBtnText }}</button>
+                <button class="uk-button uk-button-primary" (click)="nextStep();">{{ nextBtnText }}</button> 
+            </ng-container>      
+
         </div>  
     </div> 
 </section>

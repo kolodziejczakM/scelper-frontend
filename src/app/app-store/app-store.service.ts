@@ -16,6 +16,7 @@ export class AppStoreService {
     public currentInterviewerQuestion = new BehaviorSubject({} as SimpleInterviewQuestion);
 
     public randomSymbols = new BehaviorSubject([] as ScelperSymbol[]);
+    public isInterviewerTutorialVisible = new BehaviorSubject(true);
 
     public getShowError(): BehaviorSubject<boolean> {
         return this.showError;
@@ -43,5 +44,9 @@ export class AppStoreService {
 
     public getRandomSymbols(): BehaviorSubject<ScelperSymbol[]> {
         return this.randomSymbols;
+    }
+
+    public getIsInterviewerTutorialVisible(): BehaviorSubject<boolean> {
+        return this.isInterviewerTutorialVisible;
     }
 }

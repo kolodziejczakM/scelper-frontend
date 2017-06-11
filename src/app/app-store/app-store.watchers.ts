@@ -29,4 +29,8 @@ export class AppStoreWatchers {
         return this.appStoreService.getRandomSymbols();
     }
 
+    public watchIsInterviewerTutorialVisible(): BehaviorSubject<boolean> {
+        return this.appStoreService.getIsInterviewerTutorialVisible();
+    }
+
 }
