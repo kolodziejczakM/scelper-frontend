@@ -12,7 +12,7 @@ export class InterviewerTutorialComponent {
     public startBtnText = 'Rozpocznij';
     public nextBtnText = 'Dalej';
 
-    private currentStep = 0;
+    public currentStep = 0;
     public tutorialTexts = [
         [
             'Jeśli jesteś tu pierwszy raz - polecamy skorzystać z krótkiego wprowadzenia.',
@@ -22,6 +22,10 @@ export class InterviewerTutorialComponent {
             'Pośrodku ekranu widoczne jest aktualne pytanie umieszczone w specjalnym bloku:',
             'Po obu stronach pytania znajdują się strzałki:',
             'dzięki nim możesz nawigować pomiędzy pytaniami.'
+        ],
+        [
+            'Pod pytaniem znajdują się trzy symbole np.:',
+            'Symbole mają inspirować, naprowadzać na pomysły kiedy nic nie przychodzi do głowy.'
         ]
     ];
 

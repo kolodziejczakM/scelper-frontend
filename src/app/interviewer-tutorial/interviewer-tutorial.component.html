@@ -16,6 +16,14 @@
                 <span>{{ tutorialTexts[currentStep][2] }}</span>
             </ng-container>
 
+             <ng-container *ngSwitchCase="2">
+                <span>{{ tutorialTexts[currentStep][0] }}</span> 
+                <i class="fa fa-snowflake-o fa-2x margin-5" aria-hidden="true"></i>
+                <i class="fa fa-car fa-2x margin-5" aria-hidden="true"></i>
+                <i class="fa fa-bath fa-2x margin-5" aria-hidden="true"></i>
+                <p>{{ tutorialTexts[currentStep][1] }}</p>
+            </ng-container>
+
         </div>
 
 
