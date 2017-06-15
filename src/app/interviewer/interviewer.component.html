@@ -18,16 +18,16 @@
     <section class="current-answer">
         <textarea (input)="updateCurrentAnswer($event);" class="uk-textarea" rows="5" placeholder="{{ answerPlaceholder }}" [value]="currentInterviewerQuestion.answer"></textarea>
     </section>
-    <button [hidden]="!isInterviewInProgress()" class="uk-button uk-button-default margin-top-20" (click)="restartInterview();">RESTART TEST</button>
+    <button [hidden]="!isInterviewInProgress()" class="uk-button uk-button-default margin-top-20" (click)="restartInterview()">{{ restartBtnText }}</button>
     
     <ng-container *ngIf="isLastQuestionActive()">
-        <h3 *ngIf="listQuestionsWithoutAnswers().length">Nie odpowiedziałeś na następujące pytania:</h3>
+        <h3 *ngIf="listQuestionsWithoutAnswers().length">{{ missingQuestionText }}</h3>
         <div *ngFor="let question of listQuestionsWithoutAnswers()">
             <span>{{ question }}</span>
             <br>
         </div>
         <ng-container *ngIf="listQuestionsWithAnswers().length">
-            <button class="uk-button uk-button-primary margin-top-20" (click)="generatePDF();">Wygeneruj PDF</button>
+            <button class="uk-button uk-button-primary margin-top-20" (click)="generatePDF()">{{ generateBtnText }}</button>
         </ng-container>
     </ng-container>
 

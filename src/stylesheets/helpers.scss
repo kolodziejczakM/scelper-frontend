@@ -3,22 +3,42 @@
     color: darkred;
 }
 
+.text-centered {
+    text-align: center;
+}
+
 .margin-centered {
     margin: 0 auto;
 }
 
-.margin-30 {
-    margin: 30px;
+$smallest: 1;
+$highest: 30;
+$unitMultiplier: 1px;
+$directions: top right bottom left;
+
+@for $i from $smallest through $highest {
+
+    @each $direction in $directions {
+
+        .margin-#{$i} {
+            margin: $i * $unitMultiplier;
+        }
+
+        .margin-#{$direction}-#{$i} {
+            margin-#{$direction}: $i * $unitMultiplier;
+        }
+
+        .padding-#{$i} {
+            margin: $i * $unitMultiplier;
+        }
+
+        .padding-#{$direction}-#{$i} {
+            padding-#{$direction}: $i * $unitMultiplier;
+        }
+    }
 }
 
-.margin-top-20 {
-    margin-top: 20px;
-}
 
-.margin-5 {
-    margin: 5px;
-}
-
-.text-centered {
-    text-align: center;
+.overflow-hidden {
+    overflow: hidden;
 }

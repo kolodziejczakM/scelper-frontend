@@ -1,44 +1,64 @@
 <section class="interviewer-tutorial-wrapper">
     <div class="interviewer-tutorial-content">
-        <div class="current-text" [ngSwitch]="currentStep">
 
-            <ng-container *ngSwitchCase="0">  
-                <i class="fa fa-compass fa-3x" aria-hidden="true"></i>
-                <p *ngFor="let text of tutorialTexts[currentStep]">{{ text }}</p>
-            </ng-container>
+        <section class="current-step" [ngSwitch]="currentStep">
 
-            <ng-container *ngSwitchCase="1">
-                <p>{{ tutorialTexts[currentStep][0] }}</p> 
-                <div class="current-question">Co tam słychać?</div>
-                <span>{{ tutorialTexts[currentStep][1] }}</span>
-                <i class="tutorial-icon fa fa-angle-left fa-3x" aria-hidden="true"></i>
-                <i class="tutorial-icon fa fa-angle-right fa-3x" aria-hidden="true"></i>
-                <span>{{ tutorialTexts[currentStep][2] }}</span>
-            </ng-container>
+            <div class="current-text">
+                <div class="step" *ngSwitchCase="0">  
+                    <i class="fa fa-compass fa-3x" aria-hidden="true"></i>
+                    <p *ngFor="let text of tutorialTexts[currentStep]">{{ text }}</p>
+                </div>
 
-             <ng-container *ngSwitchCase="2">
-                <span>{{ tutorialTexts[currentStep][0] }}</span> 
-                <i class="fa fa-snowflake-o fa-2x margin-5" aria-hidden="true"></i>
-                <i class="fa fa-car fa-2x margin-5" aria-hidden="true"></i>
-                <i class="fa fa-bath fa-2x margin-5" aria-hidden="true"></i>
-                <p>{{ tutorialTexts[currentStep][1] }}</p>
-            </ng-container>
+                <div class="step" *ngSwitchCase="1">
+                    <p>{{ tutorialTexts[currentStep][0] }}</p> 
+                    <div class="current-question">{{ tutorialTexts[currentStep][1] }}</div>
+                </div>
 
-        </div>
+                <div class="step" *ngSwitchCase="2"> 
+                    <span>{{ tutorialTexts[currentStep][0] }}</span>
+                    <i class="tutorial-icon fa fa-angle-left fa-3x" aria-hidden="true"></i>
+                    <i class="tutorial-icon fa fa-angle-right fa-3x" aria-hidden="true"></i>
+                    <p>{{ tutorialTexts[currentStep][1] }}</p>
+                </div>
 
+                <div class="step" *ngSwitchCase="3">
+                    <span>{{ tutorialTexts[currentStep][0] }}</span> 
+                    <i class="fa fa-snowflake-o fa-2x margin-5" aria-hidden="true"></i>
+                    <i class="fa fa-car fa-2x margin-5" aria-hidden="true"></i>
+                    <i class="fa fa-bath fa-2x margin-5" aria-hidden="true"></i>
+                    <p>{{ tutorialTexts[currentStep][1] }}</p>
+                </div>
 
-        <div class="current-controls">
+                <div class="step" *ngSwitchCase="4">
+                    <p>{{ tutorialTexts[currentStep][0] }}</p>
+                    <textarea class="uk-textarea overflow-hidden">{{ tutorialTexts[currentStep][1] }}</textarea>
+                </div>
 
-            <ng-container *ngIf="isAtFirstStep();">
-                <button class="uk-button uk-button-default" (click)="closeTutorial();">{{ abortBtnText }}</button>
-                <button class="uk-button uk-button-primary" (click)="nextStep();">{{ startBtnText }}</button> 
-            </ng-container>
+                <div class="step" *ngSwitchCase="5">
+                    <p>{{ tutorialTexts[currentStep][0] }}</p>
+                    <p>{{ tutorialTexts[currentStep][1] }}</p>
+                    <button class="uk-button uk-button-primary margin-top-5">{{ tutorialTexts[currentStep][2] }}</button>
+                </div>
+            </div>
 
-            <ng-container *ngIf="!isAtFirstStep();">
-                <button class="uk-button uk-button-default" (click)="previousStep();">{{ backBtnText }}</button>
-                <button class="uk-button uk-button-primary" (click)="nextStep();">{{ nextBtnText }}</button> 
-            </ng-container>      
+            <div class="current-controls">
+                <div *ngSwitchCase="this.firstStep">
+                    <button class="uk-button uk-button-default" (click)="closeTutorial()">{{ btnText.abort }}</button>
+                    <button class="uk-button uk-button-primary" (click)="nextStep()">{{ btnText.start }}</button> 
+                </div>
 
-        </div>  
+                <div *ngIf="!isAtFirstStep() && !isAtLastStep()">
+                    <button class="uk-button uk-button-default" (click)="previousStep()">{{ btnText.back }}</button>
+                    <button class="uk-button uk-button-primary" (click)="nextStep()">{{ btnText.next }}</button> 
+                </div>      
+
+                <div *ngSwitchCase="this.lastStep">
+                    <button class="uk-button uk-button-default" (click)="previousStep()">{{ btnText.back }}</button>
+                    <button class="uk-button uk-button-primary" (click)="closeTutorial()">{{ btnText.finish }}</button> 
+                </div>
+            </div>  
+
+        </section>
+
     </div> 
 </section>

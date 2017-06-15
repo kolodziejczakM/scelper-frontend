@@ -8,7 +8,12 @@ import { SimpleInterviewAsyncs } from '../simple-interview/simple-interview.asyn
 
 import { PDFblob, SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
 import { ERROR_MSG } from '../app.constants';
-import { GENERATED_PDF_FILENAME, GENERATED_PDF_MIMETYPE, ANSWER_PLACEHOLDER } from './interviewer.constants';
+import { GENERATED_PDF_FILENAME,
+         GENERATED_PDF_MIMETYPE,
+         GENERATE_BTN_TEXT,
+         RESTART_BTN_TEXT,
+         MISSING_QUESTION_TEXT,
+         ANSWER_PLACEHOLDER } from './interviewer.constants';
 
 @Component({
     selector: 'sce-interviewer',
@@ -17,12 +22,15 @@ import { GENERATED_PDF_FILENAME, GENERATED_PDF_MIMETYPE, ANSWER_PLACEHOLDER } fr
 export class InterviewerComponent implements OnInit {
 
     public answerPlaceholder = ANSWER_PLACEHOLDER;
-
-    private currentIntervalID;
+    public generateBtnText = GENERATE_BTN_TEXT;
+    public restartBtnText = RESTART_BTN_TEXT;
+    public missingQuestionText = MISSING_QUESTION_TEXT;
 
     public isInterviewerTutorialVisible = true;
     public interviewerQuestions: SimpleInterviewQuestion[] = [];
     public currentInterviewerQuestion = {} as SimpleInterviewQuestion;
+
+    private currentIntervalID;
 
     constructor(
         private appStoreActions: AppStoreActions,

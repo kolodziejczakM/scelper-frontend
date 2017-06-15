@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppStoreActions } from '../app-store/app-store.actions';
+import { ANSWER_PLACEHOLDER, GENERATE_BTN_TEXT } from '../interviewer/interviewer.constants';
 
 @Component({
     selector: 'sce-interviewer-tutorial',
@@ -7,12 +8,16 @@ import { AppStoreActions } from '../app-store/app-store.actions';
 })
 export class InterviewerTutorialComponent {
 
-    public abortBtnText = 'Pomiń';
-    public backBtnText = 'Cofnij';
-    public startBtnText = 'Rozpocznij';
-    public nextBtnText = 'Dalej';
+    public btnText = {
+        abort: 'Pomiń',
+        back: 'Cofnij',
+        start: 'Rozpocznij',
+        next: 'Dalej',
+        finish: 'Zakończ tutorial'
+    };
 
-    public currentStep = 0;
+    public firstStep = 0;
+    public currentStep = this.firstStep;
     public tutorialTexts = [
         [
             'Jeśli jesteś tu pierwszy raz - polecamy skorzystać z krótkiego wprowadzenia.',
@@ -20,14 +25,28 @@ export class InterviewerTutorialComponent {
         ],
         [
             'Pośrodku ekranu widoczne jest aktualne pytanie umieszczone w specjalnym bloku:',
-            'Po obu stronach pytania znajdują się strzałki:',
-            'dzięki nim możesz nawigować pomiędzy pytaniami.'
+            'Co tam słychać?'
         ],
         [
-            'Pod pytaniem znajdują się trzy symbole np.:',
+            'Po obu stronach pytania znajdują się strzałki:',
+            'Dzięki nim możesz nawigować pomiędzy pytaniami.'
+        ],
+        [
+            'Pod pytaniem znajdują się trzy symbole np.',
             'Symbole mają inspirować, naprowadzać na pomysły kiedy nic nie przychodzi do głowy.'
+        ],
+        [
+            'Pod symbolami znajdziesz miejsce na swoją odpowiedź:',
+            ANSWER_PLACEHOLDER
+        ],
+        [
+            'Jeśli prawa strzałka zniknęła to znaczy, że widzisz ostatnie pytanie.',
+            'Jeżeli odpowiedziano na co najmniej jedno pytanie - wyświetli się taki przycisk:',
+            GENERATE_BTN_TEXT
         ]
     ];
+
+    public lastStep = this.tutorialTexts.length - 1;
 
     constructor(
         private appStoreActions: AppStoreActions
@@ -38,7 +57,11 @@ export class InterviewerTutorialComponent {
     }
 
     public isAtFirstStep(): boolean {
-        return this.currentStep === 0;
+        return this.currentStep === this.firstStep;
+    }
+
+    public isAtLastStep(): boolean {
+        return this.currentStep === this.lastStep;
     }
 
     public nextStep(): void {
