@@ -3,6 +3,10 @@
     color: darkred;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .text-centered {
     text-align: center;
 }
@@ -11,34 +15,27 @@
     margin: 0 auto;
 }
 
-$smallest: 1;
-$highest: 30;
 $unitMultiplier: 1px;
+$dimensions: 5 10 15 20;
 $directions: top right bottom left;
 
-@for $i from $smallest through $highest {
-
+@each $dimension in $dimensions {
     @each $direction in $directions {
 
-        .margin-#{$i} {
-            margin: $i * $unitMultiplier;
+        .margin-#{$dimension} {
+            margin: $dimension * $unitMultiplier;
         }
 
-        .margin-#{$direction}-#{$i} {
-            margin-#{$direction}: $i * $unitMultiplier;
+        .margin-#{$direction}-#{$dimension} {
+            margin-#{$direction}: $dimension * $unitMultiplier;
         }
 
-        .padding-#{$i} {
-            margin: $i * $unitMultiplier;
+        .padding-#{$dimension} {
+            margin: $dimension * $unitMultiplier;
         }
 
-        .padding-#{$direction}-#{$i} {
-            padding-#{$direction}: $i * $unitMultiplier;
+        .padding-#{$direction}-#{$dimension} {
+            padding-#{$direction}: $dimension * $unitMultiplier;
         }
     }
-}
-
-
-.overflow-hidden {
-    overflow: hidden;
 }
