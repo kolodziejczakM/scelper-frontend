@@ -1,0 +1,45 @@
+
+$hidden-part-width: 180px;
+
+.feedback-tab-wrapper {
+    cursor: pointer;
+    background: $scelper-white;
+    border: 2px solid $scelper-gray-dark;
+    border-bottom: 0px;
+    border-right: 0px;
+    border-radius: 25px 0px 0px 0px;
+    transition: right 1s;
+    position: fixed;
+    z-index: map-get($zindex, feedback);
+    right: -$hidden-part-width;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+
+    .always-visible,
+    .expanded-part {
+        display: flex;
+    }
+
+    .always-visible {
+        align-items: center;
+    }
+
+    .expanded-part {
+        align-items: flex-start;
+        flex-direction: column;
+        
+        p {
+            margin: 0px;
+        }
+    }
+
+    .feedback-icon {
+        margin: 0px 10px;
+    }
+
+    &.expanded {
+        right: 0px;
+    }
+}

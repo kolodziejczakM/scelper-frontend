@@ -35,6 +35,7 @@ import { SymbolsComponent } from './symbols/symbols.component';
 import { FooterComponent } from './footer/footer.component';
 import { InterviewerTutorialComponent } from './interviewer-tutorial/interviewer-tutorial.component';
 import { PublicScenariosTableComponent } from './public-scenarios/public-scenarios-table/public-scenarios-table.component';
+import { FeedbackTabComponent } from './feedback-tab/feedback-tab.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
         LoaderComponent,
         HeaderComponent,
         FooterComponent,
-        GenericErrorComponent
+        GenericErrorComponent,
+        FeedbackTabComponent
     ],
     imports: [
         BrowserModule,

@@ -24,6 +24,7 @@
     top: 0;
     left: 0;
     bottom: 0;
+    z-index: map-get($zindex, modal);
     width: 100%;
     background: rgba($scelper-gray-dark, 0.75);
     will-change: background;
@@ -37,6 +38,7 @@
         width: 100%;
         min-height: 220px;
         top: 0;
+        z-index: map-get($zindex, tutorial);
         will-change: top;
         animation: INITIAL_POSITION_SET 1s 1;
         left: 50%;

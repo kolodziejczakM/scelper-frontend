@@ -3,6 +3,7 @@ $wrapper-padding: 40px;
 $curr-question-font-size: 24px;
 
 .interviewer-wrapper { 
+    position: relative;
     padding: $wrapper-padding;
 }
 
