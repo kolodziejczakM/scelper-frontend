@@ -1,13 +1,11 @@
 
-$hidden-part-width: 180px;
+$hidden-part-width: 130px;
 
 .feedback-tab-wrapper {
+    opacity: 0.5;
     cursor: pointer;
+    font-size: 10px;
     background: $scelper-white;
-    border: 2px solid $scelper-gray-dark;
-    border-bottom: 0px;
-    border-right: 0px;
-    border-radius: 25px 0px 0px 0px;
     transition: right 1s;
     position: fixed;
     z-index: map-get($zindex, feedback);
@@ -15,11 +13,12 @@ $hidden-part-width: 180px;
     bottom: 0px;
     display: flex;
     align-items: center;
-    padding: 5px;
+    padding: 3px;
 
     .always-visible,
     .expanded-part {
         display: flex;
+        font-size: 12px;
     }
 
     .always-visible {
