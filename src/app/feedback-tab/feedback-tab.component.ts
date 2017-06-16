@@ -7,6 +7,12 @@ import { Component, OnInit, HostListener } from '@angular/core';
 export class FeedbackTabComponent implements OnInit {
 
     public expanded = false;
+    public visibleText = 'BETA';
+
+    public hiddenText = {
+        question: 'Znalazłeś bug\'a?',
+        mail: 'feedback@scelper.com'
+    };
 
     @HostListener('document:click', [])
     public collapse(): void {

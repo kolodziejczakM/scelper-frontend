@@ -16,7 +16,7 @@
 }
 
 $unitMultiplier: 1px;
-$dimensions: 5 10 15 20;
+$dimensions: 5 10 15 20 25 30;
 $directions: top right bottom left;
 
 @each $dimension in $dimensions {
