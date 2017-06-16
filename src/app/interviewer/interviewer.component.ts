@@ -162,7 +162,7 @@ export class InterviewerComponent implements OnInit {
         }
     }
 
-    private isLastQuestionActive(): boolean {
+    public isLastQuestionActive(): boolean {
         if (this.getCurrentQuestionIndex() === (this.interviewerQuestions.length - 1)) {
             return true;
         }else {
@@ -170,7 +170,7 @@ export class InterviewerComponent implements OnInit {
         }
     }
 
-    private isFirstQuestionActive(): boolean {
+    public isFirstQuestionActive(): boolean {
         if (this.getCurrentQuestionIndex() === 0) {
             return true;
         }else {
