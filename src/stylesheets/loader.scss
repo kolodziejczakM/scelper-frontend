@@ -1,14 +1,29 @@
 
+@keyframes LOADER_SPIN {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+$loader-dimension: 30px;
+$current-dimension: $loader-dimension;
+
 .loader {
     border: 5px solid #f3f3f3; 
     border-top: 5px solid $scelper-green;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 2s linear infinite;
-}
+    width: $loader-dimension;
+    height: $loader-dimension;
+    animation: LOADER_SPIN 2s linear infinite;
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    &--bootstrapping {
+        @extend .loader;
+        $current-dimension: $loader-dimension * 3;
+        position: fixed;
+        z-index: map-get($zindex, modal);
+        top: 20%;
+        left: 50%;
+        width: $current-dimension;
+        height: $current-dimension;
+        margin-left: -$current-dimension / 2;
+    }
 }
