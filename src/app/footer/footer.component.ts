@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
 
     public links = [
         { label: 'Regulamin i polityka prywatności', href: this.statuteLink },
-        { label: 'Twórcy', href: '' },
+        { label: 'Twórcy', href: '/authors' },
         { label: 'Najbliższa przyszłość', href: '' }
     ];
 

@@ -1,0 +1,23 @@
+
+.authors-wrapper {
+    padding: 0px 40px 40px 40px;
+    margin-top: 40px;
+    box-shadow: 0px -5px 5px -5px $scelper-gray-dark;
+   
+    p {
+        margin: 0px 0px 10px 0px;
+    }
+
+    .introduction {
+        padding: 20px;
+    }
+
+    .authors-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        padding: 0px;
+        margin: 20px;
+        list-style-type: none;
+    }
+}

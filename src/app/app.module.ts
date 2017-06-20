@@ -36,9 +36,12 @@ import { FooterComponent } from './footer/footer.component';
 import { InterviewerTutorialComponent } from './interviewer-tutorial/interviewer-tutorial.component';
 import { PublicScenariosTableComponent } from './public-scenarios/public-scenarios-table/public-scenarios-table.component';
 import { FeedbackTabComponent } from './feedback-tab/feedback-tab.component';
+import { AuthorsComponent } from './authors/authors.component';
+import { AuthorAvatarComponent } from './authors/author-avatar/author-avatar.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
+    { path: 'authors', component: AuthorsComponent },
     { path: 'interview', component: InterviewComponent },
     { path: 'interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
@@ -65,7 +68,9 @@ const appRoutes: Routes = [
         HeaderComponent,
         FooterComponent,
         GenericErrorComponent,
-        FeedbackTabComponent
+        FeedbackTabComponent,
+        AuthorsComponent,
+        AuthorAvatarComponent
     ],
     imports: [
         BrowserModule,
