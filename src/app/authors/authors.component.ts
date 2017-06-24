@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ScelperAuthor } from '../interfaces';
 
 @Component({
     selector: 'sce-authors',
     templateUrl: './authors.component.html'
 })
-export class AuthorsComponent implements OnInit {
+export class AuthorsComponent {
 
     public introTexts = [
         `Człowiek jest z natury dobry.`,
@@ -30,10 +30,5 @@ export class AuthorsComponent implements OnInit {
             email: 'cdo@scelper.com'
         }
     ];
-
-    constructor() { }
-
-    ngOnInit() {
-    }
 
 }
