@@ -5,7 +5,14 @@
 }
 
 @media(max-width: $mobile) {
+    $mobile-font-size: 13px;
+
+    .filter-select {
+        font-size: $mobile-font-size;
+    }  
+
     input.uk-input.filter-field {
         width: 120px;
+        font-size: $mobile-font-size;
     }
 }

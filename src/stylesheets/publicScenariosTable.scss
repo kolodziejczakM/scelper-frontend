@@ -34,3 +34,24 @@ td {
         }
     }
 }
+
+@media(max-width: $mobile) { 
+    $mobile-font-size: 11px;
+
+    .scelper-table-wrapper {
+        font-size: $mobile-font-size;
+    }
+
+    .custom-table {
+        margin-top: 10px;
+
+        th,
+        td {
+            padding: 10px;
+
+            &.long-text {
+                min-width: 100px;
+            }
+        }
+    }        
+} 
