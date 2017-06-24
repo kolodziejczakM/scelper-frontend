@@ -30,4 +30,17 @@
             }
         }
     }
+
+    @media(max-width: $mobile) {
+        font-size: 14px;
+        
+        .footer-main-text {
+            display: none;
+        }
+
+        .footer-links {
+            margin-bottom: 30px;
+        }
+    }
 }
+

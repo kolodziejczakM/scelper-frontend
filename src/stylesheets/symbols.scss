@@ -29,11 +29,21 @@ $mobile-dimension-multiplier: 0.6;
 }
 
 @media(max-width: $mobile) {
-    .symbols-wrapper {
-        height: $wrapper-height * $mobile-dimension-multiplier;
+
+    $symbol-dimension: $symbol-dimension * $mobile-dimension-multiplier;
+    $wrapper-height: $wrapper-height * $mobile-dimension-multiplier;
+
+    @keyframes SCELPER_SYMBOL_INIT {
+        0%   { height: 0; }
+        100% { height: $symbol-dimension; }
     }
+
+    .symbols-wrapper {
+        height: $wrapper-height;
+    }
+
     .scelper-symbol {
-        width: $symbol-dimension * $mobile-dimension-multiplier;
-        height: $symbol-dimension * $mobile-dimension-multiplier;
+        width: $symbol-dimension;
+        height: $symbol-dimension;
     }
 }

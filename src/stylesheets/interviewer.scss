@@ -12,7 +12,7 @@ $curr-question-font-size: 24px;
     display: inline-block;
     margin: 0 0 20px 0;
     padding: 10px 15px;
-    background: #f8f8f8;
+    box-shadow: -1px -1px 1px -1px $scelper-gray-dark;
     font-size: $curr-question-font-size;
 }
 
@@ -50,10 +50,21 @@ $curr-question-font-size: 24px;
 }
 
 @media(max-width: $mobile) {
+    $curr-question-font-size: $curr-question-font-size * 0.65;
+
+
     .interviewer-wrapper {
         padding: $wrapper-padding * 0.5;
     }
+
     .current-question {
-        font-size: $curr-question-font-size * 0.75;
+        font-size: $curr-question-font-size;
     }
+
+    .current-answer {
+        textarea {
+            font-size: 13px;
+        }
+    }
+
 }
