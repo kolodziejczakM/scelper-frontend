@@ -61,3 +61,10 @@ export interface ApiPathsObject {
     publicScenarios: any;
     simpleInterview: any;
 }
+
+export interface ScelperAuthor {
+    name: string;
+    imagePath: string;
+    description: string;
+    email: string;
+}

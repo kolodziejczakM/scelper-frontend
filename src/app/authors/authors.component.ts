@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ScelperAuthor } from '../interfaces';
 
 @Component({
     selector: 'sce-authors',
@@ -15,16 +16,18 @@ export class AuthorsComponent implements OnInit {
     ];
     public assetsBasePath = 'assets';
 
-    public authors = [
+    public authors: ScelperAuthor[] = [
         {
             name: 'Marcin Kołodziejczak',
             imagePath: `${this.assetsBasePath}/ceo.jpg`,
-            description: 'CEO, Programista'
+            description: 'CEO, Programista',
+            email: 'ceo@scelper.com'
         },
         {
             name: 'Tomek Sobieraj',
             imagePath: `${this.assetsBasePath}/tomekSobieraj.jpg`,
-            description: 'Grafik, designer'
+            description: 'Grafik, designer',
+            email: 'cdo@scelper.com'
         }
     ];
 

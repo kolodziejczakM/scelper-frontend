@@ -9,5 +9,6 @@ export class AuthorAvatarComponent {
     @Input('name') public name = '';
     @Input('imagePath') public imagePath = '';
     @Input('description') public description = '';
+    @Input('email') public email = '';
 
 }
