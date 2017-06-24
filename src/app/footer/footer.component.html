@@ -1,7 +1,12 @@
 <footer class="footer-wrapper">
 
     <ul class="footer-links">
-        <li *ngFor="let link of links"><a routerLink="{{ link.href }}" routerLinkActive="active">{{ link.label }}</a></li>
+        <li>
+            <a href="{{ links.statute.href }}" routerLinkActive="active">{{ links.statute.label }}</a>
+        </li>
+        <li>
+            <a routerLink="{{ links.authors.href }}" routerLinkActive="active">{{ links.authors.label }}</a>
+        </li>
     </ul>
 
     <p class="footer-main-text"> 

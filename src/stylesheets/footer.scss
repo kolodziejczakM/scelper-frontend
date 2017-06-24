@@ -2,7 +2,7 @@
 .footer-wrapper {
     box-shadow: 0 5px 15px 0.5px $scelper-gray-dark;
     background: $scelper-white;
-    padding: 20px;
+    padding: 10px;
     z-index: map-get($zindex, footer);
     position: fixed;
     width: 100%;

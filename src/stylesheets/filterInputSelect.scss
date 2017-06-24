@@ -1,4 +1,8 @@
 
+.scelper-filter-input-select-wrapper {
+    padding: 0px 40px;
+}
+
 .filter-select {
     display: inline-block;
     width: initial;
@@ -6,6 +10,10 @@
 
 @media(max-width: $mobile) {
     $mobile-font-size: 13px;
+
+    .scelper-filter-input-select-wrapper {
+        padding: 10px;
+    }
 
     .filter-select {
         font-size: $mobile-font-size;

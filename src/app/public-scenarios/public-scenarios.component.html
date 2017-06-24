@@ -67,27 +67,25 @@
     </form>
 </section>
 
+<sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
 
 <section class="scelper-table-wrapper">
-    <sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
     <table class="custom-table">
         <thead [hidden]="!filterScenarios(scenarios).length">
             <tr>
-                <th>#</th>
                 <th *ngFor="let category of selectFilterOptions"> {{ category.label }}</th>
                 <th>Opcje</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let scenario of filterScenarios(scenarios); let i = index;">
-                <td>{{ i }}</td>
                 <td class="long-text">{{ scenario.title }}</td>
                 <td class="long-text">{{ scenario.description }}</td>
                 <td>{{ scenario.authorEmail }}</td>
                 <td>{{ scenario.genre }}</td>
                 <td>{{ scenario.pages }}</td>
                 <td>{{ scenario.state }}</td>
-                <td>
+                <td class="row-options">
                     <i (click)="downloadScenario(scenario.path);" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
                     <i (click)="removeScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>
                 </td>

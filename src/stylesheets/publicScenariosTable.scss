@@ -1,6 +1,8 @@
 
+ $td-padding: 10px;
+
 .scelper-table-wrapper {
-    padding: 40px;
+    padding: 0 40px 10px 40px;
     overflow-x: auto;
 }
 
@@ -15,42 +17,60 @@ td {
 }
 
 .custom-table {
-    margin: 0 auto;
+    width: 100%;
+    margin: 20px auto;
 
     th,
     td {
-        padding: 20px;
+        padding: $td-padding;
     }
 
     th {
+        background: rgba($scelper-gray-dark, 0.1);
         text-align: left;
+
+        &:last-of-type {
+            text-align: center;
+        }
     }
 
     td {
         max-width: 500px;
-        min-width: 75px;
+        min-width: 90px;
+
         &.long-text {
             min-width: 200px;
+        }
+
+        &.row-options {
+            font-size: 14px;
+            padding-right: 0px;
+            text-align: center;
         }
     }
 }
 
 @media(max-width: $mobile) { 
-    $mobile-font-size: 11px;
-
+    $mobile-font-size: 13px;
+   
     .scelper-table-wrapper {
+        padding: 0px 0px 10px 0px;
         font-size: $mobile-font-size;
     }
 
     .custom-table {
+        $td-padding: $td-padding / 2;
         margin-top: 10px;
 
         th,
         td {
-            padding: 10px;
+            padding: $td-padding;
 
             &.long-text {
                 min-width: 100px;
+            }
+            &.row-options {
+                font-size: 11px;
             }
         }
     }        
