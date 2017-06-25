@@ -68,3 +68,8 @@ export interface ScelperAuthor {
     description: string;
     email: string;
 }
+
+export interface Breadcrumb {
+    label: string;
+    href: string;
+}

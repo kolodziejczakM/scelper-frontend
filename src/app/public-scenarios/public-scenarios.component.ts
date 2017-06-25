@@ -58,6 +58,7 @@ export class PublicScenariosComponent implements OnInit {
     public fileName = '';
 
     public scenarios: PublicScenario[] = [];
+    public fetchingScenarios = true;
 
     public scenarioStates: ScenarioState[] = SCENARIO_STATES;
     public scenarioGenres: ScenarioGenre[] = SCENARIO_GENRES;
@@ -129,14 +130,18 @@ export class PublicScenariosComponent implements OnInit {
     }
 
     private preparePublicScenarios(): void {
+        this.fetchingScenarios = true;
+
         this.publicScenariosAsyncs.getPublicScenarios().subscribe(
             (res: PublicScenario[]) => {
                 this.scenarios = res.map(this.stringifyScenario);
+                this.fetchingScenarios = false;
             },
             (err: Error) => {
                 console.warn(err);
                 this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenariosDownload'));
                 this.appStoreActions.setShowError(true);
+                this.fetchingScenarios = false;
             }
         );
     }

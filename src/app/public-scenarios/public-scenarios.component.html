@@ -90,7 +90,7 @@
                     <i (click)="removeScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>
                 </td>
             </tr>
-            <tr [hidden]="filterScenarios(scenarios).length">
+            <tr [hidden]="fetchingScenarios || filterScenarios(scenarios).length">
                 <td colspan="6">
                     <div class="text-centered">
                         <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>

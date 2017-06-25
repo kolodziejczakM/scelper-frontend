@@ -1,0 +1,28 @@
+
+.breadcrumbs-wrapper {
+    height: 50px;
+    padding: 20px 40px 10px 40px;
+    font-size: 20px;
+
+    .breadcrumbs-list {
+        margin: 0px;
+        padding: 0px;
+        list-style-type: none;
+
+        li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .breadcrumb {
+            color: $scelper-gray-dark;
+        }
+    }
+}
+
+@media(max-width: $mobile) {
+    .breadcrumbs-wrapper {
+        font-size: 16px;
+        padding: 20px 40px 10px 20px;
+    }
+}

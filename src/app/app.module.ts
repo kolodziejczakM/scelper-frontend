@@ -38,6 +38,7 @@ import { PublicScenariosTableComponent } from './public-scenarios/public-scenari
 import { FeedbackTabComponent } from './feedback-tab/feedback-tab.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { AuthorAvatarComponent } from './authors/author-avatar/author-avatar.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
         GenericErrorComponent,
         FeedbackTabComponent,
         AuthorsComponent,
-        AuthorAvatarComponent
+        AuthorAvatarComponent,
+        BreadcrumbsComponent
     ],
     imports: [
         BrowserModule,
