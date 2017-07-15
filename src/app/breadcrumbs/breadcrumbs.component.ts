@@ -15,7 +15,8 @@ export class BreadcrumbsComponent {
     public possiblePaths = {
         "interview": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[],
         "interview/simple": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[],
-        "public-scenarios": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[]
+        "public-scenarios": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[],
+        "authors": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[]
     };
 
     constructor(
