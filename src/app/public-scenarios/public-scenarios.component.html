@@ -10,62 +10,7 @@
     </button>
 </div>
 
-<section class="new-scenario-form"  [class.visible]="formVisible">
-    <form [formGroup]="pdfForm" (ngSubmit)="submitPDF(pdfForm.value)">
-        <fieldset class="uk-fieldset">
-            <div class="uk-margin">
-                <input formControlName="title" class="uk-input" type="text" placeholder="{{ formText.get('titlePlaceholder') }}"
-                [ngClass]="{'has-error': hasError('title')}">
-
-                <span *ngIf="hasError('title')" class="validation-info">{{ formText.get('required') }} {{ formText.get('title') }}</span>
-            </div>
-            <div class="uk-margin">
-                <input formControlName="authorEmail" class="uk-input" type="text" placeholder="{{ formText.get('authorEmailPlaceholder') }}"
-                [ngClass]="{'has-error': hasError('authorEmail')}">
-
-                <span *ngIf="hasError('authorEmail')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmail') }}</span>
-            </div>
-            <div class="uk-margin">
-                <input formControlName="authorEmailConfirm" class="uk-input" type="text" placeholder="{{ formText.get('authorEmailConfirmPlaceholder') }}"
-                [ngClass]="{'has-error': hasError('authorEmailConfirm')}">
-
-                <span *ngIf="hasError('authorEmailConfirm')" class="validation-info">{{ formText.get('required') }} {{ formText.get('authorEmailConfirm') }}</span>
-            </div>
-            <div class="uk-margin">
-                <select formControlName="genre" class="uk-select" [(ngModel)]="selectedGenre">
-                    <option *ngFor="let option of scenarioGenres" [disabled]="isDefaultOption(option)" [ngValue]="option">
-                        {{ option.label }}
-                    </option>
-                </select>
-            </div>
-            <div class="uk-margin">
-                <select formControlName="state" class="uk-select" [(ngModel)]="selectedState">
-                    <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)" [ngValue]="option">
-                        {{ option.label }}
-                    </option>
-                </select>
-            </div>
-            <div class="uk-margin">
-                <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="{{ formText.get('descriptionPlaceholder') }}"></textarea>
-                <span *ngIf="hasError('description')" class="validation-info">{{ formText.get('required') }} {{ formText.get('description') }}</span>
-            </div>
-            <div class="uk-margin">
-                <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">
-                    <i class="fa fa-upload" aria-hidden="true"></i>  {{ formText.get('b_upload') }}
-                </button> {{ fileName }}
-                <input #fileInputNode id="file" type="file" accept="{{acceptableMimetype}}" (change)="fileChangeEvent($event,this)"/><br>
-                <p [hidden]="fileBlob">{{ formText.get('file') }}</p>
-            </div>
-            <div class="uk-margin">
-                <span *ngIf="!isFormValid() && pdfForm.dirty">{{ formText.get('cannotSubmitted') }}</span>
-            </div>
-        </fieldset>
-        <div class="text-centered margin-30">
-            <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()">{{ formText.get('b_submit') }}</button>
-            <button type="button" class="uk-button uk-button-default" [hidden]="pdfForm.pristine" (click)="resetForm()">{{ formText.get('b_reset') }}</button>
-        </div>
-    </form>
-</section>
+<sce-new-scenario-form [visibility]="formVisible"></sce-new-scenario-form>
 
 <sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
 
