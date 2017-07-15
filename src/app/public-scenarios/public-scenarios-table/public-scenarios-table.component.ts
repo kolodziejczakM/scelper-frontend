@@ -1,14 +1,83 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { PublicScenario, ResponseObject } from '../../interfaces';
+import * as helpers from '../../app.helpers';
+
+import { AppStoreService } from '../../app-store/app-store.service';
+import { AppStoreActions } from '../../app-store/app-store.actions';
+import { ModalsService } from '../../modals/modals.service';
+import { PublicScenariosAsyncs } from '../public-scenarios.asyncs';
+
+import { environment } from '../../../environments/environment';
+import { APP_NAME,
+         ERROR_MSG,
+         COMMON_MSG,
+         SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../../app.constants';
+import { NO_RESULT_TEXT, MAYBE_YOU_TEXT } from '../public-scenarios-table/public-scenarios-table.constants';
 
 @Component({
     selector: 'sce-public-scenarios-table',
     templateUrl: './public-scenarios-table.component.html'
 })
-export class PublicScenariosTableComponent implements OnInit {
+export class PublicScenariosTableComponent {
 
-    constructor() { }
+    @Input('scenarios') scenarios: PublicScenario[] = [];
+    @Input('fetchingScenarios') fetchingScenarios = true;
 
-    ngOnInit() {
+    public noResultsText = NO_RESULT_TEXT;
+    public maybeYouText = MAYBE_YOU_TEXT;
+    public selectFilterOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
+
+    constructor(
+        private appStoreService: AppStoreService,
+        private appStoreActions: AppStoreActions,
+        private modalsService: ModalsService,
+        private publicScenariosAsyncs: PublicScenariosAsyncs
+    ) { }
+
+    public showAlert(title, message): void {
+        this.modalsService.showAlert(title, message);
+    }
+
+    public showPrompt(title): Observable<any> {
+        return this.modalsService.showPrompt(title);
+    }
+
+    public filterScenarios(scenarios: PublicScenario[] = []): any {
+
+        if (!scenarios.length) {
+            return scenarios;
+        }
+
+        return scenarios.filter(scenario => scenario[this.appStoreService.getScenarioFilterChoice().category].toLowerCase()
+                        .indexOf(this.appStoreService.getScenarioFilterValue().toLowerCase()) !== -1);
+    }
+
+    public removeScenario(): void {
+
+        this.showPrompt(COMMON_MSG.get('deleteScenarioPrompt')).subscribe((deleteCode) => {
+            if (!deleteCode) {
+                return;
+            }
+
+            this.publicScenariosAsyncs.deletePublicScenario(deleteCode).subscribe(
+                (response: ResponseObject) => {
+                    const successMessage = helpers.translateServerResponse(response.code);
+                    this.showAlert(APP_NAME, successMessage);
+                    location.reload();
+                },
+                (err: Error) => {
+                    console.warn(err);
+                    this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioDelete'));
+                    this.appStoreActions.setShowError(true);
+                }
+            );
+
+        });
+    }
+
+    public downloadScenario(path: string): void {
+        location.href = environment.serverRoot + path.replace('public', '');
     }
 
 }
