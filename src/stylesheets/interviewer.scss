@@ -2,7 +2,7 @@
 $wrapper-padding: 40px;
 $curr-question-font-size: 24px;
 
-.interviewer-wrapper { 
+.interviewer-wrapper {
     position: relative;
     padding: $wrapper-padding;
 }
@@ -10,7 +10,7 @@ $curr-question-font-size: 24px;
 .current-question {
     width: 100%;
     display: inline-block;
-    margin: 0 0 20px 0;
+    margin: 0 0 20px;
     padding: 10px 15px;
     box-shadow: -1px -1px 1px -1px $scelper-gray-dark;
     font-size: $curr-question-font-size;
@@ -37,14 +37,14 @@ $curr-question-font-size: 24px;
         cursor: pointer;
         margin: 0 10px;
 
-        &:hover { 
+        &:hover {
             color: lighten($scelper-gray-dark, 10%);
         }
     }
 }
 
 .current-answer {
-    textarea { 
+    textarea {
         padding: 10px;
     }
 }

@@ -1,6 +1,6 @@
 
 .darkred {
-    color: darkred;
+    color: #8b0000;
 }
 
 .overflow-hidden {
@@ -15,7 +15,7 @@
     margin: 0 auto;
 }
 
-$unitMultiplier: 1px;
+$unit-multiplier: 1px;
 $dimensions: 5 10 15 20 25 30;
 $directions: top right bottom left;
 
@@ -23,19 +23,19 @@ $directions: top right bottom left;
     @each $direction in $directions {
 
         .margin-#{$dimension} {
-            margin: $dimension * $unitMultiplier;
+            margin: $dimension * $unit-multiplier;
         }
 
         .margin-#{$direction}-#{$dimension} {
-            margin-#{$direction}: $dimension * $unitMultiplier;
+            margin-#{$direction}: $dimension * $unit-multiplier;
         }
 
         .padding-#{$dimension} {
-            margin: $dimension * $unitMultiplier;
+            margin: $dimension * $unit-multiplier;
         }
 
         .padding-#{$direction}-#{$dimension} {
-            padding-#{$direction}: $dimension * $unitMultiplier;
+            padding-#{$direction}: $dimension * $unit-multiplier;
         }
     }
 }

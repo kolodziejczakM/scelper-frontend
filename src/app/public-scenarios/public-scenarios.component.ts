@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppStoreActions } from '../app-store/app-store.actions';
-import { PublicScenariosAsyncs } from './public-scenarios.asyncs'; 
+import { PublicScenariosAsyncs } from './public-scenarios.asyncs';
 import { PublicScenario } from '../interfaces';
 
 import { ERROR_MSG, SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';

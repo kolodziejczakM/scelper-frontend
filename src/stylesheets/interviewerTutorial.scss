@@ -1,17 +1,17 @@
 
 @keyframes INITIAL_POSITION_SET {
-  0% { top: 100%; }
-  100% { top: 0; }
+    0% { top: 100%; }
+    100% { top: 0; }
 }
 
 @keyframes INITIAL_BACKDROP_SET {
-  0%   { background: rgba($scelper-gray-dark, 1); }
-  100% { background: rgba($scelper-gray-dark, 0.75); }
+    0%   { background: rgba($scelper-gray-dark, 1); }
+    100% { background: rgba($scelper-gray-dark, 0.75); }
 }
 
 @keyframes STEP_OPACITY {
-  0%   { opacity: 0; }
-  100% { opacity: 1 }
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
 }
 
 .step {
@@ -33,7 +33,7 @@
     .interviewer-tutorial-content {
         box-shadow: 0 .5px 15px 0.5px $scelper-gray-dark;
         position: fixed;
-        padding: 20px 40px 80px 40px;
+        padding: 20px 40px 80px;
         background: $scelper-white;
         width: 100%;
         min-height: 220px;
@@ -43,7 +43,7 @@
         animation: INITIAL_POSITION_SET 1s 1;
         left: 50%;
         transform: translateX(-50%);
-        
+
         .current-text,
         .current-controls {
             text-align: center;

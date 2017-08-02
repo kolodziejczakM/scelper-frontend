@@ -1,7 +1,8 @@
 
 input.uk-input,
-select.uk-select, 
+select.uk-select,
 textarea.uk-textarea {
+
     &:focus {
         outline: 1px solid $scelper-green;
     }
@@ -12,16 +13,17 @@ textarea.uk-textarea {
     overflow: hidden;
     max-height: 0;
     transition: all 0.25s ease-in-out;
-    &.visible{
+
+    &.visible {
         max-height: 1000px;
     }
 }
 
 .has-error {
-    border: 2px solid #FF7153 !important;
+    border: 2px solid #ff7153 !important;
 }
 
 .validation-info {
     font-weight: 700;
-    color: #FF7153;
+    color: #ff7153;
 }

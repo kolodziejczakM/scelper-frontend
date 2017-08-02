@@ -2,12 +2,14 @@
   "name": "scelper-frontend",
   "version": "0.0.0",
   "license": "MIT",
+  "sasslintConfig": "sass-lint.yml",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint & npm run sass-lint",
+    "sass-lint": "sass-lint -c sass-lint.yml -v -q",
     "e2e": "ng e2e",
     "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./src/",
     "typedoc": "typedoc"
@@ -45,6 +47,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
+    "sass-lint": "^1.10.2",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
