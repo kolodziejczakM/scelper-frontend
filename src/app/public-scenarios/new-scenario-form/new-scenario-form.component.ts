@@ -7,6 +7,10 @@ import { PdfForm,
          ScenarioGenre,
          ScenarioState } from '../../interfaces';
 
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../../shared/analytics.service';
+
 import { ModalsService } from '../../modals/modals.service';
 import { AppStoreActions } from '../../app-store/app-store.actions';
 import { PublicScenariosAsyncs } from '../public-scenarios.asyncs';
@@ -56,7 +60,8 @@ export class NewScenarioFormComponent implements OnInit {
         private modalsService: ModalsService,
         private appStoreActions: AppStoreActions,
         private publicScenariosAsyncs: PublicScenariosAsyncs,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private analyticsService: AnalyticsService
     ) {
         this.pdfForm = formBuilder.group({
             title: [
@@ -158,6 +163,7 @@ export class NewScenarioFormComponent implements OnInit {
         return isAcceptable;
     }
 
+    @reportClick(GA_ACTIONS.get('publishScenario'))
     public submitPDF(submitted: PdfForm): void {
 
         const formData = new FormData();

@@ -3,6 +3,9 @@ import { Observable } from 'rxjs/Observable';
 import { PublicScenario, ResponseObject } from '../../interfaces';
 import * as helpers from '../../app.helpers';
 
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../../shared/analytics.service';
 import { AppStoreService } from '../../app-store/app-store.service';
 import { AppStoreActions } from '../../app-store/app-store.actions';
 import { ModalsService } from '../../modals/modals.service';
@@ -32,7 +35,8 @@ export class PublicScenariosTableComponent {
         private appStoreService: AppStoreService,
         private appStoreActions: AppStoreActions,
         private modalsService: ModalsService,
-        private publicScenariosAsyncs: PublicScenariosAsyncs
+        private publicScenariosAsyncs: PublicScenariosAsyncs,
+        private analyticsService: AnalyticsService
     ) { }
 
     public showAlert(title, message): void {
@@ -53,6 +57,7 @@ export class PublicScenariosTableComponent {
                         .indexOf(this.appStoreService.getScenarioFilterValue().toLowerCase()) !== -1);
     }
 
+    @reportClick(GA_ACTIONS.get('deletePublicScenario'))
     public removeScenario(): void {
 
         this.showPrompt(COMMON_MSG.get('deleteScenarioPrompt')).subscribe((deleteCode) => {
@@ -76,6 +81,7 @@ export class PublicScenariosTableComponent {
         });
     }
 
+    @reportClick(GA_ACTIONS.get('downloadPublicScenario'))
     public downloadScenario(path: string): void {
         location.href = environment.serverRoot + path.replace('public', '');
     }

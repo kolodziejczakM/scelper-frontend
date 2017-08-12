@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../shared/analytics.service';
 
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { PublicScenariosAsyncs } from './public-scenarios.asyncs';
@@ -21,13 +24,15 @@ export class PublicScenariosComponent implements OnInit {
 
     constructor(
         private appStoreActions: AppStoreActions,
-        private publicScenariosAsyncs: PublicScenariosAsyncs
+        private publicScenariosAsyncs: PublicScenariosAsyncs,
+        private analyticsService: AnalyticsService
     ) { }
 
     ngOnInit() {
         this.preparePublicScenarios();
     }
 
+    @reportClick(GA_ACTIONS.get('toggleAddFormPublicScenario'))
     public toggleForm(): void {
         this.formVisible = !this.formVisible;
     }

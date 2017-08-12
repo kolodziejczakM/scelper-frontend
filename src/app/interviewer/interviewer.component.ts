@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../shared/analytics.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { AppStoreWatchers } from '../app-store/app-store.watchers';
 
@@ -36,7 +39,8 @@ export class InterviewerComponent implements OnInit {
         private appStoreActions: AppStoreActions,
         private appStoreWatchers: AppStoreWatchers,
         private simpleInterviewAsyncs: SimpleInterviewAsyncs,
-        private router: Router
+        private router: Router,
+        private analyticsService: AnalyticsService
     ) { }
 
     ngOnInit() {
@@ -138,6 +142,7 @@ export class InterviewerComponent implements OnInit {
         this.appStoreActions.setInterviewerQuestions(this.interviewerQuestions);
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewFirstQuestion'))
     private goToFirstQuestion(): void {
         this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[0]);
     }
@@ -150,12 +155,14 @@ export class InterviewerComponent implements OnInit {
        return this.interviewerQuestions.findIndex(el => el._id === this.currentInterviewerQuestion._id);
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewNextQuestion'))
     public goToNextQuestion(): void {
         if (!this.isLastQuestionActive()) {
              this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() + 1]);
         }
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewPreviousQuestion'))
     public goToPreviousQuestion(): void {
         if (!this.isFirstQuestionActive()) {
            this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() - 1]);

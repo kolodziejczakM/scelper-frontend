@@ -13,6 +13,7 @@ import { AppStoreActions } from './app-store/app-store.actions';
 import { AppStoreWatchers } from './app-store/app-store.watchers';
 
 import { WindowService } from './shared/window.service';
+import { AnalyticsService } from './shared/analytics.service';
 import { ApiRoutesService } from './api-routes.service';
 import { ModalsService } from './modals/modals.service';
 import { PublicScenariosAsyncs } from './public-scenarios/public-scenarios.asyncs';
@@ -92,6 +93,7 @@ const appRoutes: Routes = [
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         WindowService,
+        AnalyticsService,
         AppStoreService,
         AppStoreActions,
         AppStoreWatchers,
