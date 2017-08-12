@@ -4,6 +4,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 
@@ -77,6 +78,7 @@ const appRoutes: Routes = [
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes),
+        Angulartics2Module.forRoot([ Angulartics2GoogleAnalytics ]),
         ReactiveFormsModule,
         FormsModule,
         HttpModule,
