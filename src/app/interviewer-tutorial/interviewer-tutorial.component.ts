@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../shared/analytics.service';
+
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { ANSWER_PLACEHOLDER, GENERATE_BTN_TEXT } from '../interviewer/interviewer.constants';
 
@@ -49,9 +53,11 @@ export class InterviewerTutorialComponent {
     public lastStep = this.tutorialTexts.length - 1;
 
     constructor(
-        private appStoreActions: AppStoreActions
+        private appStoreActions: AppStoreActions,
+        private analyticsService: AnalyticsService
     ) { }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialClose'))
     public closeTutorial(): void {
         this.appStoreActions.setIsInterviewerTutorialVisible(false);
     }
@@ -64,12 +70,14 @@ export class InterviewerTutorialComponent {
         return this.currentStep === this.lastStep;
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialNextStep'))
     public nextStep(): void {
         if (this.currentStep < this.tutorialTexts.length - 1) {
             this.currentStep += 1;
         }
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialPreviousStep'))
     public previousStep(): void {
         if (this.currentStep >= 1) {
             this.currentStep -= 1;

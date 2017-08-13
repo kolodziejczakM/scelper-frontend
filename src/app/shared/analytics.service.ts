@@ -11,19 +11,17 @@ export const GA_CATEGORIES = new Map([
 ]);
 
 export const GA_ACTIONS = new Map([
-    ['downloadPublicScenario', 'Download public scenario'], //
-    ['deletePublicScenario', 'Delete public scenario'], //
-    ['toggleAddFormPublicScenario', 'Toogle form for adding public scenario'], //
-    ['publishScenario', 'Publish scenario as public'], //
-    ['simpleInterviewNextQuestion', 'Go to next question on simple interview'], //
-    ['simpleInterviewPreviousQuestion', 'Go to previous question on simple interview'], //
-    ['simpleInterviewFirstQuestion', 'Go (back) to first question on simple interview'], //
+    ['downloadPublicScenario', 'Download public scenario'],
+    ['deletePublicScenario', 'Delete public scenario'],
+    ['toggleAddFormPublicScenario', 'Toogle form for adding public scenario'],
+    ['publishScenario', 'Publish scenario as public'],
+    ['simpleInterviewNextQuestion', 'Go to next question on simple interview'],
+    ['simpleInterviewPreviousQuestion', 'Go to previous question on simple interview'],
     ['simpleInterviewResults', 'Get results as PDF from simple interview'],
     ['simpleInterviewRestart', 'Restart simple interview'],
-    ['simpleInterviewTutorialStart', 'Start tutorial on simple interview'],
-    ['simpleInterviewTutorialFinish', 'Finish tutorial on simple interview'],
-    ['simpleInterviewTutorialAbort', 'Abort tutorial on simple interview'],
-    ['readStatute', 'Read statute from footer']
+    ['simpleInterviewTutorialNextStep', 'Start tutorial on simple interview'],
+    ['simpleInterviewTutorialPreviousStep', 'Finish tutorial on simple interview'],
+    ['simpleInterviewTutorialClose', 'Close tutorial on simple interview']
 ]);
 
 export function report(category: string, action: string, label?: string): MethodDecorator {

@@ -99,6 +99,7 @@ export class InterviewerComponent implements OnInit {
         );
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewResults'))
     public generatePDF(): void {
         this.simpleInterviewAsyncs.postInterviewAnswers(this.interviewerQuestions).subscribe(
             (response: PDFblob) => {
@@ -130,6 +131,7 @@ export class InterviewerComponent implements OnInit {
         return this.interviewerQuestions.some(question => Boolean(question.answer));
     }
 
+    @reportClick(GA_ACTIONS.get('simpleInterviewRestart'))
     public restartInterview(): void {
         this.cleanInterview();
         this.goToFirstQuestion();
@@ -142,7 +144,6 @@ export class InterviewerComponent implements OnInit {
         this.appStoreActions.setInterviewerQuestions(this.interviewerQuestions);
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewFirstQuestion'))
     private goToFirstQuestion(): void {
         this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[0]);
     }
