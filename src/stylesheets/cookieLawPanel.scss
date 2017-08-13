@@ -1,0 +1,39 @@
+.cookie-law-wrapper {
+    $std-distance: 10px;
+
+    background: #fbfbfb;
+    font-size: 12px;
+    position: fixed;
+    padding: $std-distance;
+    bottom: 150px;
+    box-shadow: 0 2px 2px 0.25px $scelper-gray-dark;
+    right: 0px;
+    z-index: map-get($zindex, footer);
+    width: 35%;
+
+    p {
+        margin: $std-distance;
+    }
+
+    button {
+        position: absolute;
+        top: $std-distance / 2;
+        right: $std-distance / 2;
+        padding: 0px;
+        background: none;
+        border: none;
+    }
+
+}
+
+@media(max-width: $mobile) {
+    .cookie-law-wrapper {
+        bottom: 81px;
+    }
+}
+
+@media(max-width: $tablet) {
+    .cookie-law-wrapper {
+        width: 100%;
+    }
+}
