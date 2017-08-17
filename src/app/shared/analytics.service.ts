@@ -55,7 +55,6 @@ export class AnalyticsService {
     ) { }
 
     public trackEvent(category: string, action: string, label?: string): void {
-        console.log('decorator test');
         this.angulartics2.eventTrack.next({
             action,
             properties: { category, label }
