@@ -7,7 +7,6 @@ import { PdfForm,
          ScenarioGenre,
          ScenarioState } from '../../interfaces';
 
-import { WindowService } from '../../shared/window.service';
 import { AnalyticsService,
          reportClick,
          GA_ACTIONS } from '../../shared/analytics.service';
@@ -62,8 +61,7 @@ export class NewScenarioFormComponent implements OnInit {
         private appStoreActions: AppStoreActions,
         private publicScenariosAsyncs: PublicScenariosAsyncs,
         private formBuilder: FormBuilder,
-        private analyticsService: AnalyticsService,
-        private windowService: WindowService
+        private analyticsService: AnalyticsService
     ) {
         this.pdfForm = formBuilder.group({
             title: [
@@ -171,38 +169,24 @@ export class NewScenarioFormComponent implements OnInit {
         const formData = new FormData();
         const that = this;
 
-        this.getRecaptchaResponse().then((captchaResponse) => {
-            if (captchaResponse.length) {
+        formData.append('title', submitted.title);
+        formData.append('authorEmail', submitted.authorEmail);
+        formData.append('genre', JSON.stringify(submitted.genre));
+        formData.append('state', JSON.stringify(submitted.state));
+        formData.append('description', submitted.description);
+        formData.append('file', that.fileBlob, that.fileName);
 
-                formData.append('title', submitted.title);
-                formData.append('authorEmail', submitted.authorEmail);
-                formData.append('genre', JSON.stringify(submitted.genre));
-                formData.append('state', JSON.stringify(submitted.state));
-                formData.append('description', submitted.description);
-                formData.append('file', that.fileBlob, that.fileName);
-                formData.append('g-recaptcha-response', captchaResponse);
-
-                this.publicScenariosAsyncs.postPublicScenario(formData).subscribe(
-                    (response: ResponseObject) => {
-                        const successMessage = helpers.translateServerResponse(response.code);
-                        this.showAlert(APP_NAME, successMessage);
-                    },
-                    (err: Error) => {
-                        console.warn(err);
-                        this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));
-                        this.appStoreActions.setShowError(true);
-                    }
-                );
-
-            } else {
+        this.publicScenariosAsyncs.postPublicScenario(formData).subscribe(
+            (response: ResponseObject) => {
+                const successMessage = helpers.translateServerResponse(response.code);
+                this.showAlert(APP_NAME, successMessage);
+            },
+            (err: Error) => {
+                console.warn(err);
                 this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));
                 this.appStoreActions.setShowError(true);
             }
-        });
-    }
-
-    public getRecaptchaResponse() {
-        return this.windowService.nativeWindow.grecaptcha.getResponse();
+        );
     }
 
     public isFormValid(): boolean {

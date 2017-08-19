@@ -42,6 +42,7 @@ import { AuthorsComponent } from './authors/authors.component';
 import { AuthorAvatarComponent } from './authors/author-avatar/author-avatar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CookieLawPanelComponent } from './cookie-law-panel/cookie-law-panel.component';
+import { RecaptchaComponent } from './shared/recaptcha/recaptcha.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -76,7 +77,8 @@ const appRoutes: Routes = [
         AuthorsComponent,
         AuthorAvatarComponent,
         BreadcrumbsComponent,
-        CookieLawPanelComponent
+        CookieLawPanelComponent,
+        RecaptchaComponent
     ],
     imports: [
         BrowserModule,
