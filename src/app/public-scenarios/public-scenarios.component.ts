@@ -9,6 +9,7 @@ import { PublicScenario } from '../interfaces';
 
 import { ERROR_MSG, SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
 import { PDF_FORM_TXT } from './new-scenario-form/new-scenario-form.constants';
+import { SCENARIO_REQUEST_FORM_TXT } from './new-scenario-request-form/new-scenario-request-form.constants';
 
 @Component({
     selector: 'sce-public-scenarios',
@@ -17,7 +18,11 @@ import { PDF_FORM_TXT } from './new-scenario-form/new-scenario-form.constants';
 export class PublicScenariosComponent implements OnInit {
 
     public formVisible = false;
+    public requestFormVisible = true; // false;
+
     public formText: Map<string, string> = PDF_FORM_TXT;
+    public requestFormText: Map<string, string> = SCENARIO_REQUEST_FORM_TXT;
+
     public selectFilterOptions = SCENARIO_FILTER_DROPDOWN_OPTIONS;
     public scenarios: PublicScenario[] = [];
     public fetchingScenarios = true;

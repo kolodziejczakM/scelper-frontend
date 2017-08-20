@@ -8,9 +8,13 @@
             <i class="fa fa-eject" aria-hidden="true"></i> <span>{{ formText.get('b_add_hide') }}</span>
         </ng-container>
     </button>
+    <button class="uk-button uk-button-default">
+        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <span>{{ requestFormText.get('b_add') }}</span>
+    </button>
 </div>
 
 <sce-new-scenario-form [visibility]="formVisible"></sce-new-scenario-form>
+<sce-new-scenario-request-form [visibility]="requestFormVisible"></sce-new-scenario-request-form>
 
 <sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
 

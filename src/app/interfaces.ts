@@ -35,6 +35,11 @@ export interface ScenarioGenre {
     label: string;
 }
 
+export interface ScenarioType {
+    id: number;
+    label: string;
+}
+
 export interface ScenarioSelectFilterOption {
     id: number;
     category: string;

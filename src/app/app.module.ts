@@ -43,6 +43,7 @@ import { AuthorAvatarComponent } from './authors/author-avatar/author-avatar.com
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CookieLawPanelComponent } from './cookie-law-panel/cookie-law-panel.component';
 import { RecaptchaComponent } from './shared/recaptcha/recaptcha.component';
+import { NewScenarioRequestFormComponent } from './public-scenarios/new-scenario-request-form/new-scenario-request-form.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
         AuthorAvatarComponent,
         BreadcrumbsComponent,
         CookieLawPanelComponent,
-        RecaptchaComponent
+        RecaptchaComponent,
+        NewScenarioRequestFormComponent
     ],
     imports: [
         BrowserModule,
