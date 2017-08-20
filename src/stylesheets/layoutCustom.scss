@@ -87,3 +87,10 @@ input[type='file'] {
     background: url('assets/scelper-logo.png') no-repeat;
     background-size: contain;
 }
+
+.team-image {
+    background:url("assets/team.jpg") no-repeat 50% 20%;
+    opacity: 0.6;
+    height: 200px;
+    background-size: cover;
+}
