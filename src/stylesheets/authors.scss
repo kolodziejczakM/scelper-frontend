@@ -1,23 +1,30 @@
 
 .authors-wrapper {
-    padding: 0px 40px 40px;
     margin-top: 40px;
-    box-shadow: 0px -5px 5px -5px $scelper-gray-dark;
 
     p {
         margin: 0px 0px 10px;
     }
 
-    .introduction {
+    .team-image {
+        background:url("assets/team.jpg") no-repeat 50% 20%;
+        opacity: 0.4;
+        height: 200px;
+        background-size: cover;
+    }
+
+    .intro-text {
+        box-shadow: 2px 2px 15px 1px;
+        margin: 20px auto;
         padding: 20px;
+        width: 450px;
     }
 
     .authors-list {
         display: flex;
         flex-wrap: wrap;
+        padding: 20px;
         justify-content: flex-start;
-        padding: 0px;
-        margin: 20px;
         list-style-type: none;
     }
 }

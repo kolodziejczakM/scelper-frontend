@@ -1,14 +1,15 @@
 <section class="authors-wrapper">
-    <section class="introduction">
-       <p *ngFor="let text of introTexts">{{ text }}</p>
+    <section class="team-image"></section>
+    <section class="intro-text">
+        <p *ngFor="let text of introTexts">{{ text }}</p>
     </section>
     <ul class="authors-list">
         <li *ngFor="let author of authors">
-            <sce-author-avatar [name]="author.name" 
-                               [imagePath]="author.imagePath" 
-                               [description]="author.description" 
+            <sce-author-avatar [name]="author.name"
+                               [imagePath]="author.imagePath"
+                               [description]="author.description"
                                [email]="author.email">
-            </sce-author-avatar> 
+            </sce-author-avatar>
         </li>
     </ul>
 </section>
