@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { WindowService } from '../../shared/window.service';
 
 @Component({
@@ -7,9 +7,7 @@ import { WindowService } from '../../shared/window.service';
 })
 export class RecaptchaComponent implements OnInit {
 
-    @Input('siteKey')
-    public siteKey: string;
-
+    public siteKey = '6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm';
     public approved = false;
 
     constructor(
