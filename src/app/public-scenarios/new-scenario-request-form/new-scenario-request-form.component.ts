@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NumberValidator } from '../../shared/number.validator';
 import { ScenarioGenre, ScenarioType } from '../../interfaces';
 
 import { DEFAULT_SELECT_STATE } from '../../app.constants';
@@ -46,19 +47,31 @@ export class NewScenarioRequestFormComponent implements OnInit {
             ],
             actorNumber: [
                 '',
-                Validators.required
+                Validators.compose([
+                    Validators.required,
+                    NumberValidator.range(0, 50)
+                ])
             ],
             actressNumber: [
                 '',
-                Validators.required
+                Validators.compose([
+                    Validators.required,
+                    NumberValidator.range(0, 50)
+                ])
             ],
             vehicleNumber: [
                 '',
-                Validators.required
+                Validators.compose([
+                    Validators.required,
+                    NumberValidator.range(0, 50)
+                ])
             ],
             budget: [
                 '',
-                Validators.required
+                Validators.compose([
+                    Validators.required,
+                    NumberValidator.range(0, 50000000)
+                ])
             ],
             description: [
                 '',
@@ -116,6 +129,8 @@ export class NewScenarioRequestFormComponent implements OnInit {
     // copied - worth creating service
     public isFormValid(): boolean {
         const requirements = [
+            this.requestForm.valid,
+            this.isEmailConfirmed(),
             !this.isDefaultGenreInForm(),
             !this.isDefaultTypeInForm()
         ];

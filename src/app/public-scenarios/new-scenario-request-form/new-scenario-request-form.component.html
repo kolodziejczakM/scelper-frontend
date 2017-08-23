@@ -3,12 +3,6 @@
     <section class="new-scenario-request-form" [class.visible]="visibility">
             <form [formGroup]="requestForm" (ngSubmit)="submitRequest(requestForm.value)">
                 <fieldset class="uk-fieldset">
-                    <!-- <div class="uk-margin">
-                        <input formControlName="title" class="uk-input" type="text" placeholder="{{ requestFormText.get('titlePlaceholder') }}"
-                        [ngClass]="{'has-error': hasError('title')}">
-
-                        <span *ngIf="hasError('title')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('title') }}</span>
-                    </div> -->
                     <div class="uk-margin">
                         <select formControlName="genre" class="uk-select" [(ngModel)]="selectedGenre">
                             <option *ngFor="let option of scenarioGenres" [disabled]="isDefaultOption(option)" [ngValue]="option">
@@ -24,16 +18,28 @@
                         </select>
                     </div>
                     <div class="uk-margin">
-                        <input formControlName="actorNumber" class="uk-input" type="number" placeholder="{{ requestFormText.get('actorNumberPlaceholder') }}">
+                        <input formControlName="actorNumber" class="uk-input" type="number" pattern="\d+" placeholder="{{ requestFormText.get('actorNumberPlaceholder') }}"
+                        [ngClass]="{'has-error': hasError('actorNumber')}">
+
+                        <span *ngIf="hasError('actorNumber')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('actorNumber') }}</span>
                     </div>
                     <div class="uk-margin">
-                        <input formControlName="actressNumber" class="uk-input" type="number" placeholder="{{ requestFormText.get('actressNumberPlaceholder') }}">
+                        <input formControlName="actressNumber" class="uk-input" type="number" pattern="\d+" placeholder="{{ requestFormText.get('actressNumberPlaceholder') }}"
+                        [ngClass]="{'has-error': hasError('actressNumber')}">
+
+                        <span *ngIf="hasError('actressNumber')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('actressNumber') }}</span>
                     </div>
                     <div class="uk-margin">
-                        <input formControlName="vehicleNumber" class="uk-input" type="number" placeholder="{{ requestFormText.get('vehicleNumberPlaceholder') }}">
+                        <input formControlName="vehicleNumber" class="uk-input" type="number" pattern="\d+" placeholder="{{ requestFormText.get('vehicleNumberPlaceholder') }}"
+                        [ngClass]="{'has-error': hasError('vehicleNumber')}">
+
+                        <span *ngIf="hasError('vehicleNumber')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('vehicleNumber') }}</span>
                     </div>
                     <div class="uk-margin">
-                        <input formControlName="budget" class="uk-input" type="number" placeholder="{{ requestFormText.get('budgetPlaceholder') }}">
+                        <input formControlName="budget" class="uk-input" type="number" placeholder="{{ requestFormText.get('budgetPlaceholder') }}"
+                        [ngClass]="{'has-error': hasError('budget')}">
+
+                        <span *ngIf="hasError('budget')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('budget') }}</span>
                     </div>
                     <div class="uk-margin">
                         <input formControlName="requestAuthorEmail" class="uk-input" type="text" placeholder="{{ requestFormText.get('requestAuthorEmailPlaceholder') }}"
@@ -47,32 +53,16 @@
 
                         <span *ngIf="hasError('requestAuthorEmailConfirm')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('requestAuthorEmailConfirm') }}</span>
                     </div>
-
-                    <!-- <div class="uk-margin">
-                        <select formControlName="state" class="uk-select" [(ngModel)]="selectedState">
-                            <option *ngFor="let option of scenarioStates" [disabled]="isDefaultOption(option)" [ngValue]="option">
-                                {{ option.label }}
-                            </option>
-                        </select>
-                    </div> -->
                     <div class="uk-margin">
                         <textarea formControlName="description" class="uk-textarea" [ngClass]="{'has-error': hasError('description')}" rows="5" placeholder="{{ requestFormText.get('descriptionPlaceholder') }}"></textarea>
                         <span *ngIf="hasError('description')" class="validation-info">{{ requestFormText.get('required') }} {{ requestFormText.get('description') }}</span>
                     </div>
-                    <!-- <div class="uk-margin">
-                        <button type="button" class="uk-button uk-button-primary" (click)="triggerUpload()">
-                            <i class="fa fa-upload" aria-hidden="true"></i>  {{ requestFormText.get('b_upload') }}
-                        </button> {{ fileName }}
-                        <input #fileInputNode id="file" type="file" accept="{{acceptableMimetype}}" (change)="fileChangeEvent($event,this)"/><br>
-                        <p [hidden]="fileBlob">{{ requestFormText.get('file') }}</p>
-                    </div> -->
                     <div class="uk-margin">
                         <span *ngIf="!isFormValid() && requestForm.dirty">{{ requestFormText.get('cannotSubmitted') }}</span>
                     </div>
                 </fieldset>
-                <sce-recaptcha #recaptcha [siteKey]="'6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm'"></sce-recaptcha>
                 <div class="text-centered margin-30">
-                    <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid() || !recaptcha.isApproved()">{{ requestFormText.get('b_submit') }}</button>
+                    <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()">{{ requestFormText.get('b_submit') }}</button>
                     <button type="button" class="uk-button uk-button-default" [hidden]="requestForm.pristine" (click)="resetForm()">{{ requestFormText.get('b_reset') }}</button>
                 </div>
             </form>

@@ -29,8 +29,26 @@ textarea {
     resize: none;
 }
 
+input.uk-input,
+select.uk-select,
+textarea.uk-textarea {
+
+    &:focus {
+        outline: 1px solid $scelper-green;
+    }
+}
+
 .disabled {
     background: #808080;
+}
+
+.has-error {
+    border: 2px solid #ff7153 !important;
+}
+
+.validation-info {
+    font-weight: 700;
+    color: #ff7153;
 }
 
 .uk-button {

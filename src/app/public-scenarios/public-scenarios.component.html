@@ -1,6 +1,6 @@
 
 <div class="text-centered margin-30">
-    <button class="uk-button uk-button-primary" (click)="toggleForm();">
+    <button class="uk-button uk-button-primary" (click)="toggleAddScenarioForm()">
         <ng-container *ngIf="!formVisible">
             <i class="fa fa-plus-circle" aria-hidden="true"></i> <span>{{ formText.get('b_add') }}</span>
         </ng-container>
@@ -8,8 +8,14 @@
             <i class="fa fa-eject" aria-hidden="true"></i> <span>{{ formText.get('b_add_hide') }}</span>
         </ng-container>
     </button>
-    <button class="uk-button uk-button-default">
-        <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <span>{{ requestFormText.get('b_add') }}</span>
+
+    <button class="uk-button uk-button-default" (click)="toggleAddScenarioRequestForm()">
+        <ng-container *ngIf="!requestFormVisible">
+            <i class="fa fa-calendar-plus-o" aria-hidden="true"></i> <span>{{ requestFormText.get('b_add') }}</span>
+        </ng-container>
+        <ng-container *ngIf="requestFormVisible">
+            <i class="fa fa-eject" aria-hidden="true"></i> <span>{{ requestFormText.get('b_add_hide') }}</span>
+        </ng-container>
     </button>
 </div>
 

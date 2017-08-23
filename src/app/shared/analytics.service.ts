@@ -13,7 +13,8 @@ export const GA_CATEGORIES = new Map([
 export const GA_ACTIONS = new Map([
     ['downloadPublicScenario', 'Download public scenario'],
     ['deletePublicScenario', 'Delete public scenario'],
-    ['toggleAddFormPublicScenario', 'Toogle form for adding public scenario'],
+    ['toggleFormAddPublicScenario', 'Toogle form for adding public scenario'],
+    ['toggleFormAddPublicScenarioRequest', 'Toogle form for adding public scenario request'],
     ['publishScenario', 'Publish scenario as public'],
     ['simpleInterviewNextQuestion', 'Go to next question on simple interview'],
     ['simpleInterviewPreviousQuestion', 'Go to previous question on simple interview'],

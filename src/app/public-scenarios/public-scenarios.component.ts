@@ -18,7 +18,7 @@ import { SCENARIO_REQUEST_FORM_TXT } from './new-scenario-request-form/new-scena
 export class PublicScenariosComponent implements OnInit {
 
     public formVisible = false;
-    public requestFormVisible = true; // false;
+    public requestFormVisible = false;
 
     public formText: Map<string, string> = PDF_FORM_TXT;
     public requestFormText: Map<string, string> = SCENARIO_REQUEST_FORM_TXT;
@@ -37,9 +37,16 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
     }
 
-    @reportClick(GA_ACTIONS.get('toggleAddFormPublicScenario'))
-    public toggleForm(): void {
+    @reportClick(GA_ACTIONS.get('toggleFormAddPublicScenario'))
+    public toggleAddScenarioForm(): void {
+        this.requestFormVisible = false;
         this.formVisible = !this.formVisible;
+    }
+
+    @reportClick(GA_ACTIONS.get('toggleFormAddPublicScenarioRequest'))
+    public toggleAddScenarioRequestForm(): void {
+        this.formVisible = false;
+        this.requestFormVisible = !this.requestFormVisible;
     }
 
     private preparePublicScenarios(): void {
