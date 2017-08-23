@@ -44,6 +44,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { CookieLawPanelComponent } from './cookie-law-panel/cookie-law-panel.component';
 import { RecaptchaComponent } from './shared/recaptcha/recaptcha.component';
 import { NewScenarioRequestFormComponent } from './public-scenarios/new-scenario-request-form/new-scenario-request-form.component';
+import { PublicScenariosRequestsComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-requests.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     { path: 'interview', component: InterviewComponent },
     { path: 'interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
+    { path: 'public-scenarios/requests', component: PublicScenariosRequestsComponent },
     { path: 'activation/:deleteCode', component: ScenarioActivationComponent }
 ];
 
@@ -80,7 +82,8 @@ const appRoutes: Routes = [
         BreadcrumbsComponent,
         CookieLawPanelComponent,
         RecaptchaComponent,
-        NewScenarioRequestFormComponent
+        NewScenarioRequestFormComponent,
+        PublicScenariosRequestsComponent
     ],
     imports: [
         BrowserModule,

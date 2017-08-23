@@ -1,5 +1,7 @@
 
 .scelper-filter-input-select-wrapper {
+    display: flex;
+    justify-content: space-between;
     padding: 0px 40px;
 }
 
@@ -8,19 +10,44 @@
     width: initial;
 }
 
-@media(max-width: $mobile) {
-    $mobile-font-size: 13px;
+.request-list-link {
+    padding: 0px 10px;
+    margin-left: 5px;
+}
 
-    .scelper-filter-input-select-wrapper {
-        padding: 10px;
+@media(max-width: $tablet) {
+    $tablet-font-size: 14px;
+
+    input.uk-input.filter-field,
+    .filter-select,
+    .request-list-link {
+        font-size: $tablet-font-size;
     }
 
-    .filter-select {
+    input.uk-input.filter-field {
+        width: 160px;
+    }
+
+    .scelper-filter-input-select-wrapper {
+        padding: 0px 20px;
+    }
+}
+
+@media(max-width: $mobile) {
+    $mobile-font-size: 14px;
+
+    span,
+    input.uk-input.filter-field,
+    .filter-select,
+    .request-list-link {
         font-size: $mobile-font-size;
-    }  
+    }
 
     input.uk-input.filter-field {
         width: 120px;
-        font-size: $mobile-font-size;
+    }
+
+    .scelper-filter-input-select-wrapper {
+        padding: 10px;
     }
 }
