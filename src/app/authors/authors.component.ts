@@ -24,6 +24,12 @@ export class AuthorsComponent {
             email: 'ceo@scelper.com'
         },
         {
+            name: 'Karolina Growiec',
+            imagePath: `${this.assetsBasePath}/karolinaGrowiec.jpg`,
+            description: 'Architekt informacji',
+            email: 'karolina.growiec@gmail.com'
+        },
+        {
             name: 'Tomek Sobieraj',
             imagePath: `${this.assetsBasePath}/tomekSobieraj.jpg`,
             description: 'Grafik, designer',
