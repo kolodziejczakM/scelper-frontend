@@ -1,9 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NumberValidator } from '../../shared/number.validator';
-import { ScenarioGenre, ScenarioType } from '../../interfaces';
 
-import { DEFAULT_SELECT_STATE } from '../../app.constants';
+import { AppStoreActions } from '../../app-store/app-store.actions';
+import { PublicScenariosAsyncs } from '../public-scenarios.asyncs';
+import { ModalsService } from '../../modals/modals.service';
+
+import { NumberValidator } from '../../shared/number.validator';
+import * as helpers from '../../app.helpers';
+
+import { ResponseObject,
+         PublicScenarioRequest,
+         ScenarioGenre,
+         ScenarioType } from '../../interfaces';
+
+import { APP_NAME,
+         ERROR_MSG,
+         DEFAULT_SELECT_STATE } from '../../app.constants';
 
 import { EMAIL_PATTERN,
          SCENARIO_GENRES,
@@ -34,6 +46,9 @@ export class NewScenarioRequestFormComponent implements OnInit {
     private emailConfirmFieldName = 'requestAuthorEmailConfirm';
 
     constructor(
+        private modalsService: ModalsService,
+        private appStoreActions: AppStoreActions,
+        private publicScenariosAsyncs: PublicScenariosAsyncs,
         private formBuilder: FormBuilder
     ) {
         this.requestForm = formBuilder.group({
@@ -95,6 +110,10 @@ export class NewScenarioRequestFormComponent implements OnInit {
     ngOnInit() {
         this.setDefaultGenreInForm();
         this.setDefaultTypeInForm();
+    }
+
+    public showAlert(title, message): void {
+        this.modalsService.showAlert(title, message);
     }
 
     // copied - worth creating service
@@ -164,8 +183,30 @@ export class NewScenarioRequestFormComponent implements OnInit {
         this.requestForm.controls['type'].setValue(this.scenarioTypes[0]);
     }
 
-    public submitRequest(submitted): void {
+    public submitRequest(submitted: PublicScenarioRequest): void {
         console.log('request has been submitted: ', submitted);
+        const formData = new FormData();
+
+        formData.append('genre', JSON.stringify(submitted.genre));
+        formData.append('type', JSON.stringify(submitted.type));
+        formData.append('actorNumber', String(parseInt(submitted.actorNumber, 10)));
+        formData.append('actressNumber', String(parseInt(submitted.actressNumber, 10)));
+        formData.append('vehicleNumber', String(parseInt(submitted.vehicleNumber, 10)));
+        formData.append('budget', String(parseInt(submitted.budget, 10)));
+        formData.append('authorEmail', submitted.authorEmail);
+        formData.append('description', submitted.description);
+
+        this.publicScenariosAsyncs.postPublicScenarioRequest(formData).subscribe(
+            (response: ResponseObject) => {
+                const successMessage = helpers.translateServerResponse(response.code);
+                this.showAlert(APP_NAME, successMessage);
+            },
+            (err: Error) => {
+                console.warn(err);
+                this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioRequestAdd'));
+                this.appStoreActions.setShowError(true);
+            }
+        );
     }
 
 }

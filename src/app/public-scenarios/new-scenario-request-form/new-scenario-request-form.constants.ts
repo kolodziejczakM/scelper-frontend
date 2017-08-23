@@ -11,6 +11,8 @@ export const SCENARIO_TYPES = [
 export const SCENARIO_REQUEST_FORM_TXT = new Map([
     ['cannotSubmitted',
         'Przycisk "Publikuj" uaktywni się gdy wszystkie pola zostaną wypełnione poprawnie.'],
+    ['intro',
+        'Potrzebny mi scenariusz na film:'],
     ['required',
         'To pole jest wymagane.'],
     ['actorNumber',
@@ -28,7 +30,7 @@ export const SCENARIO_REQUEST_FORM_TXT = new Map([
     ['budget',
         'Budżet powinien być liczbą całkowitą z zakresu od 0 do 50 000.000 (PLN)'],
     ['budgetPlaceholder',
-        'Wprowadź budżet (PLN)'],
+        'Wprowadź budżet na film (PLN)'],
     ['requestAuthorEmail',
         'Format emaila jest niepoprawny.'],
     ['requestAuthorEmailPlaceholder',

@@ -12,6 +12,7 @@ export class ApiRoutesService {
     private publicScenarios = {
         getAll: () => `${this.apiBaseRoute}/public-scenarios`,
         post: () => `${this.apiBaseRoute}/public-scenarios`,
+        postRequest: () => `${this.apiBaseRoute}/public-scenarios/requests`,
         patch: (deleteCode: string) => `${this.serverRoot}/activation/${deleteCode}`,
         delete: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/${deleteCode}`
     };

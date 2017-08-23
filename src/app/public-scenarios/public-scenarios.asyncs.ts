@@ -30,6 +30,14 @@ export class PublicScenariosAsyncs {
                         .catch((err) => Observable.throw(new Error(err)));
     }
 
+    public postPublicScenarioRequest(scenarioRequest: FormData): Observable<ResponseObject | Error> {
+        return this.http.post(this.apiRoutesService.getPaths().publicScenarios.postRequests(), scenarioRequest)
+
+                        .map((res: Response) => res.json() as ResponseObject)
+                        .retry(1)
+                        .catch((err) => Observable.throw(new Error(err)));
+    }
+
     public patchPublicScenario(deleteCode: string): Observable<ResponseObject | Error> {
         return this.http.patch(this.apiRoutesService.getPaths().publicScenarios.patch(deleteCode), deleteCode)
 
@@ -45,4 +53,5 @@ export class PublicScenariosAsyncs {
                         .retry(1)
                         .catch((err) => Observable.throw(new Error(err)));
     }
+
 }

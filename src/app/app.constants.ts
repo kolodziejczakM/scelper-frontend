@@ -30,6 +30,8 @@ export const ERROR_MSG = new Map([
         'Wystąpił problem podczas pobierania listy scenariuszy. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
     ['scenarioAdd',
         'Wystąpił problem podczas dodawania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją'],
+    ['scenarioRequestAdd',
+        'Wystąpił problem podczas dodawania zlecenia. Spróbuj ponownie lub skontaktuj się z administracją'],
     ['scenarioDelete',
         'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.'],
     ['questionsDownload',
