@@ -8,7 +8,18 @@
 
         <base href="/beta">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+            window.renderRecaptchas = () => {
+                window.recaptchasList = ['recaptchaNewScenario', 'recaptchaNewScenarioRequest'];
+
+                window.recaptchasList.forEach(recaptcha => {
+                    window[recaptcha] = false;
+                    window[`${recaptcha}Callback`] = () => window[recaptcha] = true;
+                    window[`${recaptcha}ExpiredCallback`] = () => window[recaptcha] = false;
+                });
+            }
+        </script>
+        <script src='https://www.google.com/recaptcha/api.js?onload=renderRecaptchas&render=explicit' async defer></script>
     </head>
     <body>
         <script>

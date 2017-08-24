@@ -1,41 +1,34 @@
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { WindowService } from '../../shared/window.service';
 
 @Component({
     selector: 'sce-recaptcha',
     templateUrl: './recaptcha.component.html'
 })
-export class RecaptchaComponent implements OnInit {
+export class RecaptchaComponent implements AfterViewInit {
+
+    @Input('customId')
+    public customId: string;
 
     public siteKey = '6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm';
-    public approved = false;
 
     constructor(
-        private windowService: WindowService,
-        private applicationRef: ApplicationRef
+        private windowService: WindowService
     ) { }
 
-    ngOnInit() {
-        this.registerCallback();
-        this.registerExpiredCallback();
+    ngAfterViewInit() {
+        this.registerWidget();
+    }
+
+    public registerWidget(): void {
+        this.windowService.nativeWindow.grecaptcha.render(this.customId, {
+            sitekey: this.siteKey,
+            callback: window[`${this.customId}Callback`],
+            'expired-callback': window[`${this.customId}ExpiredCallback`]
+        });
     }
 
     public isApproved(): boolean {
-        return this.approved;
+        return this.windowService.nativeWindow[this.customId];
     }
-
-    public registerExpiredCallback(): void {
-        this.windowService.nativeWindow.onRecaptchaExpired = () => {
-            this.approved = false;
-            this.applicationRef.tick();
-        };
-    }
-
-    public registerCallback(): void {
-        this.windowService.nativeWindow.onRecaptchaClicked = () => {
-            this.approved = true;
-            this.applicationRef.tick();
-        };
-    }
-
 }

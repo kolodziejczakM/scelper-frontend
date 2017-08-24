@@ -62,8 +62,9 @@
                     <span *ngIf="!isFormValid() && requestForm.dirty">{{ requestFormText.get('cannotSubmitted') }}</span>
                 </div>
             </fieldset>
+            <sce-recaptcha [customId]="'recaptchaNewScenarioRequest'" #recaptcha></sce-recaptcha>
             <div class="text-centered margin-30">
-                <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid()">{{ requestFormText.get('b_submit') }}</button>
+                <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid() || !recaptcha.isApproved()">{{ requestFormText.get('b_submit') }}</button>
                 <button type="button" class="uk-button uk-button-default" [hidden]="requestForm.pristine" (click)="resetForm()">{{ requestFormText.get('b_reset') }}</button>
             </div>
         </form>
