@@ -65,7 +65,7 @@
             <sce-recaptcha [customId]="'recaptcha2'" #recaptcha></sce-recaptcha>
             <div class="text-centered margin-30">
                 <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid() || !recaptcha.isApproved()">{{ requestFormText.get('b_submit') }}</button>
-                <button type="button" class="uk-button uk-button-default" [hidden]="requestForm.pristine" (click)="resetForm()">{{ requestFormText.get('b_reset') }}</button>
+                <button type="button" class="uk-button uk-button-default" [hidden]="requestForm.pristine" (click)="resetForm(); recaptcha.reset()">{{ requestFormText.get('b_reset') }}</button>
             </div>
         </form>
     </section>

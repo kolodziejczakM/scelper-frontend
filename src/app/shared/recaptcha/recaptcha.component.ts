@@ -11,6 +11,7 @@ export class RecaptchaComponent implements OnInit {
     @Input('customId')
     public customId: string;
 
+    public widgetId: null;
     public siteKey = '6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm';
 
     constructor(
@@ -28,7 +29,7 @@ export class RecaptchaComponent implements OnInit {
     }
 
     public reset(): void {
-        this.onLoad().subscribe(() => this.windowService.nativeWindow.grecaptcha.reset());
+        this.onLoad().subscribe(() => this.windowService.nativeWindow.grecaptcha.reset(this.widgetId));
     }
 
     private onLoad(): Observable<any> {
@@ -57,7 +58,7 @@ export class RecaptchaComponent implements OnInit {
     }
 
     private renderWidget(): void {
-        this.windowService.nativeWindow.grecaptcha.render(this.customId, {
+        this.widgetId = this.windowService.nativeWindow.grecaptcha.render(this.customId, {
             sitekey: this.siteKey,
             callback: this.windowService.nativeWindow[`on${this.customId}Clicked`],
             'expired-callback': this.windowService.nativeWindow[`on${this.customId}Expired`]
