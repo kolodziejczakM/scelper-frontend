@@ -8,19 +8,7 @@
 
         <base href="/beta">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <script>
-            window.recaptchasList = ['recaptchaNewScenario', 'recaptchaNewScenarioRequest'];
-            window.recaptchaRegister = [...window.recaptchasList];
-
-            window.renderRecaptchas = () => {
-                window.recaptchasList.forEach(recaptcha => {
-                    window[recaptcha] = false;
-                    window[`${recaptcha}Callback`] = () => window[recaptcha] = true;
-                    window[`${recaptcha}ExpiredCallback`] = () => window[recaptcha] = false;
-                });
-            }
-        </script>
-        <script src='https://www.google.com/recaptcha/api.js?onload=renderRecaptchas&render=explicit' async defer></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
     </head>
     <body>
         <script>

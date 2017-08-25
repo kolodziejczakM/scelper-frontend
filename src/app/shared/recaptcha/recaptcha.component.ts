@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
 import { WindowService } from '../../shared/window.service';
 
 @Component({
     selector: 'sce-recaptcha',
     templateUrl: './recaptcha.component.html'
 })
-export class RecaptchaComponent implements OnInit, AfterViewInit, OnDestroy {
+export class RecaptchaComponent implements OnInit, AfterViewInit {
 
+    @Input('customId')
     public customId: string;
+
     public siteKey = '6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm';
 
     constructor(
@@ -15,26 +17,33 @@ export class RecaptchaComponent implements OnInit, AfterViewInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.setCustomId();
+        this.registerCallback();
+        this.registerExpiredCallback();
     }
 
     ngAfterViewInit() {
         this.registerWidget();
     }
 
-    ngOnDestroy() {
-        this.windowService.nativeWindow.recaptchaRegister.push(this.customId);
+    public registerExpiredCallback(): void {
+        this.windowService.nativeWindow[`on${this.customId}Expired`] = () => {
+            this.windowService.nativeWindow[this.customId] = false;
+        };
     }
 
-    public setCustomId(): void {
-        this.customId = this.windowService.nativeWindow.recaptchaRegister.shift();
+    public registerCallback(): void {
+        this.windowService.nativeWindow[`on${this.customId}Clicked`] = () => {
+            this.windowService.nativeWindow[this.customId] = true;
+        };
     }
 
     public registerWidget(): void {
+        this.windowService.nativeWindow[this.customId] = false;
+
         this.windowService.nativeWindow.grecaptcha.render(this.customId, {
             sitekey: this.siteKey,
-            callback: window[`${this.customId}Callback`],
-            'expired-callback': window[`${this.customId}ExpiredCallback`]
+            callback: this.windowService.nativeWindow[`on${this.customId}Clicked`],
+            'expired-callback': this.windowService.nativeWindow[`on${this.customId}Expired`]
         });
     }
 

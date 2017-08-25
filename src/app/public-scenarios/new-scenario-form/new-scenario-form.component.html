@@ -50,7 +50,7 @@
                     <span *ngIf="!isFormValid() && pdfForm.dirty">{{ formText.get('cannotSubmitted') }}</span>
                 </div>
             </fieldset>
-            <sce-recaptcha #recaptcha></sce-recaptcha>
+            <sce-recaptcha [customId]="'recaptcha1'" #recaptcha></sce-recaptcha>
             <div class="text-centered margin-30">
                 <button type="submit" class="uk-button uk-button-primary" [disabled]="!isFormValid() || !recaptcha.isApproved()">{{ formText.get('b_submit') }}</button>
                 <button type="button" class="uk-button uk-button-default" [hidden]="pdfForm.pristine" (click)="resetForm()">{{ formText.get('b_reset') }}</button>
