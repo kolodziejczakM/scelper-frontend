@@ -9,9 +9,10 @@
         <base href="/beta">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <script>
-            window.renderRecaptchas = () => {
-                window.recaptchasList = ['recaptchaNewScenario', 'recaptchaNewScenarioRequest'];
+            window.recaptchasList = ['recaptchaNewScenario', 'recaptchaNewScenarioRequest'];
+            window.recaptchaRegister = window.recaptchasList.slice(0);
 
+            window.renderRecaptchas = () => {
                 window.recaptchasList.forEach(recaptcha => {
                     window[recaptcha] = false;
                     window[`${recaptcha}Callback`] = () => window[recaptcha] = true;

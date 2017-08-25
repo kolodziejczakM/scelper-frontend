@@ -1,23 +1,33 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { WindowService } from '../../shared/window.service';
 
 @Component({
     selector: 'sce-recaptcha',
     templateUrl: './recaptcha.component.html'
 })
-export class RecaptchaComponent implements AfterViewInit {
+export class RecaptchaComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    @Input('customId')
     public customId: string;
-
     public siteKey = '6LcxPC0UAAAAAH2KIYODNOMl3UhB0kftjcqMxpgm';
 
     constructor(
         private windowService: WindowService
     ) { }
 
+    ngOnInit() {
+        this.setCustomId();
+    }
+
     ngAfterViewInit() {
         this.registerWidget();
+    }
+
+    ngOnDestroy() {
+        this.windowService.nativeWindow.recaptchaRegister.push(this.customId);
+    }
+
+    public setCustomId(): void {
+        this.customId = this.windowService.nativeWindow.recaptchaRegister.shift();
     }
 
     public registerWidget(): void {
