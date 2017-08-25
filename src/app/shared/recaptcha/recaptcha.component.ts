@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { WindowService } from '../../shared/window.service';
 
@@ -6,7 +6,7 @@ import { WindowService } from '../../shared/window.service';
     selector: 'sce-recaptcha',
     templateUrl: './recaptcha.component.html'
 })
-export class RecaptchaComponent implements OnInit, AfterViewInit {
+export class RecaptchaComponent implements OnInit {
 
     @Input('customId')
     public customId: string;
@@ -20,42 +20,47 @@ export class RecaptchaComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.registerCallback();
         this.registerExpiredCallback();
-    }
-
-    ngAfterViewInit() {
         this.registerWidget();
     }
 
-    public registerExpiredCallback(): void {
+    public isApproved(): boolean {
+        return this.windowService.nativeWindow[this.customId];
+    }
+
+    public reset(): void {
+        this.onLoad().subscribe(() => this.windowService.nativeWindow.grecaptcha.reset());
+    }
+
+    private onLoad(): Observable<any> {
+        return Observable.fromPromise(this.windowService.nativeWindow.recaptchasLoaded())
+                         .catch((err) => Observable.throw(new Error(err)));
+    }
+
+    private registerExpiredCallback(): void {
         this.windowService.nativeWindow[`on${this.customId}Expired`] = () => {
             this.windowService.nativeWindow[this.customId] = false;
         };
     }
 
-    public registerCallback(): void {
+    private registerCallback(): void {
         this.windowService.nativeWindow[`on${this.customId}Clicked`] = () => {
             this.windowService.nativeWindow[this.customId] = true;
         };
     }
 
-    public registerWidget(): void {
+    private registerWidget(): void {
         this.windowService.nativeWindow[this.customId] = false;
-
-        const onLoad = Observable.fromPromise(this.windowService.nativeWindow.recaptchasLoaded())
-                                 .catch((err) => Observable.throw(new Error(err)));
-
-        onLoad.subscribe(() => this.renderWidget());
+        this.onLoad().subscribe(() => {
+            console.log('Subscribing recaptcha');
+            this.renderWidget();
+        });
     }
 
-    public renderWidget(): void {
+    private renderWidget(): void {
         this.windowService.nativeWindow.grecaptcha.render(this.customId, {
             sitekey: this.siteKey,
             callback: this.windowService.nativeWindow[`on${this.customId}Clicked`],
             'expired-callback': this.windowService.nativeWindow[`on${this.customId}Expired`]
         });
-    }
-
-    public isApproved(): boolean {
-        return this.windowService.nativeWindow[this.customId];
     }
 }
