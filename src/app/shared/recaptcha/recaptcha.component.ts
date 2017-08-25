@@ -50,10 +50,10 @@ export class RecaptchaComponent implements OnInit {
 
     private registerWidget(): void {
         this.windowService.nativeWindow[this.customId] = false;
-        this.onLoad().subscribe(() => {
-            console.log('Subscribing recaptcha');
-            this.renderWidget();
-        });
+        this.onLoad().subscribe(
+            () => this.renderWidget(),
+            () => setTimeout(this.registerWidget.bind(this), 0)
+        );
     }
 
     private renderWidget(): void {
