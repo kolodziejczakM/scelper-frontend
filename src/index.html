@@ -10,7 +10,7 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico">
         <script>
             window.recaptchasList = ['recaptchaNewScenario', 'recaptchaNewScenarioRequest'];
-            window.recaptchaRegister = window.recaptchasList.slice(0);
+            window.recaptchaRegister = [...window.recaptchasList];
 
             window.renderRecaptchas = () => {
                 window.recaptchasList.forEach(recaptcha => {
