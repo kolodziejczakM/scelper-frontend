@@ -8,7 +8,10 @@
 
         <base href="/beta">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+        <script>
+            window.recaptchasLoaded = () => new Promise((res, err) =>  window.grecaptcha ? res() : err());
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=recaptchasLoaded&render=explicit" async defer></script>
     </head>
     <body>
         <script>

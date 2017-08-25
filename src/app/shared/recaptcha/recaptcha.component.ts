@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { WindowService } from '../../shared/window.service';
 
 @Component({
@@ -40,6 +41,13 @@ export class RecaptchaComponent implements OnInit, AfterViewInit {
     public registerWidget(): void {
         this.windowService.nativeWindow[this.customId] = false;
 
+        const onLoad = Observable.fromPromise(this.windowService.nativeWindow.recaptchasLoaded())
+                                 .catch((err) => Observable.throw(new Error(err)));
+
+        onLoad.subscribe(() => this.renderWidget());
+    }
+
+    public renderWidget(): void {
         this.windowService.nativeWindow.grecaptcha.render(this.customId, {
             sitekey: this.siteKey,
             callback: this.windowService.nativeWindow[`on${this.customId}Clicked`],
