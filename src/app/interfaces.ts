@@ -25,14 +25,14 @@ export interface PublicScenario {
 }
 
 export interface PublicScenarioRequest {
-    type: any;
     genre: any;
-    actorNumber: string;
-    actressNumber: string;
-    vehicleNumber: string;
-    budget: string;
+    type: any;
+    actorNumber: number;
+    actressNumber: number;
+    vehicleNumber: number;
+    budget: number;
     description: string;
-    authorEmail: string;
+    requestAuthorEmail: string;
 }
 
 export interface ScenarioState {

@@ -185,18 +185,21 @@ export class NewScenarioRequestFormComponent implements OnInit {
 
     public submitRequest(submitted: PublicScenarioRequest): void {
         console.log('request has been submitted: ', submitted);
-        const formData = new FormData();
 
-        formData.append('genre', JSON.stringify(submitted.genre));
-        formData.append('type', JSON.stringify(submitted.type));
-        formData.append('actorNumber', String(parseInt(submitted.actorNumber, 10)));
-        formData.append('actressNumber', String(parseInt(submitted.actressNumber, 10)));
-        formData.append('vehicleNumber', String(parseInt(submitted.vehicleNumber, 10)));
-        formData.append('budget', String(parseInt(submitted.budget, 10)));
-        formData.append('authorEmail', submitted.authorEmail);
-        formData.append('description', submitted.description);
+        const data = {
+            genre: JSON.stringify(submitted.genre),
+            type: JSON.stringify(submitted.type),
+            actorNumber: parseInt(String(submitted.actorNumber), 10),
+            actressNumber: parseInt(String(submitted.actressNumber), 10),
+            vehicleNumber: parseInt(String(submitted.vehicleNumber), 10),
+            budget: parseInt(String(submitted.budget), 10),
+            requestAuthorEmail: submitted.requestAuthorEmail,
+            description: submitted.description
+        };
 
-        this.publicScenariosAsyncs.postPublicScenarioRequest(formData).subscribe(
+        this.publicScenariosAsyncs.postPublicScenarioRequest(data)
+            .finally(this.resetForm.bind(this))
+            .subscribe(
             (response: ResponseObject) => {
                 const successMessage = helpers.translateServerResponse(response.code);
                 this.showAlert(APP_NAME, successMessage);
