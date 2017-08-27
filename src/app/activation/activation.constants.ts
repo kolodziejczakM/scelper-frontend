@@ -1,5 +1,3 @@
-
-
 export const PARAM_NAME = 'deleteCode';
 
 export const LOADING_TEXT = 'Twój kod jest przetwarzany. Prosimy o chwilę cierpliwości...';

@@ -23,7 +23,7 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicScenariosComponent } from './public-scenarios/public-scenarios.component';
 import { InterviewComponent } from './interview/interview.component';
-import { ScenarioActivationComponent } from './scenario-activation/scenario-activation.component';
+import { ActivationComponent } from './activation/activation.component';
 import { PromptComponent } from './modals/prompt/prompt.component';
 import { AlertComponent } from './modals/alert/alert.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -53,8 +53,8 @@ const appRoutes: Routes = [
     { path: 'interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
     { path: 'public-scenarios/requests', component: PublicScenariosRequestsComponent },
-    { path: 'public-scenarios/activation/:deleteCode', component: ScenarioActivationComponent },
-    { path: 'public-scenarios/requests/activation/:deleteCode', component: ScenarioActivationComponent }
+    { path: 'public-scenarios/activation/:deleteCode', component: ActivationComponent },
+    { path: 'public-scenarios/requests/activation/:deleteCode', component: ActivationComponent }
 ];
 
 @NgModule({
@@ -70,7 +70,7 @@ const appRoutes: Routes = [
         InterviewerComponent,
         SymbolsComponent,
         InterviewerTutorialComponent,
-        ScenarioActivationComponent,
+        ActivationComponent,
         PromptComponent,
         AlertComponent,
         LoaderComponent,

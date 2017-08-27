@@ -7,13 +7,13 @@ import { PublicScenariosAsyncs } from '../public-scenarios/public-scenarios.asyn
 import { PARAM_NAME,
          LOADING_TEXT,
          SUCCESS_TEXT,
-         ERROR_TEXT } from './scenario-activation.constants';
+         ERROR_TEXT } from './activation.constants';
 
 @Component({
-    selector: 'sce-scenario-activation',
-    templateUrl: './scenario-activation.component.html'
+    selector: 'sce-activation',
+    templateUrl: './activation.component.html'
 })
-export class ScenarioActivationComponent implements OnInit {
+export class ActivationComponent implements OnInit {
 
     public deleteCode: string;
     public loading = true;
