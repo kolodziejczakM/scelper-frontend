@@ -11,10 +11,13 @@ export class ApiRoutesService {
 
     private publicScenarios = {
         getAll: () => `${this.apiBaseRoute}/public-scenarios`,
+        getAllRequests: () => `${this.apiBaseRoute}/public-scenarios/requests`,
         post: () => `${this.apiBaseRoute}/public-scenarios`,
         postRequest: () => `${this.apiBaseRoute}/public-scenarios/requests`,
-        patch: (deleteCode: string) => `${this.serverRoot}/activation/${deleteCode}`,
-        delete: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/${deleteCode}`
+        patch: (deleteCode: string) => `${this.serverRoot}/public-scenarios/activation/${deleteCode}`,
+        patchRequest: (deleteCode: string) => `${this.serverRoot}/public-scenarios/requests/activation/${deleteCode}`,
+        delete: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/${deleteCode}`,
+        deleteRequest: (deleteCode: string) => `${this.apiBaseRoute}/public-scenarios/requests/${deleteCode}`
     };
 
     private simpleInterview = {

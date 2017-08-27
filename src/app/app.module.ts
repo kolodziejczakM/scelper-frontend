@@ -53,7 +53,8 @@ const appRoutes: Routes = [
     { path: 'interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
     { path: 'public-scenarios/requests', component: PublicScenariosRequestsComponent },
-    { path: 'activation/:deleteCode', component: ScenarioActivationComponent }
+    { path: 'public-scenarios/activation/:deleteCode', component: ScenarioActivationComponent },
+    { path: 'public-scenarios/requests/activation/:deleteCode', component: ScenarioActivationComponent }
 ];
 
 @NgModule({

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { PublicScenariosAsyncs } from '../public-scenarios/public-scenarios.asyncs';
-import { ResponseObject } from '../interfaces';
 
 import { PARAM_NAME,
          LOADING_TEXT,
@@ -18,14 +15,15 @@ import { PARAM_NAME,
 })
 export class ScenarioActivationComponent implements OnInit {
 
-    deleteCode: string;
-    loading = true;
+    public deleteCode: string;
+    public loading = true;
 
-    loadingText: string = LOADING_TEXT;
-    successText: string = SUCCESS_TEXT;
-    errorText: string = ERROR_TEXT;
+    private loadingText: string = LOADING_TEXT;
+    private successText: string = SUCCESS_TEXT;
+    private errorText: string = ERROR_TEXT;
+    public visibleText = this.loadingText;
 
-    visibleText = this.loadingText;
+    public requestsTypeSegment = 'requests';
 
     constructor(
         private publicScenariosAsyncs: PublicScenariosAsyncs,
@@ -34,37 +32,47 @@ export class ScenarioActivationComponent implements OnInit {
 
     ngOnInit() {
         this.setDeleteCode();
-        this.patchScenario();
+        this.matchPatchingMethod();
     }
 
     private setDeleteCode() {
         this.deleteCode = this.activatedRoute.snapshot.params[PARAM_NAME];
     }
 
-    private patchPublicScenario(deleteCode): Observable<ResponseObject | Error> {
-        return this.publicScenariosAsyncs.patchPublicScenario(deleteCode);
+    private matchPatchingMethod(): void {
+        if (this.router.url.includes(this.requestsTypeSegment)) {
+            this.patchScenarioRequest();
+        } else {
+            this.patchScenario();
+        }
     }
 
-    private patchScenario() {
+    private patchScenario(): void {
         this.loading = true;
 
-        this.patchPublicScenario(this.deleteCode).subscribe(
+        this.publicScenariosAsyncs.patchPublicScenario(this.deleteCode).subscribe(
             res => {
-                const that = this;
                 this.visibleText = this.successText;
-
-                setTimeout(function(){
-                    that.loading = false;
-                    that.router.navigate(['public-scenarios']);
-                }, 1000);
-
+                setTimeout(this.router.navigate.bind(this, ['public-scenarios']), 1000);
             },
-            (err: Response) => {
-                console.warn(err);
-                this.loading = false;
-                this.visibleText = this.errorText;
-            }
+            this.errorHandler.bind(this)
         );
     }
 
+    private patchScenarioRequest(): void {
+        this.loading = true;
+
+        this.publicScenariosAsyncs.patchPublicScenarioRequest(this.deleteCode).subscribe(
+            res => {
+                this.visibleText = this.successText;
+                setTimeout(this.router.navigate.bind(this, ['public-scenarios/requests']), 1000);
+            },
+            this.errorHandler.bind(this)
+        );
+    }
+
+    private errorHandler(): void {
+        this.loading = false;
+        this.visibleText = this.errorText;
+    }
 }

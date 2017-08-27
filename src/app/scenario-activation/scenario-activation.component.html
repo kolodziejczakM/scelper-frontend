@@ -1,2 +1,6 @@
-
-<sce-loader *ngIf="loading" [text]="visibleText" [logoVisible]="false"></sce-loader>
+<section class="scenario-activation-wrapper">
+    <sce-loader *ngIf="loading" [text]="visibleText" [logoVisible]="false"></sce-loader>
+    <p *ngIf="!loading"class="text-centered margin-top-20">
+        {{ visibleText }}
+    </p>
+</section>
