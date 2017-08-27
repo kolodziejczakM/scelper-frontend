@@ -1,0 +1,52 @@
+.public-scenarios-request-wrapper {
+    position: relative;
+    box-shadow: 1px 1px 10px 1px;
+    width: 400px;
+    padding: 20px;
+    overflow-wrap: break-word;
+
+    p {
+        margin: 5px 0px;
+    }
+
+    .delete-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        opacity: 0.25;
+    }
+
+    .pin {
+        background-color: #aaa;
+        background-image: linear-gradient(to left, hsla(0,0%,100%,.2), hsla(0,0%,0%,.2));
+        display: block;
+        height: 2em;
+        left: 50%;
+        margin: -1em -.05em;
+        position: absolute;
+        top: 0px;
+        width: .1em;
+
+        &:before {
+            content: '';
+            height: 1.5em;
+            left: 0;
+            position: absolute;
+            top: .5em;
+            transform: rotate(57.5deg);
+            transform-origin: 50% 100%;
+            width: .1em;
+        }
+
+        &:after {
+            background-color: $scelper-green;
+            background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.2), hsla(0,0%,0%,.2));
+            border-radius: 50%;
+            content: '';
+            height: .8em;
+            left: -.35em;
+            position: absolute;
+            width: .8em;
+        }
+    }
+}

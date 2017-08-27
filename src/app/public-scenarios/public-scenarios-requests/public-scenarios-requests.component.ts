@@ -32,21 +32,19 @@ export class PublicScenariosRequestsComponent implements OnInit {
         .subscribe(
             (res: PublicScenarioRequest[]) => {
                 this.scenariosRequests = res.map(this.stringifyScenarioRequest);
-               // this.fetchingScenariosRequests = false;
             },
             (err: Error) => {
                 console.warn(err);
                 this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenariosRequestsDownload'));
                 this.appStoreActions.setShowError(true);
-               // this.fetchingScenariosRequests = false;
             }
         );
     }
 
     private stringifyScenarioRequest(scenarioRequest: PublicScenarioRequest): PublicScenarioRequest {
-        scenarioRequest.type = scenarioRequest.type.label;
-        scenarioRequest.genre = scenarioRequest.genre.label;
-
+        scenarioRequest.type = scenarioRequest.type.label.toLowerCase();
+        scenarioRequest.genre = scenarioRequest.genre.label.toLowerCase();
+        scenarioRequest.updatedAt = new Date(scenarioRequest.updatedAt).toLocaleString().split(',')[0];
         return scenarioRequest;
     }
 

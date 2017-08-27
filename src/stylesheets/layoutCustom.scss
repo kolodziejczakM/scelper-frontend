@@ -3,6 +3,14 @@
     box-sizing: border-box;
 }
 
+::selection {
+    background: $scelper-gray-dark;
+}
+
+::-moz-selection {
+    background: $scelper-gray-dark;
+}
+
 body {
     overflow-y: scroll;
 }

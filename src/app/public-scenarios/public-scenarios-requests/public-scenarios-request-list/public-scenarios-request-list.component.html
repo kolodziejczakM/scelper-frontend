@@ -1,3 +1,7 @@
 <section class="public-scenarios-request-list-wrapper">
-    <sce-public-scenarios-request></sce-public-scenarios-request>
+    <ul>
+        <li *ngFor="let request of requestList">
+            <sce-public-scenarios-request [scenarioRequest]="request"></sce-public-scenarios-request>
+        </li>
+    </ul>
 </section>

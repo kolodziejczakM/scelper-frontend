@@ -1,3 +1,35 @@
 <section class="public-scenarios-request-wrapper">
-    public-scenarios-request works!
+    <div class="pin"></div>
+    <div class="date-info">
+        Przypięto:
+        <span class="bold">{{ scenarioRequest.updatedAt }}</span> przez
+        <p class="bold">{{ scenarioRequest.requestAuthorEmail }}</p>
+    </div>
+    <div class="delete-icon">
+        <i aria-hidden="true" class="fa fa-trash fa-2x"></i>
+    </div>
+    <div class="form-field-description">
+        <p>
+            Potrzebuje scenariusza na
+            <span class="bold">{{ scenarioRequest.type }}</span> film
+            <span class="bold">{{ scenarioRequest.genre }}</span>.
+        </p>
+        <p>
+            Mam do dyspozycji
+            <span class="bold">{{ scenarioRequest.actorNumber }} aktora(ów)</span> i
+            <span class="bold">{{ scenarioRequest.actressNumber }} aktorkę(ek)</span>.
+        </p>
+        <p>
+            Liczba pojazdów, którymi dysponuje:
+            <span class="bold">{{ scenarioRequest.vehicleNumber }}</span>.
+         </p>
+        <p>
+            Mój budżet na potencjalny film:
+            <span class="bold">{{ scenarioRequest.budget }} zł</span>.
+        </p>
+    </div>
+    <div class="user-description">
+        <p class="bold"> Dodatkowy opis:</p>
+        <p>{{ scenarioRequest.description }}</p>
+    </div>
 </section>

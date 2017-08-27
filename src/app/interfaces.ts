@@ -33,6 +33,7 @@ export interface PublicScenarioRequest {
     budget: number;
     description: string;
     requestAuthorEmail: string;
+    updatedAt: any;
 }
 
 export interface ScenarioState {

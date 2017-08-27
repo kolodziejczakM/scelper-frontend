@@ -20,13 +20,13 @@ export class AuthorsComponent {
         {
             name: 'Marcin Kołodziejczak',
             imagePath: `${this.assetsBasePath}/ceo.jpg`,
-            description: 'CEO, Programista',
+            description: 'CEO, developer',
             email: 'ceo@scelper.com'
         },
         {
             name: 'Karolina Growiec',
             imagePath: `${this.assetsBasePath}/karolinaGrowiec.jpg`,
-            description: 'Architekt informacji',
+            description: 'Support',
             email: 'karolina.growiec@gmail.com'
         },
         {
