@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -45,6 +46,8 @@ import { CookieLawPanelComponent } from './cookie-law-panel/cookie-law-panel.com
 import { RecaptchaComponent } from './shared/recaptcha/recaptcha.component';
 import { NewScenarioRequestFormComponent } from './public-scenarios/new-scenario-request-form/new-scenario-request-form.component';
 import { PublicScenariosRequestsComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-requests.component';
+import { PublicScenariosRequestListComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-request-list/public-scenarios-request-list.component';
+import { PublicScenariosRequestComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-request/public-scenarios-request.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -84,7 +87,9 @@ const appRoutes: Routes = [
         CookieLawPanelComponent,
         RecaptchaComponent,
         NewScenarioRequestFormComponent,
-        PublicScenariosRequestsComponent
+        PublicScenariosRequestsComponent,
+        PublicScenariosRequestListComponent,
+        PublicScenariosRequestComponent
     ],
     imports: [
         BrowserModule,
