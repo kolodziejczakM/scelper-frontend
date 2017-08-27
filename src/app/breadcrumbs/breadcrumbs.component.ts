@@ -10,8 +10,6 @@ import { Breadcrumb } from '../interfaces';
 })
 export class BreadcrumbsComponent {
 
-    public separator = '>';
-
     public possiblePaths = {
         "interview": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[],
         "interview/simple": [{ label: 'Strona główna', href: '/' }] as Breadcrumb[],
@@ -27,5 +25,4 @@ export class BreadcrumbsComponent {
         const keyName = Object.keys(this.possiblePaths).find((key) => location.href.split('#').pop().slice(1) === key);
         return this.possiblePaths[keyName];
     }
-
 }
