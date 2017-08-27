@@ -53,7 +53,7 @@ export class ActivationComponent implements OnInit {
         this.publicScenariosAsyncs.patchPublicScenario(this.deleteCode).subscribe(
             res => {
                 this.visibleText = this.successText;
-                setTimeout(this.router.navigate.bind(this, ['public-scenarios']), 1000);
+                setTimeout(this.router.navigate.bind(this.router, ['public-scenarios']), 1000);
             },
             this.errorHandler.bind(this)
         );
@@ -65,7 +65,7 @@ export class ActivationComponent implements OnInit {
         this.publicScenariosAsyncs.patchPublicScenarioRequest(this.deleteCode).subscribe(
             res => {
                 this.visibleText = this.successText;
-                setTimeout(this.router.navigate.bind(this, ['public-scenarios/requests']), 1000);
+                setTimeout(this.router.navigate.bind(this.router, ['public-scenarios/requests']), 1000);
             },
             this.errorHandler.bind(this)
         );

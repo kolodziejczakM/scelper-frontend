@@ -30,6 +30,8 @@ export const COMMON_MSG = new Map([
 export const ERROR_MSG = new Map([
     ['scenariosDownload',
         'Wystąpił problem podczas pobierania listy scenariuszy. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
+    ['scenariosRequestsDownload',
+        'Wystąpił problem podczas pobierania listy zleceń. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
     ['scenarioAdd',
         'Wystąpił problem podczas dodawania scenariusza. Spróbuj ponownie lub skontaktuj się z administracją'],
     ['scenarioRequestAdd',
