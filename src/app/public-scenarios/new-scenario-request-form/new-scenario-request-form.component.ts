@@ -6,10 +6,9 @@ import { PublicScenariosAsyncs } from '../public-scenarios.asyncs';
 import { ModalsService } from '../../modals/modals.service';
 
 import { NumberValidator } from '../../shared/number.validator';
-import * as helpers from '../../app.helpers';
+import { COMMON_MSG } from '../../app.constants';
 
-import { ResponseObject,
-         PublicScenarioRequest,
+import { PublicScenarioRequest,
          ScenarioGenre,
          ScenarioType } from '../../interfaces';
 
@@ -184,7 +183,6 @@ export class NewScenarioRequestFormComponent implements OnInit {
     }
 
     public submitRequest(submitted: PublicScenarioRequest): void {
-        console.log('request has been submitted: ', submitted);
 
         const data = {
             genre: JSON.stringify(submitted.genre),
@@ -197,13 +195,12 @@ export class NewScenarioRequestFormComponent implements OnInit {
             description: submitted.description
         };
 
+        this.resetForm();
+        this.showAlert(APP_NAME, COMMON_MSG.get('emailSent'));
+
         this.publicScenariosAsyncs.postPublicScenarioRequest(data)
-            .finally(this.resetForm.bind(this))
-            .subscribe(
-            (response: ResponseObject) => {
-                const successMessage = helpers.translateServerResponse(response.code);
-                this.showAlert(APP_NAME, successMessage);
-            },
+        .subscribe(
+            () => {},
             (err: Error) => {
                 console.warn(err);
                 this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioRequestAdd'));

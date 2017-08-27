@@ -1,9 +1,8 @@
 import { Component, ViewChild, ElementRef, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as helpers from '../../app.helpers';
+import { COMMON_MSG } from '../../app.constants';
 
 import { PdfForm,
-         ResponseObject,
          ScenarioGenre,
          ScenarioState } from '../../interfaces';
 
@@ -176,11 +175,12 @@ export class NewScenarioFormComponent implements OnInit {
         formData.append('description', submitted.description);
         formData.append('file', that.fileBlob, that.fileName);
 
-        this.publicScenariosAsyncs.postPublicScenario(formData).subscribe(
-            (response: ResponseObject) => {
-                const successMessage = helpers.translateServerResponse(response.code);
-                this.showAlert(APP_NAME, successMessage);
-            },
+        this.resetForm();
+        this.showAlert(APP_NAME, COMMON_MSG.get('emailSent'));
+
+        this.publicScenariosAsyncs.postPublicScenario(formData)
+        .subscribe(
+            () => {},
             (err: Error) => {
                 console.warn(err);
                 this.appStoreActions.setErrorMessage(ERROR_MSG.get('scenarioAdd'));

@@ -21,6 +21,8 @@ export const SCENARIO_FILTER_DROPDOWN_OPTIONS = [
 export const COMMON_MSG = new Map([
     ['confirm',
         'Czy jesteś pewien?'],
+    ['emailSent',
+        'Sprawdź skrzynkę mailową. Wysłaliśmy Ci ważne informacje nt. kolejnych kroków.'],
     ['deleteScenarioPrompt',
         'Wprowadź kod usunięcia: ']
 ]);
@@ -42,7 +44,7 @@ export const ERROR_MSG = new Map([
 
 export const SERVER_SUCCESS_RESPONSES = {
     MAIL_SENT: {
-        msg: 'Sprawdź skrzynkę mailową. Wysłaliśmy Ci ważne informacje nt. kolejnych kroków.',
+        msg: COMMON_MSG.get('emailSent'),
         code: 'MAIL_SENT'
     },
     SCENARIO_UPDATED: {
