@@ -13,7 +13,16 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        opacity: 0.25;
+        color: rgba($scelper-gray-dark, 0.25);
+        cursor: pointer;
+
+        &:hover {
+            color: rgba($scelper-gray-dark, 0.5);
+        }
+    }
+
+    .email-highlighting {
+        color: darken($scelper-green, 10%);
     }
 
     .pin {
@@ -48,5 +57,11 @@
             position: absolute;
             width: .8em;
         }
+    }
+}
+
+@media(max-width: $mobile) {
+    .public-scenarios-request-wrapper {
+        width: 350px;
     }
 }

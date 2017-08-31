@@ -9,7 +9,7 @@ import { AlertComponent } from './alert/alert.component';
 export class ModalsService {
 
     constructor(
-        private dialogService: DialogService
+        public dialogService: DialogService
     ) { }
 
     public showAlert(title, message): void {

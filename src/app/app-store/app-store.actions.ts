@@ -18,11 +18,19 @@ export class AppStoreActions {
         this.appStoreService.errorMessage = value;
     }
 
+    public setScenarioRequestFilterChoice(value: ScenarioSelectFilterOption): void {
+        this.appStoreService.scenarioRequestFilterChoice = value;
+    }
+
+    public setScenarioRequestFilterValue(value: string): void {
+        this.appStoreService.scenarioRequestFilterValue = value;
+    }
+
     public setScenarioFilterChoice(value: ScenarioSelectFilterOption): void {
         this.appStoreService.scenarioFilterChoice = value;
     }
 
-    public scenarioFilterValue(value: string): void {
+    public setScenarioFilterValue(value: string): void {
         this.appStoreService.scenarioFilterValue = value;
     }
 

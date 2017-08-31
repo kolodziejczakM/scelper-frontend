@@ -60,7 +60,7 @@ export class PublicScenariosTableComponent {
     @reportClick(GA_ACTIONS.get('deletePublicScenario'))
     public removeScenario(): void {
 
-        this.showPrompt(COMMON_MSG.get('deleteScenarioPrompt')).subscribe((deleteCode) => {
+        this.showPrompt(COMMON_MSG.get('deletePrompt')).subscribe((deleteCode) => {
             if (!deleteCode) {
                 return;
             }

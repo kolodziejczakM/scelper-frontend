@@ -18,12 +18,23 @@ export const SCENARIO_FILTER_DROPDOWN_OPTIONS = [
     { id: 5, category: 'state', label: 'Stan' }
 ];
 
+export const SCENARIO_REQUEST_FILTER_DROPDOWN_OPTIONS = [
+    { id: 0, category: 'genre', label: 'Gatunek' },
+    { id: 1, category: 'type', label: 'typ' },
+    { id: 2, category: 'actorNumber', label: 'Liczba aktorów' },
+    { id: 3, category: 'actressNumber', label: 'Liczba aktorek' },
+    { id: 4, category: 'vehicleNumber', label: 'Liczba pojazdów' },
+    { id: 5, category: 'budget', label: 'Budżet na film (zł)' },
+    { id: 6, category: 'requestAuthorEmail', label: 'Autor zlecenia' },
+    { id: 7, category: 'description', label: 'Opis' }
+];
+
 export const COMMON_MSG = new Map([
     ['confirm',
         'Czy jesteś pewien?'],
     ['emailSent',
         'Sprawdź skrzynkę mailową. Wysłaliśmy Ci ważne informacje nt. kolejnych kroków.'],
-    ['deleteScenarioPrompt',
+    ['deletePrompt',
         'Wprowadź kod usunięcia: ']
 ]);
 
@@ -38,6 +49,8 @@ export const ERROR_MSG = new Map([
         'Wystąpił problem podczas dodawania zlecenia. Spróbuj ponownie lub skontaktuj się z administracją'],
     ['scenarioDelete',
         'Wystąpił problem podczas usuwania scenariusza. Sprawdź swój kod usunięcia i spróbuj ponownie.'],
+    ['scenarioRequestDelete',
+        'Wystąpił problem podczas usuwania zlecenia. Sprawdź swój kod usunięcia i spróbuj ponownie.'],
     ['questionsDownload',
         'Wystąpił problem podczas pobierania listy pytań. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
     ['interviewSummaryGeneration',
@@ -56,6 +69,10 @@ export const SERVER_SUCCESS_RESPONSES = {
     SCENARIO_REMOVED: {
         msg: 'Scenariusz został usunięty. W razie pytań prosimy o kontakt z administracją.',
         code: 'SCENARIO_REMOVED'
+    },
+    SCENARIO_REQUEST_REMOVED: {
+        msg: 'Zlecenie zostało usunięte. W razie pytań prosimy o kontakt z administracją.',
+        code: 'SCENARIO_REQUEST_REMOVED'
     }
 };
 

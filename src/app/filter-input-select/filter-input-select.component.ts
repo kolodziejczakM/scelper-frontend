@@ -9,7 +9,11 @@ import { ScenarioSelectFilterOption } from '../interfaces';
 })
 export class FilterInputSelectComponent implements OnInit {
 
-    @Input('selectOptions') selectOptions;
+    @Input('selectOptions')
+    public selectOptions;
+
+    @Input('actionName')
+    public actionName;
 
     public selectedFilter: ScenarioSelectFilterOption;
     public filterValue: string;
@@ -29,15 +33,15 @@ export class FilterInputSelectComponent implements OnInit {
 
     private clearInputField(): void {
         this.filterValue = '';
-        this.appStoreActions.scenarioFilterValue('');
+        this.appStoreActions[`set${this.actionName}Value`]('');
     }
 
     public onInputChange(): void {
-        this.appStoreActions.scenarioFilterValue(this.filterValue);
+        this.appStoreActions[`set${this.actionName}Value`](this.filterValue);
     }
 
     public onSelectChange(): void {
-        this.appStoreActions.setScenarioFilterChoice(this.selectedFilter);
+        this.appStoreActions[`set${this.actionName}Choice`](this.selectedFilter);
         this.clearInputField();
     }
 }

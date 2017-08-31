@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
-import { ScenarioSelectFilterOption, SimpleInterviewQuestion, ScelperSymbol } from '../interfaces';
+import { SCENARIO_FILTER_DROPDOWN_OPTIONS,
+         SCENARIO_REQUEST_FILTER_DROPDOWN_OPTIONS } from '../app.constants';
+import { ScenarioSelectFilterOption,
+         ScenarioRequestSelectFilterOption,
+         SimpleInterviewQuestion,
+         ScelperSymbol } from '../interfaces';
 
 @Injectable()
 export class AppStoreService {
@@ -11,6 +15,9 @@ export class AppStoreService {
 
     public scenarioFilterChoice: ScenarioSelectFilterOption = SCENARIO_FILTER_DROPDOWN_OPTIONS[0];
     public scenarioFilterValue = '';
+
+    public scenarioRequestFilterChoice: ScenarioRequestSelectFilterOption = SCENARIO_REQUEST_FILTER_DROPDOWN_OPTIONS[0];
+    public scenarioRequestFilterValue = '';
 
     public interviewerQuestions = new BehaviorSubject([{ id: 0, category: '', questionText: '' }] as SimpleInterviewQuestion[]);
     public currentInterviewerQuestion = new BehaviorSubject({} as SimpleInterviewQuestion);
@@ -32,6 +39,14 @@ export class AppStoreService {
 
     public getScenarioFilterValue(): string {
         return this.scenarioFilterValue;
+    }
+
+    public getScenarioRequestFilterChoice(): ScenarioSelectFilterOption {
+        return this.scenarioRequestFilterChoice;
+    }
+
+    public getScenarioRequestFilterValue(): string {
+        return this.scenarioRequestFilterValue;
     }
 
     public getInterviewerQuestions() {

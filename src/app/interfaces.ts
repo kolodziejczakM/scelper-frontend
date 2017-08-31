@@ -27,10 +27,10 @@ export interface PublicScenario {
 export interface PublicScenarioRequest {
     genre: any;
     type: any;
-    actorNumber: number;
-    actressNumber: number;
-    vehicleNumber: number;
-    budget: number;
+    actorNumber: number | string;
+    actressNumber: number | string;
+    vehicleNumber: number | string;
+    budget: number | string;
     description: string;
     requestAuthorEmail: string;
     updatedAt: any;
@@ -53,6 +53,12 @@ export interface ScenarioType {
 }
 
 export interface ScenarioSelectFilterOption {
+    id: number;
+    category: string;
+    label: string;
+}
+
+export interface ScenarioRequestSelectFilterOption {
     id: number;
     category: string;
     label: string;
@@ -87,6 +93,7 @@ export interface ScelperAuthor {
 }
 
 export interface Breadcrumb {
+    iconName: string;
     label: string;
     href: string;
 }

@@ -22,6 +22,5 @@
 <sce-new-scenario-form [visibility]="formVisible"></sce-new-scenario-form>
 <sce-new-scenario-request-form [visibility]="requestFormVisible"></sce-new-scenario-request-form>
 
-<sce-filter-input-select [selectOptions]="selectFilterOptions"></sce-filter-input-select>
-
+<sce-filter-input-select [actionName]="'ScenarioFilter'" [selectOptions]="selectFilterOptions"></sce-filter-input-select>
 <sce-public-scenarios-table [fetchingScenarios]="fetchingScenarios" [scenarios]="scenarios"></sce-public-scenarios-table>

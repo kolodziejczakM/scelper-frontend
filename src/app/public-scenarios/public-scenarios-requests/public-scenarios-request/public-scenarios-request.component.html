@@ -1,35 +1,49 @@
 <section class="public-scenarios-request-wrapper">
     <div class="pin"></div>
     <div class="date-info">
-        Przypięto:
-        <span class="bold">{{ scenarioRequest.updatedAt }}</span> przez
-        <p class="bold">{{ scenarioRequest.requestAuthorEmail }}</p>
+        <span>{{ staticTexts.get('added') }}</span>
+        <span class="bold">{{ scenarioRequest.updatedAt }}</span>
+        <span>{{ staticTexts.get('authorPrefix') }}</span>
+        <p class="bold email-highlighting">{{ scenarioRequest.requestAuthorEmail }}</p>
     </div>
-    <div class="delete-icon">
+    <div (click)="removeScenarioRequest()" class="delete-icon">
         <i aria-hidden="true" class="fa fa-trash fa-2x"></i>
     </div>
     <div class="form-field-description">
         <p>
-            Potrzebuje scenariusza na
-            <span class="bold">{{ scenarioRequest.type }}</span> film
-            <span class="bold">{{ scenarioRequest.genre }}</span>.
+            <span>{{ staticTexts.get('need') }}</span>
+            <span class="block-element">
+                <span class="bold">{{ scenarioRequest.type }}</span>
+                <span>{{ staticTexts.get('filmSuffix') }}</span>
+                <span class="bold">
+                    {{ scenarioRequest.genre }}{{ staticTexts.get('dot') }}
+                </span>
+            </span>
         </p>
         <p>
-            Mam do dyspozycji
-            <span class="bold">{{ scenarioRequest.actorNumber }} aktora(ów)</span> i
-            <span class="bold">{{ scenarioRequest.actressNumber }} aktorkę(ek)</span>.
+            <span>{{ staticTexts.get('have') }}</span>
+            <span class="bold">
+                {{ scenarioRequest.actorNumber }} {{ staticTexts.get('actor') }}
+            </span>
+            <span>{{ staticTexts.get('and') }}</span>
+            <span class="bold">
+                {{ scenarioRequest.actressNumber }} {{ staticTexts.get('actress') }}{{ staticTexts.get('dot') }}
+            </span>
         </p>
         <p>
-            Liczba pojazdów, którymi dysponuje:
-            <span class="bold">{{ scenarioRequest.vehicleNumber }}</span>.
+            <span>{{ staticTexts.get('vehiclesHave') }}</span>
+            <span class="bold">{{ scenarioRequest.vehicleNumber }}</span>
+            <span>{{ staticTexts.get('dot') }}</span>
          </p>
         <p>
-            Mój budżet na potencjalny film:
-            <span class="bold">{{ scenarioRequest.budget }} zł</span>.
+            <span>{{ staticTexts.get('budgetHave') }}</span>
+            <span class="bold">
+                {{ scenarioRequest.budget }} {{ staticTexts.get('currency') }}{{ staticTexts.get('dot') }}
+            </span>
         </p>
     </div>
     <div class="user-description">
-        <p class="bold"> Dodatkowy opis:</p>
+        <p class="bold">{{ staticTexts.get('additionalDescription') }}</p>
         <p>{{ scenarioRequest.description }}</p>
     </div>
 </section>
