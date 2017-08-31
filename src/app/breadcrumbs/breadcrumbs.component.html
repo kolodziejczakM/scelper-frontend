@@ -2,8 +2,8 @@
 <section class="breadcrumbs-wrapper">
     <ul class="breadcrumbs-list">
         <li *ngFor="let subsite of getCurrentUrlChilds()">
-            <i class="{{ subsite.iconName }}" aria-hidden="true"></i>
             <a class="breadcrumb" routerLink="{{ subsite.href }}">{{ subsite.label }}</a>
+            <i class="{{ subsite.iconName }}" aria-hidden="true"></i>
         </li>
     </ul>
 </section>

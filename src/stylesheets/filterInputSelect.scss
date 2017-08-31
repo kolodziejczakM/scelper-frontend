@@ -2,7 +2,7 @@
 .scelper-filter-input-select-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 0px 40px;
+    // padding: 0px 40px;
 }
 
 .filter-select {
@@ -27,10 +27,6 @@
     input.uk-input.filter-field {
         width: 160px;
     }
-
-    .scelper-filter-input-select-wrapper {
-        padding: 0px 20px;
-    }
 }
 
 @media(max-width: $mobile) {
@@ -44,9 +40,5 @@
 
     input.uk-input.filter-field {
         width: 120px;
-    }
-
-    .scelper-filter-input-select-wrapper {
-        padding: 10px;
     }
 }

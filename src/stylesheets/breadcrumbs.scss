@@ -1,8 +1,8 @@
 
 .breadcrumbs-wrapper {
-    min-height: 50px;
-    padding: 20px 40px 10px;
-    font-size: 20px;
+    min-height: 65px;
+    padding: 20px 20px 10px 40px;
+    font-size: 18px;
 
     .breadcrumbs-list {
         margin: 0px;
@@ -13,17 +13,31 @@
             display: inline-block;
             margin-top: 10px;
             margin-right: 25px;
+
+            &:last-of-type {
+                margin-right: 0px;
+            }
         }
 
         .breadcrumb {
             color: $scelper-gray-dark;
+            text-decoration: none;
+            margin-right: 5px;
+
+            &:hover {
+                color: darken($scelper-gray-dark, 20%);
+            }
         }
     }
 }
 
-@media(max-width: $mobile) {
+@media(max-width: $tablet) {
     .breadcrumbs-wrapper {
         font-size: 16px;
-        padding: 20px 40px 10px 20px;
+        padding: 20px 20px 10px 20px;
+
+        .breadcrumb {
+            margin-right: 2.5px;
+        }
     }
 }

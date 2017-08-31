@@ -51,6 +51,12 @@ td {
     }
 }
 
+@media(max-width: $tablet) {
+    .public-scenarios-table-wrapper {
+        padding: 0px 20px;
+    }
+}
+
 @media(max-width: $mobile) {
     $mobile-font-size: 13px;
 

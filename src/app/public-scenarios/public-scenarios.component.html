@@ -22,5 +22,11 @@
 <sce-new-scenario-form [visibility]="formVisible"></sce-new-scenario-form>
 <sce-new-scenario-request-form [visibility]="requestFormVisible"></sce-new-scenario-request-form>
 
-<sce-filter-input-select [actionName]="'ScenarioFilter'" [selectOptions]="selectFilterOptions"></sce-filter-input-select>
+<div class="options-panel">
+    <sce-filter-input-select [actionName]="'ScenarioFilter'" [selectOptions]="selectFilterOptions"></sce-filter-input-select>
+    <a class="uk-button uk-button-default request-list-link" routerLink="requests">
+        <i class="fa fa-list" aria-hidden="true"></i> Lista zleceń
+    </a>
+</div>
+
 <sce-public-scenarios-table [fetchingScenarios]="fetchingScenarios" [scenarios]="scenarios"></sce-public-scenarios-table>
