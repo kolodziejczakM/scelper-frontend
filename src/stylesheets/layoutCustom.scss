@@ -62,7 +62,14 @@ textarea.uk-textarea {
 .options-panel {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 0px 40px;
+
+    .request-list-link {
+        margin-left: 10px;
+        padding: 0px 10px;
+        white-space: nowrap;
+    }
 }
 
 .uk-button {
@@ -127,6 +134,7 @@ input[type='file'] {
     background-size: cover;
 }
 
+
 @media(max-width: $tablet) {
     .options-panel {
         padding: 0px 20px;
@@ -134,8 +142,16 @@ input[type='file'] {
 }
 
 @media(max-width: $mobile) {
+    $mobile-font-size: 14px;
+
     .options-panel {
         flex-direction: column-reverse;
+
+        .request-list-link {
+            margin-left: 0px;
+            white-space: nowrap;
+            font-size: $mobile-font-size;
+        }
 
         a {
             margin-bottom: 15px;

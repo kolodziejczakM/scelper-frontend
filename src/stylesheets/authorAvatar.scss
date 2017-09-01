@@ -27,3 +27,15 @@
         padding: 20px 0 20px 20px;
     }
 }
+
+@media(max-width: $mobile) {
+    .author-avatar-wrapper {
+        margin-right: 0px;
+        padding-left: 0px;
+
+        .author-image {
+            width: 80px;
+            height: 80px;
+        }
+    }
+}

@@ -6,6 +6,8 @@ export const KILO_BYTE = 1024;
 
 export const DEFAULT_SELECT_STATE = 'Wybierz';
 export const BACK_BUTTON_TEXT = 'Wróć';
+export const NO_RESULT_TEXT = 'Brak wyników dla wybranych kryteriów wyszukiwania.';
+export const MAYBE_YOU_TEXT = 'Może dorzucisz coś swojego?';
 
 export const GENERIC_ERROR_HEADER = 'Wystąpił błąd';
 

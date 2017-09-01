@@ -15,8 +15,9 @@ import { environment } from '../../../environments/environment';
 import { APP_NAME,
          ERROR_MSG,
          COMMON_MSG,
-         SCENARIO_FILTER_DROPDOWN_OPTIONS } from '../../app.constants';
-import { NO_RESULT_TEXT, MAYBE_YOU_TEXT } from '../public-scenarios-table/public-scenarios-table.constants';
+         SCENARIO_FILTER_DROPDOWN_OPTIONS,
+         NO_RESULT_TEXT,
+         MAYBE_YOU_TEXT } from '../../app.constants';
 
 @Component({
     selector: 'sce-public-scenarios-table',

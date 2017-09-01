@@ -9,6 +9,6 @@
                 {{option.label}}
             </option>
         </select>
-        <button class="uk-button uk-button-default" *ngIf="filterValue" (click)="clearInputField();">{{ staticTexts.get('clearBtnText') }}</button>
     </div>
+    <button class="uk-button uk-button-default reset-filter-button" *ngIf="filterValue" (click)="clearInputField();">{{ staticTexts.get('clearBtnText') }}</button>
 </section>

@@ -2,5 +2,5 @@
     <div class="options-panel">
         <sce-filter-input-select [actionName]="'ScenarioRequestFilter'" [selectOptions]="selectFilterOptions"></sce-filter-input-select>
     </div>
-    <sce-public-scenarios-request-list [requestList]="scenariosRequests"></sce-public-scenarios-request-list>
+    <sce-public-scenarios-request-list [fetchingRequests]="fetchingScenariosRequests" [requestList]="scenariosRequests"></sce-public-scenarios-request-list>
 </section>

@@ -1,8 +1,8 @@
 
 .scelper-filter-input-select-wrapper {
     display: flex;
-    justify-content: space-between;
-    // padding: 0px 40px;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 .filter-select {
@@ -10,13 +10,21 @@
     width: initial;
 }
 
-.request-list-link {
-    padding: 0px 10px;
-    margin-left: 5px;
+.reset-filter-button {
+    display: block;
+    margin-left: 10px;
 }
+
 
 @media(max-width: $tablet) {
     $tablet-font-size: 14px;
+
+    .reset-filter-button {
+        font-size: $tablet-font-size;
+        padding: 0px 10px;
+        display: block;
+        margin-left: 10px;
+    }
 
     input.uk-input.filter-field,
     .filter-select,
@@ -32,13 +40,21 @@
 @media(max-width: $mobile) {
     $mobile-font-size: 14px;
 
-    input.uk-input.filter-field,
-    .filter-select,
-    .request-list-link {
-        font-size: $mobile-font-size;
+    .reset-filter-button {
+        align-self: flex-end;
     }
 
-    input.uk-input.filter-field {
-        width: 120px;
+    .scelper-filter-input-select-wrapper {
+
+        input.uk-input.filter-field,
+        .filter-select {
+            font-size: $mobile-font-size;
+        }
+
+        select.uk-select,
+        input.uk-input.filter-field {
+            width: 80px;
+        }
+
     }
 }

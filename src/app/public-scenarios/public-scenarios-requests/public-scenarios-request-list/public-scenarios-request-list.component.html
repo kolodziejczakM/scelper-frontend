@@ -1,7 +1,17 @@
 <section class="public-scenarios-request-list-wrapper">
-    <ul #listNode>
-        <li *ngFor="let request of filterScenariosRequests(requestList)">
+    <ul [class.one-item]="requestList.length === 0" #listNode>
+        <li [class.last]="last" class="user-request" *ngFor="let request of filterScenariosRequests(requestList); let last = last;">
             <sce-public-scenarios-request [scenarioRequest]="request"></sce-public-scenarios-request>
+        </li>
+        <li [hidden]="requestList.length">
+            <sce-public-scenarios-request [scenarioRequest]="sampleRequest"></sce-public-scenarios-request>
+        </li>
+        <li class="margin-centered" [hidden]="fetchingRequests || filterScenariosRequests(requestList).length">
+            <div class="text-centered">
+                <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
+                <p>{{ noResultsText }}</p>
+                <p>{{ maybeYouText }}</p>
+            </div>
         </li>
     </ul>
 </section>
