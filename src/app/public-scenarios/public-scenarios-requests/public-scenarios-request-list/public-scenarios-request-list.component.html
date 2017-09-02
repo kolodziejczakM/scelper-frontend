@@ -1,5 +1,7 @@
 <section class="public-scenarios-request-list-wrapper">
-    <ul [class.one-item]="requestList.length === 0" #listNode>
+    <ul [ngClass]="{'zero-item': !filterScenariosRequests(requestList).length,
+                    'one-item': requestList.length === 0}"
+     #listNode>
         <li [class.last]="last" class="user-request" *ngFor="let request of filterScenariosRequests(requestList); let last = last;">
             <sce-public-scenarios-request [scenarioRequest]="request"></sce-public-scenarios-request>
         </li>

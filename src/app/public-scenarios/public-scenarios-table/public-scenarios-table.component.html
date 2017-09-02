@@ -1,6 +1,6 @@
 <section class="public-scenarios-table-wrapper">
-    <table class="custom-table">
-        <thead [hidden]="!filterScenarios(scenarios).length">
+    <table [hidden]="!filterScenarios(scenarios).length" class="custom-table">
+        <thead>
             <tr>
                 <th *ngFor="let category of selectFilterOptions"> {{ category.label }}</th>
                 <th>Opcje</th>
@@ -8,26 +8,24 @@
         </thead>
         <tbody>
             <tr *ngFor="let scenario of filterScenarios(scenarios); let i = index;">
-                <td class="long-text">{{ scenario.title }}</td>
-                <td class="long-text">{{ scenario.description }}</td>
-                <td>{{ scenario.authorEmail }}</td>
-                <td>{{ scenario.genre }}</td>
-                <td>{{ scenario.pages }}</td>
-                <td>{{ scenario.state }}</td>
-                <td class="row-options">
-                    <i (click)="downloadScenario(scenario.path);" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
-                    <i (click)="removeScenario();" class="fa fa-trash fa-2x" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr [hidden]="fetchingScenarios || filterScenarios(scenarios).length">
-                <td colspan="6">
-                    <div class="text-centered">
-                        <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
-                        <p>{{ noResultsText }}</p>
-                        <p>{{ maybeYouText }}</p>
-                    </div>
+                <td class="title-cell long-text">{{ scenario.title }}</td>
+                <td class="description-cell long-text">{{ scenario.description }}</td>
+                <td class="email-cell">{{ scenario.authorEmail }}</td>
+                <td class="genre-cell">{{ scenario.genre }}</td>
+                <td class="pages-cell">{{ scenario.pages }}</td>
+                <td class="state-cell">{{ scenario.state }}</td>
+                <td class="options-cell">
+                    <i (click)="downloadScenario(scenario.path)" class="fa fa-cloud-download fa-2x" aria-hidden="true"></i>
+                    <i (click)="removeScenario()" class="fa fa-trash fa-2x" aria-hidden="true"></i>
                 </td>
             </tr>
         </tbody>
     </table>
+    <div class="margin-centered margin-top-20" [hidden]="fetchingScenarios || filterScenarios(scenarios).length">
+        <div class="text-centered">
+            <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
+            <p>{{ noResultsText }}</p>
+            <p>{{ maybeYouText }}</p>
+        </div>
+    </div>
 </section>

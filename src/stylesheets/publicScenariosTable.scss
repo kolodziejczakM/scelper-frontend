@@ -1,4 +1,3 @@
-
 $td-padding: 10px;
 
 .public-scenarios-table-wrapper {
@@ -19,11 +18,13 @@ td {
 
 .custom-table {
     width: 100%;
+    min-width: 900px;
     margin: 20px auto;
 
     th,
     td {
         padding: $td-padding;
+        word-wrap: break-word;
     }
 
     th {
@@ -36,18 +37,54 @@ td {
     }
 
     td {
-        max-width: 500px;
-        min-width: 90px;
 
-        &.long-text {
-            min-width: 200px;
-        }
-
-        &.row-options {
+        &.options-cell {
             font-size: 14px;
             padding-right: 0px;
             text-align: center;
         }
+    }
+
+    .title-cell {
+        width: 20%;
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    .description-cell {
+        width: 25%;
+        min-width: 250px;
+        max-width: 300px;
+    }
+
+    .email-cell {
+        width: 20%;
+        min-width: 150px;
+        max-width: 300px;
+    }
+
+    .genre-cell {
+        width: 10%;
+        min-width: 150px;
+        max-width: 250px;
+    }
+
+    .pages-cell {
+        width: 7%;
+        min-width: 90px;
+        max-width: 150px;
+    }
+
+    .state-cell {
+        width: 10%;
+        min-width: 120px;
+        max-width: 200px;
+    }
+
+    .options-cell {
+        width: 12%;
+        min-width: 100px;
+        max-width: 180px;
     }
 }
 
@@ -69,7 +106,7 @@ td {
     }
 
     .custom-table {
-        $td-padding: $td-padding / 2;
+        $td-padding: $td-padding / 1.2;
         font-size: $mobile-font-size;
         margin-top: 10px;
 
@@ -77,11 +114,7 @@ td {
         td {
             padding: $td-padding;
 
-            &.long-text {
-                min-width: 100px;
-            }
-
-            &.row-options {
+            &.options-cell {
                 font-size: 11px;
             }
         }
