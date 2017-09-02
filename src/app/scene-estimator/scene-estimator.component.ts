@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SceneEstimatorComponent implements OnInit {
 
     public estimationForm: FormGroup;
+    private waitingForResponse = false;
 
     constructor(
         private formBuilder: FormBuilder
@@ -29,6 +30,7 @@ export class SceneEstimatorComponent implements OnInit {
     }
 
     public submitEstimation(submitted): void {
+        this.waitingForResponse = true;
         console.log('submitted estimation form! :)');
     }
 }
