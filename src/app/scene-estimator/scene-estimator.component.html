@@ -1,3 +1,16 @@
 <section class="scene-estimator-wrapper">
-
+    <form [formGroup]="estimationForm" (ngSubmit)="submitEstimation(estimationForm.value)">
+        <fieldset>
+            <input formControlName="sceneText" class="uk-input" type="text" placeholder="Tutaj wklej tekst swojej sceny">
+        </fieldset>
+        <sce-recaptcha [customId]="'recaptcha3'" #recaptcha></sce-recaptcha>
+        <div class="margin-top-15">
+            Przycisk 'Estymuj' uaktywni się gdy pola zostaną poprawnie wypełnione.
+        </div>
+        <div class="uk-margin">
+            <button type="submit" class="uk-button uk-button-primary block-element margin-centered" [disabled]="!isFormValid() || !recaptcha.isApproved()">
+                Estymuj
+            </button>
+        </div>
+    </form>
 </section>
