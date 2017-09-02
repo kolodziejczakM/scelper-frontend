@@ -1,0 +1,18 @@
+<section class="uk-child-width-1-1 uk-child-width-1-2@s uk-grid uk-padding margin-centered">
+    <div class="uk-light uk-background-secondary uk-padding">
+        <h3>{{ staticTexts.get('simpleInterviewHeader') }}</h3>
+        <div class="interview-block">
+            <i class="fa fa-id-card-o fa-5x" aria-hidden="true"></i>
+            <span>{{ staticTexts.get('simpleInterviewDescription') }}</span>
+        </div>
+        <button routerLink="/creative-room/interview/simple" routerLinkActive="active" class="uk-button uk-button-default">{{ staticTexts.get('startBtnText') }}</button>
+    </div>
+    <div class="full-interview uk-background-muted uk-padding">
+        <h3>Zmierz swoją scenę</h3>
+        <div class="interview-block black">
+            <i class="fa fa-tachometer fa-5x" aria-hidden="true"></i>
+            <span>Sprawdź czy scena z Twojego scenariusza nie jest zbyt długa.</span>
+        </div>
+        <button class="uk-button uk-button-default">{{ staticTexts.get('startBtnText') }}</button>
+    </div>
+</section>

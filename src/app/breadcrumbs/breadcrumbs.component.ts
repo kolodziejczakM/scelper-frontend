@@ -11,8 +11,11 @@ import { Breadcrumb } from '../interfaces';
 export class BreadcrumbsComponent {
 
     public possiblePaths = {
-        "interview": [{ iconName: 'fa fa-home', label: 'Strona główna', href: '/' }] as Breadcrumb[],
-        "interview/simple": [{ iconName: 'fa fa-home', label: 'Strona główna', href: '/' }] as Breadcrumb[],
+        "creative-room": [{ iconName: 'fa fa-home', label: 'Strona główna', href: '/' }] as Breadcrumb[],
+        "creative-room/interview/simple": [
+            { iconName: 'fa fa-home', label: 'Strona główna', href: '/' },
+            { iconName: 'fa fa-cubes', label: 'Creative room', href: '/creative-room' },
+        ] as Breadcrumb[],
         "public-scenarios": [{ iconName: 'fa fa-home', label: 'Strona główna', href: '/' }] as Breadcrumb[],
         "public-scenarios/requests": [
             { iconName: 'fa fa-home', label: 'Strona główna', href: '/' },

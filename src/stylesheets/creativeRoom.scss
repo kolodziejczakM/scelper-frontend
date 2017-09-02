@@ -1,0 +1,14 @@
+.interview-block {
+    display: flex;
+    align-items: center;
+    color: $scelper-white;
+    padding: 20px 0px;
+
+    &.black {
+        color: $scelper-black;
+    }
+
+    span {
+        margin-left: 15px;
+    }
+}

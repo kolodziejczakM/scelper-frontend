@@ -23,7 +23,7 @@ import { SimpleInterviewAsyncs } from './simple-interview/simple-interview.async
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PublicScenariosComponent } from './public-scenarios/public-scenarios.component';
-import { InterviewComponent } from './interview/interview.component';
+import { CreativeRoomComponent } from './creative-room/creative-room.component';
 import { ActivationComponent } from './activation/activation.component';
 import { PromptComponent } from './modals/prompt/prompt.component';
 import { AlertComponent } from './modals/alert/alert.component';
@@ -52,8 +52,8 @@ import { PublicScenariosRequestComponent } from './public-scenarios/public-scena
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
     { path: 'authors', component: AuthorsComponent },
-    { path: 'interview', component: InterviewComponent },
-    { path: 'interview/simple', component: SimpleInterviewComponent },
+    { path: 'creative-room', component: CreativeRoomComponent },
+    { path: 'creative-room/interview/simple', component: SimpleInterviewComponent },
     { path: 'public-scenarios', component: PublicScenariosComponent },
     { path: 'public-scenarios/requests', component: PublicScenariosRequestsComponent },
     { path: 'public-scenarios/activation/:deleteCode', component: ActivationComponent },
@@ -68,7 +68,7 @@ const appRoutes: Routes = [
         PublicScenariosTableComponent,
         NewScenarioFormComponent,
         FilterInputSelectComponent,
-        InterviewComponent,
+        CreativeRoomComponent,
         SimpleInterviewComponent,
         InterviewerComponent,
         SymbolsComponent,
