@@ -48,6 +48,7 @@ import { NewScenarioRequestFormComponent } from './public-scenarios/new-scenario
 import { PublicScenariosRequestsComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-requests.component';
 import { PublicScenariosRequestListComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-request-list/public-scenarios-request-list.component';
 import { PublicScenariosRequestComponent } from './public-scenarios/public-scenarios-requests/public-scenarios-request/public-scenarios-request.component';
+import { SceneEstimatorComponent } from './scene-estimator/scene-estimator.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomepageComponent },
@@ -89,7 +90,8 @@ const appRoutes: Routes = [
         NewScenarioRequestFormComponent,
         PublicScenariosRequestsComponent,
         PublicScenariosRequestListComponent,
-        PublicScenariosRequestComponent
+        PublicScenariosRequestComponent,
+        SceneEstimatorComponent
     ],
     imports: [
         BrowserModule,

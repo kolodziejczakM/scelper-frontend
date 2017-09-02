@@ -5,10 +5,10 @@
         <li [class.last]="last" class="user-request" *ngFor="let request of filterScenariosRequests(requestList); let last = last;">
             <sce-public-scenarios-request [scenarioRequest]="request"></sce-public-scenarios-request>
         </li>
-        <li [hidden]="!fetchingRequests && requestList.length">
+        <li *ngIf="!fetchingRequests && !requestList.length">
             <sce-public-scenarios-request [scenarioRequest]="sampleRequest"></sce-public-scenarios-request>
         </li>
-        <li class="margin-centered" [hidden]="fetchingRequests || filterScenariosRequests(requestList).length">
+        <li class="margin-centered" *ngIf="!fetchingRequests && !filterScenariosRequests(requestList).length">
             <div class="text-centered">
                 <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
                 <p>{{ noResultsText }}</p>

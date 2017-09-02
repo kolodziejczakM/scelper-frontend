@@ -23,6 +23,14 @@
     font-weight: bold;
 }
 
+.white-font {
+    color: $scelper-white;
+}
+
+.black-font {
+    color: $scelper-black;
+}
+
 $unit-multiplier: 1px;
 $dimensions: 5 10 15 20 25 30;
 $directions: top right bottom left;

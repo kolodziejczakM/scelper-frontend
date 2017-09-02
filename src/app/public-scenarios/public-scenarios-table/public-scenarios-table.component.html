@@ -1,5 +1,5 @@
 <section class="public-scenarios-table-wrapper">
-    <table [hidden]="!filterScenarios(scenarios).length" class="custom-table">
+    <table *ngIf="filterScenarios(scenarios).length" class="custom-table">
         <thead>
             <tr>
                 <th *ngFor="let category of selectFilterOptions"> {{ category.label }}</th>
@@ -21,7 +21,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="margin-centered margin-top-20" [hidden]="fetchingScenarios || filterScenarios(scenarios).length">
+    <div class="margin-centered margin-top-20" *ngIf="!fetchingScenarios && !filterScenarios(scenarios).length">
         <div class="text-centered">
             <i class="fa fa-frown-o fa-4x" aria-hidden="true"></i>
             <p>{{ noResultsText }}</p>

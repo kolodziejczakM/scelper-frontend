@@ -1,8 +1,8 @@
-.interview-block {
+.common-block {
     display: flex;
     align-items: center;
     color: $scelper-white;
-    padding: 20px 0px;
+    padding: 10px 0px 20px;
 
     &.black {
         color: $scelper-black;
@@ -10,5 +10,10 @@
 
     span {
         margin-left: 15px;
+    }
+
+    .common-block-text {
+        display: flex;
+        flex-direction: column;
     }
 }

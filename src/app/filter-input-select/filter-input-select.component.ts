@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { STATIC_TEXTS } from './filter-input-select.constants';
 import { ScenarioSelectFilterOption } from '../interfaces';
@@ -7,7 +8,7 @@ import { ScenarioSelectFilterOption } from '../interfaces';
     selector: 'sce-filter-input-select',
     templateUrl: './filter-input-select.component.html'
 })
-export class FilterInputSelectComponent implements OnInit {
+export class FilterInputSelectComponent implements OnInit, OnDestroy {
 
     @Input('selectOptions')
     public selectOptions;
@@ -19,12 +20,24 @@ export class FilterInputSelectComponent implements OnInit {
     public filterValue: string;
     public staticTexts: Map<string, string> = STATIC_TEXTS;
 
+    private routerSubscription;
+
     constructor(
+        private router: Router,
         private appStoreActions: AppStoreActions
     ) { }
 
     ngOnInit() {
         this.setSelectedFilter();
+        this.resetOnRouteChange();
+    }
+
+    ngOnDestroy() {
+        this.routerSubscription.unsubscribe();
+    }
+
+    private resetOnRouteChange(): void {
+        this.routerSubscription = this.router.events.subscribe(this.clearInputField.bind(this));
     }
 
     private setSelectedFilter(): void {
