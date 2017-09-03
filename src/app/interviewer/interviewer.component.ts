@@ -109,6 +109,7 @@ export class InterviewerComponent implements OnInit {
 
                 anchor.href = URL.createObjectURL(pdfBlob);
                 anchor.download = GENERATED_PDF_FILENAME;
+                document.body.appendChild(anchor);
                 anchor.click();
             },
             (err: Error) => {
