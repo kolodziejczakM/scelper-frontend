@@ -7,3 +7,7 @@ export function translateServerResponse(respCode: string): string {
         }
     }
 }
+
+export function roundSecondsToMinutes(seconds: number) {
+    return Math.round(seconds / 60);
+}

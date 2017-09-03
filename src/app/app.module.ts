@@ -19,6 +19,7 @@ import { ApiRoutesService } from './api-routes.service';
 import { ModalsService } from './modals/modals.service';
 import { PublicScenariosAsyncs } from './public-scenarios/public-scenarios.asyncs';
 import { SimpleInterviewAsyncs } from './simple-interview/simple-interview.asyncs';
+import { CreativeRoomAsyncs } from './creative-room/creative-room.asyncs';
 
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -117,7 +118,8 @@ const appRoutes: Routes = [
         ApiRoutesService,
         ModalsService,
         PublicScenariosAsyncs,
-        SimpleInterviewAsyncs
+        SimpleInterviewAsyncs,
+        CreativeRoomAsyncs
     ],
     bootstrap: [AppComponent]
 })

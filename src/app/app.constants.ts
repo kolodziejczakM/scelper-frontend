@@ -56,7 +56,9 @@ export const ERROR_MSG = new Map([
     ['questionsDownload',
         'Wystąpił problem podczas pobierania listy pytań. Sprawdź połączenie internetowe lub skontaktuj się z administracją'],
     ['interviewSummaryGeneration',
-        'Wystąpił problem podczas generowania podsumowania. Spróbuj ponownie lub skontaktuj się z administracją']
+        'Wystąpił problem podczas generowania podsumowania. Spróbuj ponownie lub skontaktuj się z administracją'],
+    ['tts',
+        'Wystąpił problem podczas połączenia z zewnętrznym dostawcą usługi. Spróbuj ponownie lub skontaktuj się z administracją.']
 ]);
 
 export const SERVER_SUCCESS_RESPONSES = {

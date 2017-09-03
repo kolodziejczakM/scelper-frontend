@@ -83,6 +83,7 @@ export interface ScelperSymbol {
 export interface ApiPathsObject {
     publicScenarios: any;
     simpleInterview: any;
+    creativeRoom: any;
 }
 
 export interface ScelperAuthor {

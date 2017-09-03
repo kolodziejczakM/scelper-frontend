@@ -3,19 +3,47 @@
         <fieldset>
             <input formControlName="sceneText" class="uk-input" type="text" placeholder="Tutaj wklej tekst swojej sceny">
         </fieldset>
-        <div *ngIf="!waitingForResponse">
+        <div *ngIf="!waitingForResponse && !estimationCanBePlayed && !estimationDone">
             <sce-recaptcha [customId]="'recaptcha3'" #recaptcha></sce-recaptcha>
             <div class="margin-top-15">
-                Przycisk 'Estymuj' uaktywni się gdy pola zostaną poprawnie wypełnione.
+                {{ commonTexts.get('unlockSubmit') }}
             </div>
             <div class="uk-margin">
                 <button type="submit" class="uk-button uk-button-primary block-element margin-centered" [disabled]="!isFormValid() || !recaptcha.isApproved()">
-                    Estymuj
+                    {{ commonTexts.get('startEstimation') }}
                 </button>
             </div>
         </div>
+        <div *ngIf="!waitingForResponse && estimationDone">
+            <p class="bold">{{ sceneDurationTexts.get('head') }} {{ sceneDuration }} {{ sceneDurationUnitName }}.</p>
+            <p>{{ sceneDurationTexts.get('tail') }} {{ sceneDurationTexts.get('conflict') }}</p>
+            <p>{{ sceneDurationTexts.get('goodLuck') }}</p>
+
+            <div *ngIf="!isPlayerPlaying()">
+                <button (click)="playRecord()" type="button" class="uk-button uk-button-primary block-element margin-centered">
+                    {{ commonTexts.get('playRecord') }}
+                    <span class="margin-left-10">
+                        <i class="fa fa-play" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+
+            <div *ngIf="isPlayerPlaying()">
+                <button (click)="pauseRecord()" type="button" class="uk-button uk-button-primary block-element margin-centered">
+                    {{ commonTexts.get('pauseRecord') }}
+                    <span class="margin-left-10">
+                        <i class="fa fa-pause" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+
+            <button class="uk-button uk-button-default" (click)="resetEstimator();">
+                <span><i class="fa fa-undo" aria-hidden="true"></i></span>
+            </button>
+        </div>
         <div *ngIf="waitingForResponse">
-            <sce-loader></sce-loader>
+            <sce-loader [text]="loadingText"></sce-loader>
         </div>
     </form>
+    <audio #audioNode></audio>
 </section>

@@ -26,9 +26,14 @@ export class ApiRoutesService {
         postAnswers: () => `${this.apiBaseRoute}/interview-summary`
     };
 
+    private creativeRoom = {
+        postTextToSpeech: () => `${this.apiBaseRoute}/tts`
+    };
+
     private paths = {
         publicScenarios: this.publicScenarios,
-        simpleInterview: this.simpleInterview
+        simpleInterview: this.simpleInterview,
+        creativeRoom: this.creativeRoom
     };
 
     public getPaths(): ApiPathsObject {
