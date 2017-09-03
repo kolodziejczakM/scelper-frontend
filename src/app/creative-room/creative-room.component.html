@@ -16,7 +16,10 @@
         <h3>Zmierz swoją scenę</h3>
         <div class="common-block black">
             <i class="fa fa-tachometer fa-5x" aria-hidden="true"></i>
-            <span>Sprawdź czy scena z Twojego scenariusza nie jest zbyt długa.</span>
+            <span>
+                Sprawdź czy scena z Twojego scenariusza nie potrwa zbyt długo. <br>
+                Stosujemy tutaj jedną z prostszych metod estymacji - czytania na głos.
+            </span>
         </div>
         <button (click)="toggleSceneEstimator()" class="uk-button uk-button-default">{{ staticTexts.get('startBtnText') }}</button>
         <sce-scene-estimator *ngIf="sceneEstimatorVisible"></sce-scene-estimator>

@@ -32,7 +32,7 @@ export class SceneEstimatorComponent implements OnInit {
 
     public sceneDurationTexts = new Map ([
         ['head', 'Twoja scena potrwa ok.'],
-        ['tail', 'Długość sceny nie powinna przekraczać 5 minut, ale nie jest to żalazna zasada.'],
+        ['tail', 'Długość sceny nie powinna przekraczać 5 minut, ale nie jest to żelazna zasada.'],
         ['conflict', 'Pamiętaj, że każda scena powinna posiadać konflikt lub przynajmniej jego wprowadzenie.'],
         ['goodLuck', 'Powodzenia!']
     ]);
