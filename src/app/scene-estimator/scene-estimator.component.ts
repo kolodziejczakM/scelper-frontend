@@ -22,7 +22,7 @@ export class SceneEstimatorComponent implements OnInit {
     public sceneDuration: number = null;
     public sceneDurationUnitName = 'minut';
 
-    public loadingText = 'Długość przetwarzania zależy od długości trwania sceny. Prosimy o cierpliwość.';
+    public loadingText = 'Długość przetwarzania zależy od czasu trwania sceny. Prosimy o cierpliwość.';
     public commonTexts = new Map ([
         ['unlockSubmit', 'Przycisk "Estymuj" uaktywni się gdy pola zostaną poprawnie wypełnione.'],
         ['startEstimation', 'Estymuj'],
