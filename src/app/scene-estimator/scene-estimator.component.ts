@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AnalyticsService,
+         reportClick,
+         GA_ACTIONS } from '../shared/analytics.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { CreativeRoomAsyncs } from '../creative-room/creative-room.asyncs';
 
@@ -40,14 +43,14 @@ export class SceneEstimatorComponent implements OnInit {
 
     constructor(
         private appStoreActions: AppStoreActions,
+        private analyticsService: AnalyticsService,
         private creativeRoomAsyncs: CreativeRoomAsyncs,
         private formBuilder: FormBuilder
     ) {
         this.estimationForm = formBuilder.group({
             sceneText: [
                 '',
-                Validators.compose([Validators.required, Validators.minLength(1)]) // Validators.maxLength(5000)
-                // maxLength needs to be verified!
+                Validators.compose([Validators.required, Validators.minLength(1)])
             ]
         });
     }
@@ -63,14 +66,17 @@ export class SceneEstimatorComponent implements OnInit {
         return this.audioNode.nativeElement.duration > 0 && !this.audioNode.nativeElement.paused;
     }
 
+    @reportClick(GA_ACTIONS.get('playEstimationRecord'))
     public playRecord(): void {
         this.audioNode.nativeElement.play();
     }
 
+    @reportClick(GA_ACTIONS.get('pauseEstimationRecord'))
     public pauseRecord(): void {
         this.audioNode.nativeElement.pause();
     }
 
+    @reportClick(GA_ACTIONS.get('resetEstimation'))
     public resetEstimator(): void {
         this.waitingForResponse = false;
         this.estimationDone = false;
@@ -82,6 +88,7 @@ export class SceneEstimatorComponent implements OnInit {
         }
     }
 
+    @reportClick(GA_ACTIONS.get('submitEstimation'))
     public submitEstimation(submitted): void {
         this.waitingForResponse = true;
 

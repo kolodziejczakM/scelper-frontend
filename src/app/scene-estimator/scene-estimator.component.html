@@ -19,7 +19,7 @@
             <p>{{ sceneDurationTexts.get('tail') }} {{ sceneDurationTexts.get('conflict') }}</p>
             <p>{{ sceneDurationTexts.get('goodLuck') }}</p>
 
-            <div *ngIf="!isPlayerPlaying()">
+            <div class="margin-top-10 margin-bottom-10" *ngIf="!isPlayerPlaying()">
                 <button (click)="playRecord()" type="button" class="uk-button uk-button-primary block-element margin-centered">
                     {{ commonTexts.get('playRecord') }}
                     <span class="margin-left-10">
@@ -28,7 +28,7 @@
                 </button>
             </div>
 
-            <div *ngIf="isPlayerPlaying()">
+            <div class="margin-top-10 margin-bottom-10" *ngIf="isPlayerPlaying()">
                 <button (click)="pauseRecord()" type="button" class="uk-button uk-button-primary block-element margin-centered">
                     {{ commonTexts.get('pauseRecord') }}
                     <span class="margin-left-10">

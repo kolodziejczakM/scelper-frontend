@@ -11,6 +11,11 @@ export const GA_CATEGORIES = new Map([
 ]);
 
 export const GA_ACTIONS = new Map([
+    ['expandFeedbackTab', 'Feedback tab expanded'],
+    ['playEstimationRecord', 'Estimation record played'],
+    ['pauseEstimationRecord', 'Estimation record paused'],
+    ['resetEstimation', 'Reset estimation clicked'],
+    ['submitEstimation', 'Scene estimation submitted'],
     ['downloadPublicScenario', 'Download public scenario'],
     ['deletePublicScenario', 'Delete public scenario'],
     ['deletePublicScenarioRequest', 'Delete public scenario request'],
