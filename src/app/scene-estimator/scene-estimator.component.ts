@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../shared/analytics.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { CreativeRoomAsyncs } from '../creative-room/creative-room.asyncs';
@@ -37,7 +36,7 @@ export class SceneEstimatorComponent implements OnInit {
         ['goodLuck', 'Powodzenia!']
     ]);
 
-    private waitingForResponse = false;
+    public waitingForResponse = false;
     public estimationDone = false;
     public estimationCanBePlayed = false;
 
@@ -66,18 +65,18 @@ export class SceneEstimatorComponent implements OnInit {
         return this.audioNode.nativeElement.duration > 0 && !this.audioNode.nativeElement.paused;
     }
 
-    @reportClick(GA_ACTIONS.get('playEstimationRecord'))
     public playRecord(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('playEstimationRecord'));
         this.audioNode.nativeElement.play();
     }
 
-    @reportClick(GA_ACTIONS.get('pauseEstimationRecord'))
     public pauseRecord(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('pauseEstimationRecord'));
         this.audioNode.nativeElement.pause();
     }
 
-    @reportClick(GA_ACTIONS.get('resetEstimation'))
     public resetEstimator(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('resetEstimation'));
         this.waitingForResponse = false;
         this.estimationDone = false;
         this.estimationCanBePlayed = false;
@@ -88,8 +87,8 @@ export class SceneEstimatorComponent implements OnInit {
         }
     }
 
-    @reportClick(GA_ACTIONS.get('submitEstimation'))
     public submitEstimation(submitted): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('submitEstimation'));
         this.waitingForResponse = true;
 
         this.creativeRoomAsyncs.postTextToSpeech({ text: submitted.sceneText })

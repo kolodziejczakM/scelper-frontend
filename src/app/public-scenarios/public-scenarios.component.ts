@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../shared/analytics.service';
 
 import { AppStoreActions } from '../app-store/app-store.actions';
@@ -37,14 +36,14 @@ export class PublicScenariosComponent implements OnInit {
         this.preparePublicScenarios();
     }
 
-    @reportClick(GA_ACTIONS.get('toggleFormAddPublicScenario'))
     public toggleAddScenarioForm(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('toggleFormAddPublicScenario'));
         this.requestFormVisible = false;
         this.formVisible = !this.formVisible;
     }
 
-    @reportClick(GA_ACTIONS.get('toggleFormAddPublicScenarioRequest'))
     public toggleAddScenarioRequestForm(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('toggleFormAddPublicScenarioRequest'));
         this.formVisible = false;
         this.requestFormVisible = !this.requestFormVisible;
     }

@@ -1,6 +1,5 @@
 import { Component, HostListener } from '@angular/core';
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../shared/analytics.service';
 @Component({
     selector: 'sce-feedback-tab',
@@ -25,8 +24,8 @@ export class FeedbackTabComponent {
         this.expanded = false;
     }
 
-    @reportClick(GA_ACTIONS.get('expandFeedbackTab'))
     public expand($event): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('expandFeedbackTab'));
         $event.stopPropagation();
         this.expanded = true;
     }

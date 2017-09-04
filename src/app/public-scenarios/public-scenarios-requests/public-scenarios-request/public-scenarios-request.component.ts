@@ -11,7 +11,6 @@ import { DialogService } from 'ng2-bootstrap-modal';
 import { ModalsService } from '../../../modals/modals.service';
 
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../../../shared/analytics.service';
 
 import { APP_NAME, ERROR_MSG, COMMON_MSG } from '../../../app.constants';
@@ -56,9 +55,8 @@ export class PublicScenariosRequestComponent extends ModalsService implements On
         console.log(this.scenarioRequest);
     }
 
-    @reportClick(GA_ACTIONS.get('deletePublicScenarioRequest'))
     public removeScenarioRequest(): void {
-
+        this.analyticsService.trackClick(GA_ACTIONS.get('deletePublicScenarioRequest'));
         super.showPrompt(COMMON_MSG.get('deletePrompt')).subscribe((deleteCode) => {
             if (!deleteCode) {
                 return;

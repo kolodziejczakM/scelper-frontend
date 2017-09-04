@@ -4,7 +4,6 @@ import { PublicScenario, ResponseObject } from '../../interfaces';
 import * as helpers from '../../app.helpers';
 
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../../shared/analytics.service';
 import { AppStoreService } from '../../app-store/app-store.service';
 import { AppStoreActions } from '../../app-store/app-store.actions';
@@ -58,9 +57,8 @@ export class PublicScenariosTableComponent {
                         .indexOf(this.appStoreService.getScenarioFilterValue().toLowerCase()) !== -1);
     }
 
-    @reportClick(GA_ACTIONS.get('deletePublicScenario'))
     public removeScenario(): void {
-
+        this.analyticsService.trackClick(GA_ACTIONS.get('deletePublicScenario'));
         this.showPrompt(COMMON_MSG.get('deletePrompt')).subscribe((deleteCode) => {
             if (!deleteCode) {
                 return;
@@ -82,8 +80,8 @@ export class PublicScenariosTableComponent {
         });
     }
 
-    @reportClick(GA_ACTIONS.get('downloadPublicScenario'))
     public downloadScenario(path: string): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('downloadPublicScenario'));
         location.href = environment.serverRoot + path.replace('public', '');
     }
 

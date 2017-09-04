@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../shared/analytics.service';
 import { AppStoreActions } from '../app-store/app-store.actions';
 import { AppStoreWatchers } from '../app-store/app-store.watchers';
@@ -99,8 +98,9 @@ export class InterviewerComponent implements OnInit {
         );
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewResults'))
     public generatePDF(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewResults'));
+
         this.simpleInterviewAsyncs.postInterviewAnswers(this.interviewerQuestions).subscribe(
             (response: PDFblob) => {
 
@@ -132,8 +132,8 @@ export class InterviewerComponent implements OnInit {
         return this.interviewerQuestions.some(question => Boolean(question.answer));
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewRestart'))
     public restartInterview(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewRestart'));
         this.cleanInterview();
         this.goToFirstQuestion();
     }
@@ -157,15 +157,15 @@ export class InterviewerComponent implements OnInit {
        return this.interviewerQuestions.findIndex(el => el._id === this.currentInterviewerQuestion._id);
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewNextQuestion'))
     public goToNextQuestion(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewNextQuestion'));
         if (!this.isLastQuestionActive()) {
              this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() + 1]);
         }
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewPreviousQuestion'))
     public goToPreviousQuestion(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewPreviousQuestion'));
         if (!this.isFirstQuestionActive()) {
            this.appStoreActions.setCurrentInteviewerQuestion(this.interviewerQuestions[this.getCurrentQuestionIndex() - 1]);
         }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../shared/analytics.service';
 
 import { AppStoreActions } from '../app-store/app-store.actions';
@@ -57,8 +56,8 @@ export class InterviewerTutorialComponent {
         private analyticsService: AnalyticsService
     ) { }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialClose'))
     public closeTutorial(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewTutorialClose'));
         this.appStoreActions.setIsInterviewerTutorialVisible(false);
     }
 
@@ -70,15 +69,15 @@ export class InterviewerTutorialComponent {
         return this.currentStep === this.lastStep;
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialNextStep'))
     public nextStep(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewTutorialNextStep'));
         if (this.currentStep < this.tutorialTexts.length - 1) {
             this.currentStep += 1;
         }
     }
 
-    @reportClick(GA_ACTIONS.get('simpleInterviewTutorialPreviousStep'))
     public previousStep(): void {
+        this.analyticsService.trackClick(GA_ACTIONS.get('simpleInterviewTutorialPreviousStep'));
         if (this.currentStep >= 1) {
             this.currentStep -= 1;
         }

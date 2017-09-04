@@ -7,7 +7,6 @@ import { PdfForm,
          ScenarioState } from '../../interfaces';
 
 import { AnalyticsService,
-         reportClick,
          GA_ACTIONS } from '../../shared/analytics.service';
 
 import { ModalsService } from '../../modals/modals.service';
@@ -162,9 +161,8 @@ export class NewScenarioFormComponent implements OnInit {
         return isAcceptable;
     }
 
-    @reportClick(GA_ACTIONS.get('publishScenario'))
     public submitPDF(submitted: PdfForm): void {
-
+        this.analyticsService.trackClick(GA_ACTIONS.get('publishScenario'));
         const formData = new FormData();
         const that = this;
 
