@@ -15,7 +15,8 @@ export class FooterComponent {
 
     public links = {
         statute: { label: 'Regulamin i polityka prywatności', href: this.statuteLink },
-        authors: { label: 'Twórcy', href: '/authors' }
+        authors: { label: 'Twórcy', href: '/authors' },
+        changes: { label: 'Zaproponuj zmiany', href: 'https://goo.gl/forms/AtXsm7fKKO9ntdVy2' }
     };
 
 }

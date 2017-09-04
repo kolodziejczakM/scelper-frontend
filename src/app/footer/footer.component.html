@@ -7,9 +7,12 @@
         <li>
             <a routerLink="{{ links.authors.href }}" routerLinkActive="active">{{ links.authors.label }}</a>
         </li>
+        <li>
+            <a href="{{ links.changes.href }}" routerLinkActive="active">{{ links.changes.label }}</a>
+        </li>
     </ul>
 
-    <p class="footer-main-text"> 
+    <p class="footer-main-text">
         {{ genesisTexts.get('head') }} <i class="fa fa-heart sce-heart-icon" aria-hidden="true"></i> {{ genesisTexts.get('tail') }}
     </p>
 
