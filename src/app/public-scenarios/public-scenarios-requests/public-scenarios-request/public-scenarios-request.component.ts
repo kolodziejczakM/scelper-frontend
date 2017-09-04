@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import * as helpers from '../../../app.helpers';
 import { ResponseObject, PublicScenarioRequest } from '../../../interfaces';
@@ -19,7 +19,7 @@ import { APP_NAME, ERROR_MSG, COMMON_MSG } from '../../../app.constants';
     selector: 'sce-public-scenarios-request',
     templateUrl: './public-scenarios-request.component.html'
 })
-export class PublicScenariosRequestComponent extends ModalsService implements OnInit {
+export class PublicScenariosRequestComponent extends ModalsService {
 
     @Input('scenarioRequest')
     public scenarioRequest: PublicScenarioRequest;
@@ -49,10 +49,6 @@ export class PublicScenariosRequestComponent extends ModalsService implements On
         private analyticsService: AnalyticsService
     ) {
         super(dialogService);
-    }
-
-    ngOnInit() {
-        console.log(this.scenarioRequest);
     }
 
     public removeScenarioRequest(): void {
