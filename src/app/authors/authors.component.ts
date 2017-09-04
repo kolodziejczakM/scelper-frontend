@@ -32,7 +32,7 @@ export class AuthorsComponent {
         {
             name: 'Tomek Sobieraj',
             imagePath: `${this.assetsBasePath}/tomekSobieraj.jpg`,
-            description: 'Grafik, designer',
+            description: 'Logo designer',
             email: 'cdo@scelper.com'
         }
     ];
